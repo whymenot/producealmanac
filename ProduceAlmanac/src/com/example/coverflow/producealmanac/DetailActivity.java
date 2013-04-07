@@ -38,9 +38,9 @@ public class DetailActivity extends Activity {
 		TextView itemGeneral = (TextView)findViewById(R.id.item_general);
 		TextView itemRipe = (TextView)findViewById(R.id.item_ripe);
 		TextView itemStorage = (TextView)findViewById(R.id.item_storage);
-		itemName.setText("");
-		itemGeneral.setText("");
-		itemRipe.setText("");
-		itemStorage.setText("");
+		itemName.setText(currentItem.name);
+		itemGeneral.setText(currentItem.description);
+		itemRipe.setText(currentItem.ripeness);
+		itemStorage.setText(currentItem.storage);
 	}
 }
