@@ -8,6 +8,7 @@ import com.example.coverflow.ReflectingImageAdapter;
 import com.example.coverflow.ResourceImageAdapter;
 import com.example.coverflow.producealmanac.Item;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -28,6 +29,8 @@ public class CoverFlowTestingActivity extends Activity {
 	ArrayList<Item> currentItems;
 	boolean populated=false;
 	TextView textView;
+	int resourceList[] = {R.drawable.apple, R.drawable.apple, R.drawable.apple};
+	ResourceImageAdapter myAdapter;
 
     /*
      * (non-Javadoc)
@@ -50,11 +53,14 @@ public class CoverFlowTestingActivity extends Activity {
 		currentItems.add(new Item("apple"));
 		currentItems.add(new Item("potato"));
 		currentItems.add(new Item("strawberries"));
+		
 		//etc etc
+		myAdapter = new ResourceImageAdapter(this);
+		myAdapter.setResources(resourceList);
 		
 
 		//CoverFlow code below
-
+		//System.out.println("MAIN ACTIVITY STARTED, printing just before COVERFLOW setup");
     	
 //        super.onCreate(savedInstanceState);
 
@@ -66,6 +72,7 @@ public class CoverFlowTestingActivity extends Activity {
         final CoverFlow reflectingCoverFlow = (CoverFlow) findViewById(this.getResources().getIdentifier(
                 "coverflowReflect", "id", "com.example.coverflow"));
         setupCoverFlow(reflectingCoverFlow, true);
+
     }
 
     /**
@@ -79,9 +86,9 @@ public class CoverFlowTestingActivity extends Activity {
     private void setupCoverFlow(final CoverFlow mCoverFlow, final boolean reflect) {
         BaseAdapter coverImageAdapter;
         if (reflect) {
-            coverImageAdapter = new ReflectingImageAdapter(new ResourceImageAdapter(this));
+            coverImageAdapter = new ReflectingImageAdapter(myAdapter);
         } else {
-            coverImageAdapter = new ResourceImageAdapter(this);
+            coverImageAdapter = myAdapter;
         }
         mCoverFlow.setAdapter(coverImageAdapter);
         mCoverFlow.setSelection(2, true);
@@ -112,6 +119,22 @@ public class CoverFlowTestingActivity extends Activity {
             public void onNothingSelected(final AdapterView< ? > parent) {
                 textView.setText("Nothing clicked!");
             }
+        });
+        
+        mCoverFlow.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				// TODO Auto-generated method stub
+				/*
+				Intent intent = new Intent(CoverFlowTestingActivity.this, DetailActivity.class);
+				intent.putExtra("name", currentItems.get(arg2).name);
+				startActivity(intent);				
+				*/
+				System.out.println("CLICKED : " + arg2 + " , " + arg3);
+			}
+        	
         });
     }
     
