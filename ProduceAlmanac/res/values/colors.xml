@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<color name="LightGreen">#9ABCA8</color>
+<color name= "Brown">#826246</color>
+<color name="DeepGreen">#5A9170</color>
+<color name="TransparentWhite">#60FFFFFF</color>
+<color name= "TextGreen">#6D8A79</color>
+<color name= "TextBrown">#433224</color>
+
+</resources>
