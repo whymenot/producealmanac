@@ -1,11 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="8" android:versionName="TEST_RELEASE" package="com.example.coverflow">
-    <application android:icon="@drawable/icon" android:label="@string/app_name">
-        <activity android:label="@string/app_name" android:name=".producealmanac.CoverFlowTestingActivity">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.coverflow"
+    android:versionCode="8"
+    android:versionName="TEST_RELEASE" >
+
+    <application
+        android:icon="@drawable/icon"
+        android:label="@string/app_name" >
+        <activity
+            android:name="com.example.coverflow.producealmanac.CoverFlowTestingActivity"
+            android:label="@string/app_name" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.example.coverflow.producealmanac.MainActivity"
+            android:label="@string/title_activity_main" >
+        </activity>
+        <activity
+            android:name="com.example.coverflow.producealmanac.DetailActivity"
+            android:label="@string/title_activity_detail" >
+        </activity>
     </application>
+
 </manifest>
