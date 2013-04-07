@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical"
+	android:layout_width="fill_parent" android:layout_height="fill_parent">
+
+	<com.example.coverflow.CoverFlow xmlns:coverflow="http://schemas.android.com/apk/res/com.example.coverflow"
+		coverflow:imageWidth="200dip" coverflow:imageHeight="300dip" coverflow:withReflection="true"
+		coverflow:imageReflectionRatio="0.2" coverflow:reflectionGap="2dip" android:id="@+id/coverflowReflect"
+		android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5dip" />
+
+	<TextView android:text="STATUS" android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:padding="5dip" android:id="@+id/statusText"></TextView>
+
+</LinearLayout>
+
