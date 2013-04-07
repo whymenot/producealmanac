@@ -18,7 +18,9 @@ public class DetailActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_detail);
 		intent = getIntent();
-		name = intent.getStringExtra(name);
+		name = intent.getStringExtra("name");
+		currentItem = Item.itemMap.get(name);
+		
 		
 		
 	}

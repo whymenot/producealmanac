@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 public class Item {
 	
 	static HashMap<String,Object[]> infoMap = new HashMap<String, Object[]>();
+	static HashMap<String,Item> itemMap = new HashMap<String, Item>();
 	
 	String name;
 	String description;
@@ -23,6 +24,7 @@ public class Item {
 		this.description = (String) infoMap.get(name)[0];
 		this.storage = (String) infoMap.get(name)[1];
 		this.picture = (Bitmap) infoMap.get(name)[2];
+		Item.itemMap.put(name, this);
 	}
 	
 
