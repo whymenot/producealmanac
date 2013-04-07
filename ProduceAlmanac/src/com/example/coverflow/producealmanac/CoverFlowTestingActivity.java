@@ -65,8 +65,6 @@ public class CoverFlowTestingActivity extends Activity {
 //        super.onCreate(savedInstanceState);
 
         setContentView(R.layout.main);
-        textView = (TextView) findViewById(this.getResources()
-                .getIdentifier("statusText", "id", "com.example.coverflow"));
         // note resources below are taken using getIdentifier to allow importing
         // this library as library.
         final CoverFlow reflectingCoverFlow = (CoverFlow) findViewById(this.getResources().getIdentifier(
@@ -105,19 +103,19 @@ public class CoverFlowTestingActivity extends Activity {
         mCoverFlow.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(final AdapterView< ? > parent, final View view, final int position, final long id) {
-                textView.setText("Item clicked! : " + id);
+                //textView.setText("Item clicked! : " + id);
             }
 
         });
         mCoverFlow.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(final AdapterView< ? > parent, final View view, final int position, final long id) {
-                textView.setText("Item selected! : " + id);
+                //textView.setText("Item selected! : " + id);
             }
 
             @Override
             public void onNothingSelected(final AdapterView< ? > parent) {
-                textView.setText("Nothing clicked!");
+                //textView.setText("Nothing clicked!");
             }
         });
         
