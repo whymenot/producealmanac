@@ -49,6 +49,7 @@ public class CoverFlowTestingActivity extends Activity {
 		
 		//add all current items to the ArrayList
 		currentItems = new ArrayList<Item>();
+		//currentItems.add(new Item("artichoke"));
 		currentItems.add(new Item("apple"));
 		currentItems.add(new Item("potato"));
 		currentItems.add(new Item("strawberry"));
@@ -144,6 +145,12 @@ public class CoverFlowTestingActivity extends Activity {
     }
     
 	public void populateMap(){
+
+		Bitmap bitartichoke = BitmapFactory.decodeResource(getResources(), R.drawable.artichoke);
+		ImageView artichokeView =  new ImageView(this);
+		artichokeView.setImageBitmap(bitartichoke);
+		Object[] info0 = {"artichokes are pretty", "anywhere", "red", bitartichoke };
+		Item.infoMap.put("artichoke",info0);
 		
 		Bitmap bitmapple = BitmapFactory.decodeResource(getResources(), R.drawable.apple);
 		ImageView appleView =  new ImageView(this);
@@ -163,6 +170,4 @@ public class CoverFlowTestingActivity extends Activity {
 		Object[] info3 = {"strawberries are good", "refrigerator", "bright red",  bitmapberry};
 		Item.infoMap.put("strawberry", info3);
 	}
-
-
 }
