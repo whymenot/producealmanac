@@ -29,7 +29,7 @@ public class CoverFlowTestingActivity extends Activity {
 	ArrayList<Item> currentItems;
 	boolean populated=false;
 	TextView textView;
-	int resourceList[] = {R.drawable.image01, R.drawable.image02, R.drawable.image03, R.drawable.image04, R.drawable.image05};
+	int resourceList[] = {R.drawable.apple, R.drawable.potato, R.drawable.strawberry, R.drawable.apple, R.drawable.potato};
 	ResourceImageAdapter myAdapter;
 
     /*
