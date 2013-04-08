@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="search_font">35sp</dimen>
-    <dimen name="largest_font">80sp</dimen>
-    <dimen name="produce_font">40sp</dimen>
-    <dimen name="title_font">40sp</dimen>
-    <dimen name="body_font">24sp</dimen>
-</resources>

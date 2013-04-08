@@ -2,8 +2,10 @@ package com.example.coverflow.producealmanac;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.Menu;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.coverflow.R;
@@ -38,9 +40,12 @@ public class DetailActivity extends Activity {
 		TextView itemGeneral = (TextView)findViewById(R.id.item_general);
 		TextView itemRipe = (TextView)findViewById(R.id.item_ripe);
 		TextView itemStorage = (TextView)findViewById(R.id.item_storage);
-		itemName.setText("");
-		itemGeneral.setText("");
-		itemRipe.setText("");
-		itemStorage.setText("");
+		itemName.setText(currentItem.name);
+		itemGeneral.setText(currentItem.description);
+		itemRipe.setText(currentItem.ripeness);
+		itemStorage.setText(currentItem.storage);
+		LinearLayout picture = (LinearLayout) findViewById(R.id.item_photo);
+		picture.setBackground(new BitmapDrawable( getResources(),currentItem.picture));
+		
 	}
 }

@@ -29,7 +29,6 @@ public class CoverFlowTestingActivity extends Activity {
 	ArrayList<Item> currentItems;
 	boolean populated=false;
 	TextView textView;
-	int resourceList[] = {R.drawable.apple, R.drawable.apple, R.drawable.apple};
 	ResourceImageAdapter myAdapter;
 
     /*
@@ -41,8 +40,8 @@ public class CoverFlowTestingActivity extends Activity {
     protected void onCreate(final Bundle savedInstanceState) {
 
     	super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
-		
+    	setContentView(R.layout.main);
+
 		if(!populated){
 			populated=true;
 			populateMap();
@@ -52,10 +51,18 @@ public class CoverFlowTestingActivity extends Activity {
 		currentItems = new ArrayList<Item>();
 		currentItems.add(new Item("apple"));
 		currentItems.add(new Item("potato"));
-		currentItems.add(new Item("strawberries"));
+		currentItems.add(new Item("strawberry"));
 		
 		//etc etc
 		myAdapter = new ResourceImageAdapter(this);
+		
+		int resourceList[] = new int[currentItems.size()];
+		
+		for (int i = 0; i < currentItems.size(); i++) {
+			System.out.println(currentItems.get(i).name);
+			resourceList[i] = getResources().getIdentifier(currentItems.get(i).name, "drawable", getPackageName());
+			System.out.println(resourceList[i]);
+		}
 		myAdapter.setResources(resourceList);
 		
 
@@ -65,8 +72,6 @@ public class CoverFlowTestingActivity extends Activity {
 //        super.onCreate(savedInstanceState);
 
         setContentView(R.layout.main);
-        textView = (TextView) findViewById(this.getResources()
-                .getIdentifier("statusText", "id", "com.example.coverflow"));
         // note resources below are taken using getIdentifier to allow importing
         // this library as library.
         final CoverFlow reflectingCoverFlow = (CoverFlow) findViewById(this.getResources().getIdentifier(
@@ -91,7 +96,7 @@ public class CoverFlowTestingActivity extends Activity {
             coverImageAdapter = myAdapter;
         }
         mCoverFlow.setAdapter(coverImageAdapter);
-        mCoverFlow.setSelection(2, true);
+        mCoverFlow.setSelection(0, true);
         setupListeners(mCoverFlow);
     }
 
@@ -105,19 +110,19 @@ public class CoverFlowTestingActivity extends Activity {
         mCoverFlow.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(final AdapterView< ? > parent, final View view, final int position, final long id) {
-                textView.setText("Item clicked! : " + id);
+                //textView.setText("Item clicked! : " + id);
             }
 
         });
         mCoverFlow.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(final AdapterView< ? > parent, final View view, final int position, final long id) {
-                textView.setText("Item selected! : " + id);
+                //textView.setText("Item selected! : " + id);
             }
 
             @Override
             public void onNothingSelected(final AdapterView< ? > parent) {
-                textView.setText("Nothing clicked!");
+                //textView.setText("Nothing clicked!");
             }
         });
         
@@ -127,12 +132,12 @@ public class CoverFlowTestingActivity extends Activity {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
-				/*
+				
+				System.out.println("CLICKED : " + arg2 + " , " + arg3);
+				
 				Intent intent = new Intent(CoverFlowTestingActivity.this, DetailActivity.class);
 				intent.putExtra("name", currentItems.get(arg2).name);
-				startActivity(intent);				
-				*/
-				System.out.println("CLICKED : " + arg2 + " , " + arg3);
+				startActivity(intent);
 			}
         	
         });
@@ -143,20 +148,20 @@ public class CoverFlowTestingActivity extends Activity {
 		Bitmap bitmapple = BitmapFactory.decodeResource(getResources(), R.drawable.apple);
 		ImageView appleView =  new ImageView(this);
 		appleView.setImageBitmap(bitmapple);
-		Object[] info = {"apples grow on trees", "counter", bitmapple };
+		Object[] info = {"apples grow on trees", "counter", "green", bitmapple };
 		Item.infoMap.put("apple",info);
 		
 		Bitmap bitmapotato = BitmapFactory.decodeResource(getResources(), R.drawable.potato);
 		ImageView potatoView = new ImageView(this);
 		potatoView.setImageBitmap(bitmapotato);		
-		Object[] info2 = {"potatoes grow in the earth", "counter", bitmapotato};
+		Object[] info2 = {"potatoes grow in the earth", "counter", "no ears", bitmapotato};
 		Item.infoMap.put("potato",info2);
 		
 		Bitmap bitmapberry = BitmapFactory.decodeResource(getResources(), R.drawable.strawberry);
 		ImageView strawberryView = new ImageView(this);
 		strawberryView.setImageBitmap(bitmapberry);		
-		Object[] info3 = {"strawberries are good", "refrigerator", bitmapberry};
-		Item.infoMap.put("strawberries", info3);
+		Object[] info3 = {"strawberries are good", "refrigerator", "bright red",  bitmapberry};
+		Item.infoMap.put("strawberry", info3);
 	}
 
 

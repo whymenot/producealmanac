@@ -1,14 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical"
-	android:layout_width="fill_parent" android:layout_height="fill_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical" 
+    android:typeface="sans">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="82.5dip"
+        android:background="@color/LightGreen"
+        android:orientation="vertical" >
+        
+       	<TextView
+	   		android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+	    	android:text="the produce almanac"
+	    	android:layout_gravity="left"
+	    	android:textColor="@android:color/white"
+	    	android:typeface="sans"
+	    	android:textSize="59sp"
+	    	android:paddingTop="10dip"
+	    	android:paddingLeft="20.6dip"
+	    	android:paddingRight="20.6dip"
+	    	 />
+        
+        
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="123.75dip"
+        android:background="@color/Brown"
+        android:orientation="vertical" >
+       	
+        
+        
+       	<LinearLayout
+        	android:layout_width="550dip"
+        	android:layout_marginTop="20dip"
+        	
+        	android:layout_marginLeft="20dip"
+        	android:layout_height="83.75dip"
+        	android:background="@color/TransparentWhite"
+        	android:orientation="vertical" >
+        	  <TextView
+       	    android:textColor="@android:color/white"
+        	android:layout_width="wrap_content"
+        	android:text="search"
+        	android:layout_marginLeft="20dip"
+        	android:layout_marginTop="25dip"
+        	android:layout_height="wrap_content"
+        	android:orientation="vertical"
+	    	android:textSize="50sp" />
+       	  
+    	</LinearLayout>
+    	
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dip"
+        android:layout_marginTop="61.875dip"
+        android:orientation="vertical" 
+		android:paddingLeft="20.6dip"
+	    android:paddingRight="20.6dip">
+
+                
+       	<TextView
+	   		android:layout_width="wrap_content"
+	    	android:layout_height="100dip"
+	    	android:text="EARLY"
+	    	android:textColor="@color/DeepGreen"
+
+	    	android:textStyle="bold"
+	    	android:textSize="105sp"
+	    	/>
+       	
+       	<TextView
+	   		android:layout_width="wrap_content"
+	    	android:layout_height="100dip"
+	    	android:textStyle="bold"
+	    	android:text="APRIL"
+	    	android:textColor="@color/DeepGreen"
+	    	android:typeface="sans"
+	    	android:textSize="105sp"
+	    	 />
+     </LinearLayout>
+    <LinearLayout
+	android:layout_width="fill_parent" android:layout_height="450dip">
 
 	<com.example.coverflow.CoverFlow xmlns:coverflow="http://schemas.android.com/apk/res/com.example.coverflow"
-		coverflow:imageWidth="200dip" coverflow:imageHeight="300dip" coverflow:withReflection="true"
+		coverflow:imageWidth="300dip" coverflow:imageHeight="300dip" coverflow:withReflection="true"
 		coverflow:imageReflectionRatio="0.2" coverflow:reflectionGap="2dip" android:id="@+id/coverflowReflect"
-		android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5dip" />
+		android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5dip" 
+		android:layout_marginBottom="24dip" android:focusable="false"
+		/>
 
-	<TextView android:text="STATUS" android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:padding="5dip" android:id="@+id/statusText"></TextView>
+</LinearLayout>
 
 </LinearLayout>
 
