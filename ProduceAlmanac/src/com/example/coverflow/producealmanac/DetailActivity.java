@@ -47,5 +47,6 @@ public class DetailActivity extends Activity {
 		LinearLayout picture = (LinearLayout) findViewById(R.id.item_photo);
 		picture.setBackground(new BitmapDrawable( getResources(),currentItem.picture));
 		
+		
 	}
 }

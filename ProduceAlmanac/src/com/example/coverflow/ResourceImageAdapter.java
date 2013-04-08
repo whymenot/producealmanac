@@ -29,8 +29,7 @@ public class ResourceImageAdapter extends AbstractCoverFlowImageAdapter {
     private static final List<Integer> IMAGE_RESOURCE_IDS = new ArrayList<Integer>(DEFAULT_LIST_SIZE);
 
     /** The Constant DEFAULT_RESOURCE_LIST. */
-    private static final int[] DEFAULT_RESOURCE_LIST = { R.drawable.apple, R.drawable.potato, R.drawable.strawberry,
-            R.drawable.apple, R.drawable.potato };
+    private static final int[] DEFAULT_RESOURCE_LIST = {  };
 
     /** The bitmap map. */
     private final Map<Integer, WeakReference<Bitmap>> bitmapMap = new HashMap<Integer, WeakReference<Bitmap>>();

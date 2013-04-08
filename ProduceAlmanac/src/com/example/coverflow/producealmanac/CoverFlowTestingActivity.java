@@ -49,10 +49,13 @@ public class CoverFlowTestingActivity extends Activity {
 		
 		//add all current items to the ArrayList
 		currentItems = new ArrayList<Item>();
-		//currentItems.add(new Item("artichoke"));
-		currentItems.add(new Item("apple"));
-		currentItems.add(new Item("potato"));
-		currentItems.add(new Item("strawberry"));
+		currentItems.add(new Item("artichoke"));
+		currentItems.add(new Item("cabbage"));
+		currentItems.add(new Item("celeriac"));
+		currentItems.add(new Item("kale"));
+		currentItems.add(new Item("leeks"));
+		currentItems.add(new Item("peas"));
+		currentItems.add(new Item("turnips"));
 		
 		//etc etc
 		myAdapter = new ResourceImageAdapter(this);
@@ -61,7 +64,7 @@ public class CoverFlowTestingActivity extends Activity {
 		
 		for (int i = 0; i < currentItems.size(); i++) {
 			System.out.println(currentItems.get(i).name);
-			resourceList[i] = getResources().getIdentifier(currentItems.get(i).name, "drawable", getPackageName());
+			resourceList[i] = getResources().getIdentifier(currentItems.get(i).name + "_coverflow", "drawable", getPackageName());
 			System.out.println(resourceList[i]);
 		}
 		myAdapter.setResources(resourceList);
@@ -144,30 +147,21 @@ public class CoverFlowTestingActivity extends Activity {
         });
     }
     
-	public void populateMap(){
-
-		Bitmap bitartichoke = BitmapFactory.decodeResource(getResources(), R.drawable.artichoke);
-		ImageView artichokeView =  new ImageView(this);
-		artichokeView.setImageBitmap(bitartichoke);
-		Object[] info0 = {"artichokes are pretty", "anywhere", "red", bitartichoke };
-		Item.infoMap.put("artichoke",info0);
-		
-		Bitmap bitmapple = BitmapFactory.decodeResource(getResources(), R.drawable.apple);
-		ImageView appleView =  new ImageView(this);
-		appleView.setImageBitmap(bitmapple);
-		Object[] info = {"apples grow on trees", "counter", "green", bitmapple };
-		Item.infoMap.put("apple",info);
-		
-		Bitmap bitmapotato = BitmapFactory.decodeResource(getResources(), R.drawable.potato);
-		ImageView potatoView = new ImageView(this);
-		potatoView.setImageBitmap(bitmapotato);		
-		Object[] info2 = {"potatoes grow in the earth", "counter", "no ears", bitmapotato};
-		Item.infoMap.put("potato",info2);
-		
-		Bitmap bitmapberry = BitmapFactory.decodeResource(getResources(), R.drawable.strawberry);
-		ImageView strawberryView = new ImageView(this);
-		strawberryView.setImageBitmap(bitmapberry);		
-		Object[] info3 = {"strawberries are good", "refrigerator", "bright red",  bitmapberry};
-		Item.infoMap.put("strawberry", info3);
+	public void populateMap() {
+		putEntry(R.drawable.celeriac_detail, "artichokes are pretty", "anywhere", "red", "artichoke");
+		putEntry(R.drawable.celeriac_detail, "cabbages are evil", "trashcan", "green", "cabbage");
+		putEntry(R.drawable.celeriac_detail, "celeriacs are scary", "smithy", "green", "celeriac");
+		putEntry(R.drawable.celeriac_detail, "kale is kind", "who knows", "green", "kale");
+		putEntry(R.drawable.celeriac_detail, "leeks are...", "asasasd", "violet", "leeks");
+		putEntry(R.drawable.celeriac_detail, "peas are small", "asdasd", "invisible", "peas");
+		putEntry(R.drawable.celeriac_detail, "turnips.. what are these?", "asdfasdf", "no idea", "turnips");
+	}
+	
+	public void putEntry(int resID, String general, String storage, String ripe, String name) {
+		Bitmap bitmap = BitmapFactory.decodeResource(getResources(), resID);
+		ImageView imgView = new ImageView(this);
+		imgView.setImageBitmap(bitmap);
+		Object[] info = {general, storage, ripe, bitmap};
+		Item.infoMap.put(name, info);
 	}
 }
