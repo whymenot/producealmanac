@@ -29,13 +29,13 @@
                 android:paddingTop="10dip"
                 android:text="the produce almanac"
                 android:textColor="@android:color/white"
-                android:textSize="59sp"
+                android:textSize="@dimen/produce_font"
                 android:typeface="sans" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/item_photo"
-            android:layout_width="fill_parent"
+            android:layout_width="554dip"
             android:layout_height="412dip"
             android:layout_margin="24dip"
             android:background="@android:color/black"
@@ -45,11 +45,11 @@
             <TextView
             android:id="@+id/item_name"
 	   		android:layout_width="wrap_content"
-	    	android:layout_height="100dip"
+	    	android:layout_height="120dip"
 	    	android:text="LEMON"
 	    	android:textColor="@color/Brown"
 	    	android:textStyle="bold"
-	    	android:textSize="105sp"
+	    	android:textSize="@dimen/largest_font"
 	    	/>
         </LinearLayout>
             
@@ -60,7 +60,7 @@
 	    	android:textColor="@color/TextGreen"
 	    	android:layout_marginLeft="24dip"
 	    	android:textStyle="bold"
-	    	android:textSize="46.6sp"
+	    	android:textSize="@dimen/title_font"
 	    	/>
          
          	<TextView
@@ -70,7 +70,7 @@
 	    	android:text="this is some text about some things"
 	    	android:textColor="@color/TextBrown"
 	    	android:layout_marginLeft="24dip"
-	    	android:textSize="32.6sp"
+	    	android:textSize="@dimen/body_font"
 	    	/>
          
            <TextView
@@ -81,7 +81,7 @@
 	    	android:textColor="@color/TextGreen"
 	    	android:layout_marginLeft="24dip"
 	    	android:textStyle="bold"
-	    	android:textSize="46.6sp"
+	    	android:textSize="@dimen/title_font"
 	    	/>
            <TextView
             android:id="@+id/item_ripe"
@@ -90,7 +90,7 @@
 	    	android:text="this is some text about some things"
 	    	android:textColor="@color/TextBrown"
 	    	android:layout_marginLeft="24dip"
-	    	android:textSize="32.6sp"
+	    	android:textSize="@dimen/body_font"
 	    	/>
              <TextView
             android:layout_marginTop="24dip"
@@ -100,7 +100,7 @@
 	    	android:textColor="@color/TextGreen"
 	    	android:layout_marginLeft="24dip"
 	    	android:textStyle="bold"
-	    	android:textSize="46.6sp"
+	    	android:textSize="@dimen/title_font"
 	    	/>
         	<TextView
         	android:id="@+id/item_storage"
@@ -109,7 +109,7 @@
 	    	android:text="this is some text about some things"
 	    	android:textColor="@color/TextBrown"
 	    	android:layout_marginLeft="24dip"
-	    	android:textSize="32.6sp"
+	    	android:textSize="@dimen/body_font"
 	    	/>
     </LinearLayout>
 
