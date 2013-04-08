@@ -53,9 +53,9 @@ public class CoverFlowTestingActivity extends Activity {
 		currentItems.add(new Item("cabbage"));
 		currentItems.add(new Item("celeriac"));
 		currentItems.add(new Item("kale"));
-		currentItems.add(new Item("leeks"));
+		currentItems.add(new Item("leek"));
 		currentItems.add(new Item("peas"));
-		currentItems.add(new Item("turnips"));
+		currentItems.add(new Item("turnip"));
 		
 		//etc etc
 		myAdapter = new ResourceImageAdapter(this);
@@ -152,9 +152,9 @@ public class CoverFlowTestingActivity extends Activity {
 		putEntry(R.drawable.celeriac_detail, "cabbages are evil", "trashcan", "green", "cabbage");
 		putEntry(R.drawable.celeriac_detail, "celeriacs are scary", "smithy", "green", "celeriac");
 		putEntry(R.drawable.celeriac_detail, "kale is kind", "who knows", "green", "kale");
-		putEntry(R.drawable.celeriac_detail, "leeks are...", "asasasd", "violet", "leeks");
+		putEntry(R.drawable.celeriac_detail, "leeks are...", "asasasd", "violet", "leek");
 		putEntry(R.drawable.celeriac_detail, "peas are small", "asdasd", "invisible", "peas");
-		putEntry(R.drawable.celeriac_detail, "turnips.. what are these?", "asdfasdf", "no idea", "turnips");
+		putEntry(R.drawable.celeriac_detail, "turnips.. what are these?", "asdfasdf", "no idea", "turnip");
 	}
 	
 	public void putEntry(int resID, String general, String storage, String ripe, String name) {
