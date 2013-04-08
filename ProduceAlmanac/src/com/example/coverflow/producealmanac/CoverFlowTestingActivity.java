@@ -29,7 +29,6 @@ public class CoverFlowTestingActivity extends Activity {
 	ArrayList<Item> currentItems;
 	boolean populated=false;
 	TextView textView;
-	int resourceList[] = {R.drawable.image01, R.drawable.image02, R.drawable.image03, R.drawable.image04, R.drawable.image05};
 	ResourceImageAdapter myAdapter;
 
     /*
@@ -52,10 +51,18 @@ public class CoverFlowTestingActivity extends Activity {
 		currentItems = new ArrayList<Item>();
 		currentItems.add(new Item("apple"));
 		currentItems.add(new Item("potato"));
-		currentItems.add(new Item("strawberries"));
+		currentItems.add(new Item("strawberry"));
 		
 		//etc etc
 		myAdapter = new ResourceImageAdapter(this);
+		
+		int resourceList[] = new int[currentItems.size()];
+		
+		for (int i = 0; i < currentItems.size(); i++) {
+			System.out.println(currentItems.get(i).name);
+			resourceList[i] = getResources().getIdentifier(currentItems.get(i).name, "drawable", getPackageName());
+			System.out.println(resourceList[i]);
+		}
 		myAdapter.setResources(resourceList);
 		
 
@@ -89,7 +96,7 @@ public class CoverFlowTestingActivity extends Activity {
             coverImageAdapter = myAdapter;
         }
         mCoverFlow.setAdapter(coverImageAdapter);
-        mCoverFlow.setSelection(2, true);
+        mCoverFlow.setSelection(0, true);
         setupListeners(mCoverFlow);
     }
 
@@ -154,7 +161,7 @@ public class CoverFlowTestingActivity extends Activity {
 		ImageView strawberryView = new ImageView(this);
 		strawberryView.setImageBitmap(bitmapberry);		
 		Object[] info3 = {"strawberries are good", "refrigerator", "bright red",  bitmapberry};
-		Item.infoMap.put("strawberries", info3);
+		Item.infoMap.put("strawberry", info3);
 	}
 
 

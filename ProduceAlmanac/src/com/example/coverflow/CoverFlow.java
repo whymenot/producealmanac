@@ -324,7 +324,8 @@ public class CoverFlow extends Gallery {
      *            the Angle by which to rotate the Bitmap
      */
     private void transformImageBitmap(final ImageView child, final Transformation t, final int rotationAngle) {
-        mCamera.save();
+        //System.out.println("called for angle : " + rotationAngle);
+    	mCamera.save();
         final Matrix imageMatrix = t.getMatrix();
 
         final int height = child.getLayoutParams().height;
