@@ -29,7 +29,7 @@ public class CoverFlowTestingActivity extends Activity {
 	ArrayList<Item> currentItems;
 	boolean populated=false;
 	TextView textView;
-	int resourceList[] = {R.drawable.apple, R.drawable.apple, R.drawable.apple};
+	int resourceList[] = {R.drawable.image01, R.drawable.image02, R.drawable.image03, R.drawable.image04, R.drawable.image05};
 	ResourceImageAdapter myAdapter;
 
     /*
@@ -41,8 +41,8 @@ public class CoverFlowTestingActivity extends Activity {
     protected void onCreate(final Bundle savedInstanceState) {
 
     	super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
-		
+    	setContentView(R.layout.main);
+
 		if(!populated){
 			populated=true;
 			populateMap();
@@ -125,12 +125,12 @@ public class CoverFlowTestingActivity extends Activity {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// TODO Auto-generated method stub
-				/*
+				
+				System.out.println("CLICKED : " + arg2 + " , " + arg3);
+				
 				Intent intent = new Intent(CoverFlowTestingActivity.this, DetailActivity.class);
 				intent.putExtra("name", currentItems.get(arg2).name);
-				startActivity(intent);				
-				*/
-				System.out.println("CLICKED : " + arg2 + " , " + arg3);
+				startActivity(intent);
 			}
         	
         });
