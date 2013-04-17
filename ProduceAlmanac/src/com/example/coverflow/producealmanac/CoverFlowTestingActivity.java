@@ -33,8 +33,8 @@ public class CoverFlowTestingActivity extends Activity {
 	
 	//search/filter terms
 	public String searchTerms = "";
-	public ArrayList<Filter> activeFilters;
-	public int month;
+	public ArrayList<String> activeFilters;
+	public Month month;
 
     /*
      * (non-Javadoc)
@@ -52,13 +52,13 @@ public class CoverFlowTestingActivity extends Activity {
 			populateMap();
 		}
 		
-		//add all current items to the ArrayList
+		
 		currentItems = new ArrayList<Item>();
 		
 		//@TODO GET CURRENT MONTH
-		this.month = 5;
+		this.month = null;
 		
-		this.activeFilters = new ArrayList<Filter>();
+		this.activeFilters = new ArrayList<String>();
 		
 		
 		
@@ -171,12 +171,12 @@ public class CoverFlowTestingActivity extends Activity {
 		
 		
 		
-		this.activeFilters = new ArrayList<Filter>();
-		//@TODO instantiate all Filter objects before populating infoMap
-		//add all Filter instances to activeFilters by default
+		this.activeFilters = new ArrayList<String>();
+		//@TODO instantiate all Month objects before populating infoMap
+		//add all filter Strings to activeFilters by default
 		
 		
-		//@TODO include Filter instances as last argument to putEntry()
+		//@TODO include filter Strings as last argument to putEntry()
 		putEntry(R.drawable.celeriac_detail, "artichokes are pretty", "anywhere", "red", "artichoke");
 		putEntry(R.drawable.celeriac_detail, "cabbages are evil", "trashcan", "green", "cabbage");
 		putEntry(R.drawable.celeriac_detail, "When peeled, celeriac's creamy white flesh resembles that of a turnip and tastes like a subtle blend of celery and parsley. This time of year, celeriac can be a perfect non-starch substitute for potatoes in a warming meal, and can be prepared in a similar way. It goes well with fresh green vegetables or salad and anything roasted or grilled.", "Celeriac can be stored for up to four months in the fridge.", "A ripe celeriac is firm with its peel intact.", "celeriac");
@@ -186,7 +186,7 @@ public class CoverFlowTestingActivity extends Activity {
 		putEntry(R.drawable.celeriac_detail, "turnips.. what are these?", "asdfasdf", "no idea", "turnip");
 	}
 	
-	public void putEntry(int resID, String general, String storage, String ripe, String name, Filter group) {
+	public void putEntry(int resID, String general, String storage, String ripe, String name, String group) {
 		Bitmap bitmap = BitmapFactory.decodeResource(getResources(), resID);
 		ImageView imgView = new ImageView(this);
 		imgView.setImageBitmap(bitmap);
