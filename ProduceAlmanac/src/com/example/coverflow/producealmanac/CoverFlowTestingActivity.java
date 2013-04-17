@@ -1,6 +1,7 @@
 package com.example.coverflow.producealmanac;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -19,6 +20,7 @@ import com.example.coverflow.CoverFlow;
 import com.example.coverflow.R;
 import com.example.coverflow.ReflectingImageAdapter;
 import com.example.coverflow.ResourceImageAdapter;
+import com.example.coverflow.producealmanac.MultiSpinner.MultiSpinnerListener;
 
 /**
  * The Class CoverFlowTestingActivity.
@@ -100,7 +102,20 @@ public class CoverFlowTestingActivity extends Activity {
         final CoverFlow reflectingCoverFlow = (CoverFlow) findViewById(this.getResources().getIdentifier(
                 "coverflowReflect", "id", "com.example.coverflow"));
         setupCoverFlow(reflectingCoverFlow, true);
-
+        
+        
+        final MultiSpinner multispinner = (MultiSpinner) findViewById(this.getResources().getIdentifier("SpinnerCollegues", "id", "com.example.coverflow"));
+        List<String> spinnerItems = new ArrayList<String>();
+        spinnerItems.add(BERRIES);
+        spinnerItems.add(ROOTS);
+        spinnerItems.add(LEAFY);
+        spinnerItems.add(CITRUS);
+        spinnerItems.add(HERBS);
+        multispinner.setItems(spinnerItems, "FILTER", new MultiSpinnerListener() {
+        	public void onItemsSelected(boolean[] selected) {
+        		// what happens when selected.
+        	}
+        });
     }
 
     /**
