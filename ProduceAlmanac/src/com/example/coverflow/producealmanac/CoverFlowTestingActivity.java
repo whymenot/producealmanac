@@ -60,7 +60,7 @@ public class CoverFlowTestingActivity extends Activity {
 		int monthNum = 0;
 		
 		
-		
+		/*
 		createAllItems();
 		createAllMonths();
 		
@@ -69,7 +69,7 @@ public class CoverFlowTestingActivity extends Activity {
 		currentItems = currentMonth.getAllItems();
 		
 		this.activeFilters = new ArrayList<String>();
-		
+		*/
 		
 
 
