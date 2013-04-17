@@ -175,15 +175,17 @@ public class CoverFlowTestingActivity extends Activity {
 		//@TODO instantiate all Month objects before populating infoMap
 		//add all filter Strings to activeFilters by default
 		
+		//temporary... dummy group
+		String group = "group";
 		
 		//@TODO include filter Strings as last argument to putEntry()
-		putEntry(R.drawable.celeriac_detail, "artichokes are pretty", "anywhere", "red", "artichoke");
-		putEntry(R.drawable.celeriac_detail, "cabbages are evil", "trashcan", "green", "cabbage");
-		putEntry(R.drawable.celeriac_detail, "When peeled, celeriac's creamy white flesh resembles that of a turnip and tastes like a subtle blend of celery and parsley. This time of year, celeriac can be a perfect non-starch substitute for potatoes in a warming meal, and can be prepared in a similar way. It goes well with fresh green vegetables or salad and anything roasted or grilled.", "Celeriac can be stored for up to four months in the fridge.", "A ripe celeriac is firm with its peel intact.", "celeriac");
-		putEntry(R.drawable.celeriac_detail, "kale is kind", "who knows", "green", "kale");
-		putEntry(R.drawable.celeriac_detail, "leeks are...", "asasasd", "violet", "leek");
-		putEntry(R.drawable.celeriac_detail, "peas are small", "asdasd", "invisible", "peas");
-		putEntry(R.drawable.celeriac_detail, "turnips.. what are these?", "asdfasdf", "no idea", "turnip");
+		putEntry(R.drawable.celeriac_detail, "artichokes are pretty", "anywhere", "red", "artichoke", group);
+		putEntry(R.drawable.celeriac_detail, "cabbages are evil", "trashcan", "green", "cabbage", group);
+		putEntry(R.drawable.celeriac_detail, "When peeled, celeriac's creamy white flesh resembles that of a turnip and tastes like a subtle blend of celery and parsley. This time of year, celeriac can be a perfect non-starch substitute for potatoes in a warming meal, and can be prepared in a similar way. It goes well with fresh green vegetables or salad and anything roasted or grilled.", "Celeriac can be stored for up to four months in the fridge.", "A ripe celeriac is firm with its peel intact.", "celeriac", group);
+		putEntry(R.drawable.celeriac_detail, "kale is kind", "who knows", "green", "kale", group);
+		putEntry(R.drawable.celeriac_detail, "leeks are...", "asasasd", "violet", "leek", group);
+		putEntry(R.drawable.celeriac_detail, "peas are small", "asdasd", "invisible", "peas", group);
+		putEntry(R.drawable.celeriac_detail, "turnips.. what are these?", "asdfasdf", "no idea", "turnip", group);
 	}
 	
 	public void putEntry(int resID, String general, String storage, String ripe, String name, String group) {
