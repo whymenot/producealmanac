@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import android.graphics.Bitmap;
 
+@SuppressWarnings("rawtypes")
 public class Item implements Comparable{
 	
 	static HashMap<String,Object[]> infoMap = new HashMap<String, Object[]>();
@@ -14,7 +15,7 @@ public class Item implements Comparable{
 	public String ripeness;
 	public String storage;
 	public Bitmap picture;
-	public Filter group;
+	public String group;
 	/*
 	HOW TO LOAD A PICTURE FROM THE DRAWABLE FOLDER
 	Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.name_of_file);
@@ -27,8 +28,7 @@ public class Item implements Comparable{
 		this.storage = (String) infoMap.get(name)[1];
 		this.ripeness = (String) infoMap.get(name)[2];
 		this.picture = (Bitmap) infoMap.get(name)[3];
-		this.group = (Filter) infoMap.get(name)[4];
-		this.group.items.add(this);
+		this.group = (String) infoMap.get(name)[4];
 		Item.itemMap.put(name, this);
 	}
 	@Override
