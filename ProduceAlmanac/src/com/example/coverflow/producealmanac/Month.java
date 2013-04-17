@@ -12,7 +12,7 @@ public class Month {
 	
 	public final String months[] = {"INDEX_ZERO_BAD_MONTH","January","February","March","April",
 			"May","June","July","August","September","October","November","December"};
-	public String month;
+	public String monthName;
 	public ArrayList<Item> items; 
 	public int monthNumber;
 	
@@ -23,8 +23,13 @@ public class Month {
 	
 	public Month(int monthNumber){
 		this.monthNumber = monthNumber;
-		this.month = months[monthNumber]; 
+		this.monthName = months[monthNumber]; 
 		this.items = new ArrayList<Item>();
+		String[] names = itemNamesByMonth[monthNumber];
+		for (String name : names){
+			this.items.add(Item.itemMap.get(name));
+		}
+		this.sort();
 	}
 	
 	@SuppressWarnings("unchecked")
