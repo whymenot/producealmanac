@@ -16,8 +16,9 @@ public class Month {
 	public ArrayList<Item> items; 
 	public int monthNumber;
 	
+	//itemNamesByMonth[][] 
 	//array of string arrays created at bottom of class below
-	public String[][] itemNamesByMonth; 
+	
 	
 	
 	public Month(int monthNumber){
@@ -36,11 +37,21 @@ public class Month {
 		return (ArrayList<Item>) items.clone();
 	}
 	
-	String[] Zero = {"ZERO_BAD_MONTH_NO_DATA"};
-	String[] April = {"artichoke", "cabbage","celeriac","kale","leek","peas","turnip"};
-	String[] May = {"cabbage","celeriac", "leek", "turnip"};
 	
-	itemNamesByMonth = {Zero,Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec};;
+	String Zero[] = {"ZERO_BAD_MONTH_NO_DATA",""};
+	String Jan[] = {"cabbage","celeriac", "leek", "turnip"};
+	String Feb[] = {"cabbage","celeriac", "leek", "turnip"};
+	String Mar[] = {"cabbage","celeriac", "leek", "turnip"};
+	String Apr[] = {"artichoke", "cabbage","celeriac","kale","leek","peas","turnip"};
+	String May[] = {"cabbage","celeriac", "leek", "turnip"};
+	String Jun[] = {"cabbage","celeriac", "leek", "turnip"};
+	String Jul[] = {"cabbage","celeriac", "leek", "turnip"};
+	String Aug[] = {"cabbage","celeriac", "leek", "turnip"};
+	String Sep[] = {"cabbage","celeriac", "leek", "turnip"};
+	String Oct[] = {"cabbage","celeriac", "leek", "turnip"};
+	String Nov[] = {"cabbage","celeriac", "leek", "turnip"};
+	String Dec[] = {"cabbage","celeriac", "leek", "turnip"};
 	
+	public String itemNamesByMonth[][] = {Zero,Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec};
 	
 }
