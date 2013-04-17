@@ -34,7 +34,8 @@ public class CoverFlowTestingActivity extends Activity {
 	//search/filter terms
 	public String searchTerms = "";
 	public ArrayList<String> activeFilters;
-	public Month month;
+	public Month currentMonth;
+	public Month[] months;
 
     /*
      * (non-Javadoc)
@@ -53,27 +54,23 @@ public class CoverFlowTestingActivity extends Activity {
 		}
 		
 		
-		currentItems = new ArrayList<Item>();
+		
 		
 		//@TODO GET CURRENT MONTH
-		this.month = null;
+		int monthNum = 0;
 		
+		
+		
+		createAllItems();
+		createAllMonths();
+		
+		this.currentMonth = months[monthNum];
+		
+		currentItems = new ArrayList<Item>();
 		this.activeFilters = new ArrayList<String>();
 		
 		
-		
-		
-		
-		/**
-		currentItems.add(new Item("artichoke"));
-		currentItems.add(new Item("cabbage"));
-		currentItems.add(new Item("celeriac"));
-		currentItems.add(new Item("kale"));
-		currentItems.add(new Item("leek"));
-		currentItems.add(new Item("peas"));
-		currentItems.add(new Item("turnip"));
-		**/
-		//etc etc
+
 
 		
 		
@@ -103,7 +100,17 @@ public class CoverFlowTestingActivity extends Activity {
 
     }
 
-    /**
+    private void createAllMonths() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void createAllItems() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
      * Setup cover flow.
      * 
      * @param mCoverFlow
