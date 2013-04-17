@@ -66,7 +66,8 @@ public class CoverFlowTestingActivity extends Activity {
 		
 		this.currentMonth = months[monthNum];
 		
-		currentItems = new ArrayList<Item>();
+		currentItems = currentMonth.getAllItems();
+		
 		this.activeFilters = new ArrayList<String>();
 		
 		

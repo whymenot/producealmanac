@@ -26,4 +26,9 @@ public class Month {
 	public void sort(){
 		Collections.sort(items);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public ArrayList<Item> getAllItems(){
+		return (ArrayList<Item>) items.clone();
+	}
 }
