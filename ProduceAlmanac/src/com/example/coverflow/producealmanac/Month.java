@@ -43,7 +43,7 @@ public class Month {
 	}
 	
 	
-	String Zero[] = {"ZERO_BAD_MONTH_NO_DATA",""};
+	String Zero[] = {"ZERO_BAD_MONTH_NO_DATA"};
 	String Jan[] = {"cabbage","celeriac", "leek", "turnip"};
 	String Feb[] = {"cabbage","celeriac", "leek", "turnip"};
 	String Mar[] = {"cabbage","celeriac", "leek", "turnip"};

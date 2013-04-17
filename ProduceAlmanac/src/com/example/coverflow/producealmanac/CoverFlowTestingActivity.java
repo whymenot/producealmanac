@@ -1,6 +1,7 @@
 package com.example.coverflow.producealmanac;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -45,6 +46,8 @@ public class CoverFlowTestingActivity extends Activity {
 	public final static String CITRUS = "Citrus Fruits";
 	public final static String HERBS = "Fresh Herbs";
 	
+	public final static String[] FILTERS = {BERRIES,ROOTS,LEAFY,CITRUS,HERBS};
+	
 
     /*
      * (non-Javadoc)
@@ -71,18 +74,18 @@ public class CoverFlowTestingActivity extends Activity {
 		
 		currentItems = new ArrayList<Item>();
 		months = new Month[13];
+		
 		createAllItems();
-		/*
 		createAllMonths();
 		
 		this.currentMonth = months[monthNum];
-		
+		//getAllItems() returns copy of ArrayList, OK to modify
 		currentItems = currentMonth.getAllItems();
 		
-		this.activeFilters = new ArrayList<String>();
-		*/
+		//set all filters as active by default
+		this.activeFilters = new ArrayList<String>(Arrays.asList(FILTERS));
 		
-
+		//done initializing backend data
 
 		
 		
@@ -113,11 +116,21 @@ public class CoverFlowTestingActivity extends Activity {
     }
 
     private void createAllMonths() {
-		// TODO Auto-generated method stub
-		
+    	/**Creates all Month instances...should only be called after
+    	*  all Item instances have been created. Month Zero is "empty"
+    	*  so 1->Jan, 2->Feb, ... 12->Dec
+    	**/
+    	for (int i=0; i < 13; i++){
+    		months[i] = new Month(i);
+    	}		
 	}
 
 	private void createAllItems() {
+		//@TODO We should not be adding EVERYTHING to currentItems, we should
+		//just be creating item instances and copy the currentMonth's ArrayList
+		
+		
+		//FIX BELOW
 		currentItems.add(new Item("artichoke"));
 		currentItems.add(new Item("cabbage"));
 		currentItems.add(new Item("celeriac"));
