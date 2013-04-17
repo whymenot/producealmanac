@@ -56,6 +56,11 @@
        	  
     	</LinearLayout>
     	
+       	<com.example.coverflow.producealmanac.MultiSpinner android:id="@+id/SpinnerCollegues"
+    		android:layout_width="fill_parent"
+		    android:layout_height="wrap_content" 
+		    android:prompt="@string/filter"/>
+    	
     </LinearLayout>
 
     <LinearLayout
@@ -86,10 +91,6 @@
 	    	android:typeface="sans"
 	    	android:textSize="@dimen/largest_font"
 	    	 />
-       	<com.example.coverflow.producealmanac.MultiSpinner android:id="@+id/SpinnerCollegues"
-    		android:layout_width="fill_parent"
-		    android:layout_height="wrap_content" 
-		    android:prompt="@string/filter"/>
      </LinearLayout>
     <LinearLayout
 	android:layout_width="fill_parent" android:layout_height="450dip">

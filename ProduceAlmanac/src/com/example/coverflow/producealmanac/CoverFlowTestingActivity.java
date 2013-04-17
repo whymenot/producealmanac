@@ -36,7 +36,17 @@ public class CoverFlowTestingActivity extends Activity {
 	//search/filter terms
 	public String searchTerms = "";
 	public ArrayList<String> activeFilters;
-	public Month month;
+	public Month currentMonth;
+	public Month[] months;
+	
+	
+	//Static filter strings
+	public final static String BERRIES = "Berries";
+	public final static String ROOTS  = "Root Vegetables";
+	public final static String LEAFY = "Leafy Greens";
+	public final static String CITRUS = "Citrus Fruits";
+	public final static String HERBS = "Fresh Herbs";
+	
 
     /*
      * (non-Javadoc)
@@ -58,22 +68,21 @@ public class CoverFlowTestingActivity extends Activity {
 		currentItems = new ArrayList<Item>();
 		
 		//@TODO GET CURRENT MONTH
-		this.month = null;
 		
 		this.activeFilters = new ArrayList<String>();
 		
+		currentItems = new ArrayList<Item>();
+		months = new Month[13];
+		createAllItems();
+		/*
+		createAllMonths();
 		
+		this.currentMonth = months[monthNum];
 		
+		currentItems = currentMonth.getAllItems();
 		
-		
-
-		currentItems.add(new Item("artichoke"));
-		currentItems.add(new Item("cabbage"));
-		currentItems.add(new Item("celeriac"));
-		currentItems.add(new Item("kale"));
-		currentItems.add(new Item("leek"));
-		currentItems.add(new Item("peas"));
-		currentItems.add(new Item("turnip"));
+		this.activeFilters = new ArrayList<String>();
+		*/
 
 		//etc etc
 
@@ -111,14 +120,48 @@ public class CoverFlowTestingActivity extends Activity {
         spinnerItems.add(LEAFY);
         spinnerItems.add(CITRUS);
         spinnerItems.add(HERBS);
+        spinnerItems.add(HERBS);
+        spinnerItems.add(HERBS);
+        spinnerItems.add(HERBS);
+        spinnerItems.add(HERBS);
+        spinnerItems.add(HERBS);
+        spinnerItems.add(HERBS);
+        spinnerItems.add(HERBS);
+        spinnerItems.add(HERBS);
+        spinnerItems.add(HERBS);
+        spinnerItems.add(HERBS);
+        spinnerItems.add(HERBS);
+        spinnerItems.add(HERBS);
+        spinnerItems.add(HERBS);
         multispinner.setItems(spinnerItems, "FILTER", new MultiSpinnerListener() {
         	public void onItemsSelected(boolean[] selected) {
         		// what happens when selected.
+        		System.out.println("What's selected ? ");
+        		for (int i = 0; i < selected.length; i++) {
+        			if (selected[i] == true) System.out.print(i + " , ");
+        		}
+        		System.out.println();
         	}
         });
+        multispinner.setPrompt("FILTER");
     }
 
-    /**
+    private void createAllMonths() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void createAllItems() {
+		currentItems.add(new Item("artichoke"));
+		currentItems.add(new Item("cabbage"));
+		currentItems.add(new Item("celeriac"));
+		currentItems.add(new Item("kale"));
+		currentItems.add(new Item("leek"));
+		currentItems.add(new Item("peas"));
+		currentItems.add(new Item("turnip"));		
+	}
+
+	/**
      * Setup cover flow.
      * 
      * @param mCoverFlow
@@ -187,8 +230,7 @@ public class CoverFlowTestingActivity extends Activity {
 		
 		
 		this.activeFilters = new ArrayList<String>();
-		//@TODO instantiate all Month objects before populating infoMap
-		//add all filter Strings to activeFilters by default
+		//@TODO add all filter Strings to activeFilters by default
 		
 		//temporary... dummy group
 		String group = "group";
