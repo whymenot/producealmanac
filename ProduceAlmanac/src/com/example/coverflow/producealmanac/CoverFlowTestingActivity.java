@@ -2,11 +2,6 @@ package com.example.coverflow.producealmanac;
 
 import java.util.ArrayList;
 
-import com.example.coverflow.CoverFlow;
-import com.example.coverflow.R;
-import com.example.coverflow.ReflectingImageAdapter;
-import com.example.coverflow.ResourceImageAdapter;
-import com.example.coverflow.producealmanac.Item;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -20,6 +15,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.coverflow.CoverFlow;
+import com.example.coverflow.R;
+import com.example.coverflow.ReflectingImageAdapter;
+import com.example.coverflow.ResourceImageAdapter;
+
 /**
  * The Class CoverFlowTestingActivity.
  */
@@ -30,6 +30,11 @@ public class CoverFlowTestingActivity extends Activity {
 	boolean populated=false;
 	TextView textView;
 	ResourceImageAdapter myAdapter;
+	
+	//search/filter terms
+	public String searchTerms = "";
+	public ArrayList<Filter> activeFilters;
+	public int month;
 
     /*
      * (non-Javadoc)
@@ -49,6 +54,17 @@ public class CoverFlowTestingActivity extends Activity {
 		
 		//add all current items to the ArrayList
 		currentItems = new ArrayList<Item>();
+		
+		//@TODO GET CURRENT MONTH
+		this.month = 5;
+		
+		this.activeFilters = new ArrayList<Filter>();
+		
+		
+		
+		
+		
+		/**
 		currentItems.add(new Item("artichoke"));
 		currentItems.add(new Item("cabbage"));
 		currentItems.add(new Item("celeriac"));
@@ -56,8 +72,11 @@ public class CoverFlowTestingActivity extends Activity {
 		currentItems.add(new Item("leek"));
 		currentItems.add(new Item("peas"));
 		currentItems.add(new Item("turnip"));
-		
+		**/
 		//etc etc
+
+		
+		
 		myAdapter = new ResourceImageAdapter(this);
 		
 		int resourceList[] = new int[currentItems.size()];
@@ -148,6 +167,16 @@ public class CoverFlowTestingActivity extends Activity {
     }
     
 	public void populateMap() {
+		
+		
+		
+		
+		this.activeFilters = new ArrayList<Filter>();
+		//@TODO instantiate all Filter objects before populating infoMap
+		//add all Filter instances to activeFilters by default
+		
+		
+		//@TODO include Filter instances as last argument to putEntry()
 		putEntry(R.drawable.celeriac_detail, "artichokes are pretty", "anywhere", "red", "artichoke");
 		putEntry(R.drawable.celeriac_detail, "cabbages are evil", "trashcan", "green", "cabbage");
 		putEntry(R.drawable.celeriac_detail, "When peeled, celeriac's creamy white flesh resembles that of a turnip and tastes like a subtle blend of celery and parsley. This time of year, celeriac can be a perfect non-starch substitute for potatoes in a warming meal, and can be prepared in a similar way. It goes well with fresh green vegetables or salad and anything roasted or grilled.", "Celeriac can be stored for up to four months in the fridge.", "A ripe celeriac is firm with its peel intact.", "celeriac");
@@ -157,11 +186,11 @@ public class CoverFlowTestingActivity extends Activity {
 		putEntry(R.drawable.celeriac_detail, "turnips.. what are these?", "asdfasdf", "no idea", "turnip");
 	}
 	
-	public void putEntry(int resID, String general, String storage, String ripe, String name) {
+	public void putEntry(int resID, String general, String storage, String ripe, String name, Filter group) {
 		Bitmap bitmap = BitmapFactory.decodeResource(getResources(), resID);
 		ImageView imgView = new ImageView(this);
 		imgView.setImageBitmap(bitmap);
-		Object[] info = {general, storage, ripe, bitmap};
+		Object[] info = {general, storage, ripe, bitmap,group};
 		Item.infoMap.put(name, info);
 	}
 }
