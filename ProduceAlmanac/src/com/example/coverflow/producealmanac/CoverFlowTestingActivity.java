@@ -36,6 +36,15 @@ public class CoverFlowTestingActivity extends Activity {
 	public ArrayList<String> activeFilters;
 	public Month currentMonth;
 	public Month[] months;
+	
+	
+	//Static filter strings
+	public final static String BERRIES = "Berries";
+	public final static String ROOTS  = "Root Vegetables";
+	public final static String LEAFY = "Leafy Greens";
+	public final static String CITRUS = "Citrus Fruits";
+	public final static String HERBS = "Fresh Herbs";
+	
 
     /*
      * (non-Javadoc)
@@ -60,8 +69,10 @@ public class CoverFlowTestingActivity extends Activity {
 		int monthNum = 0;
 		
 		
-		/*
+		currentItems = new ArrayList<Item>();
+		months = new Month[13];
 		createAllItems();
+		/*
 		createAllMonths();
 		
 		this.currentMonth = months[monthNum];
@@ -107,8 +118,13 @@ public class CoverFlowTestingActivity extends Activity {
 	}
 
 	private void createAllItems() {
-		// TODO Auto-generated method stub
-		
+		currentItems.add(new Item("artichoke"));
+		currentItems.add(new Item("cabbage"));
+		currentItems.add(new Item("celeriac"));
+		currentItems.add(new Item("kale"));
+		currentItems.add(new Item("leek"));
+		currentItems.add(new Item("peas"));
+		currentItems.add(new Item("turnip"));		
 	}
 
 	/**
@@ -180,8 +196,7 @@ public class CoverFlowTestingActivity extends Activity {
 		
 		
 		this.activeFilters = new ArrayList<String>();
-		//@TODO instantiate all Month objects before populating infoMap
-		//add all filter Strings to activeFilters by default
+		//@TODO add all filter Strings to activeFilters by default
 		
 		//temporary... dummy group
 		String group = "group";

@@ -10,11 +10,15 @@ public class Month {
 	 */
 	
 	
-	public final String months[] = {"ZERO BAD","January","February","March","April",
+	public final String months[] = {"INDEX_ZERO_BAD_MONTH","January","February","March","April",
 			"May","June","July","August","September","October","November","December"};
 	public String month;
 	public ArrayList<Item> items; 
 	public int monthNumber;
+	
+	//array of string arrays created at bottom of class below
+	public String[][] itemNamesByMonth; 
+	
 	
 	public Month(int monthNumber){
 		this.monthNumber = monthNumber;
@@ -31,4 +35,12 @@ public class Month {
 	public ArrayList<Item> getAllItems(){
 		return (ArrayList<Item>) items.clone();
 	}
+	
+	String[] Zero = {"ZERO_BAD_MONTH_NO_DATA"};
+	String[] April = {"artichoke", "cabbage","celeriac","kale","leek","peas","turnip"};
+	String[] May = {"cabbage","celeriac", "leek", "turnip"};
+	
+	itemNamesByMonth = {Zero,Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec};;
+	
+	
 }
