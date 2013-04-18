@@ -96,7 +96,7 @@
 	android:layout_width="fill_parent" android:layout_height="450dip">
 
 	<com.example.coverflow.CoverFlow xmlns:coverflow="http://schemas.android.com/apk/res/com.example.coverflow"
-		coverflow:imageWidth="300dip" coverflow:imageHeight="300dip" coverflow:withReflection="true"
+		coverflow:imageWidth="200dip" coverflow:imageHeight="300dip" coverflow:withReflection="true"
 		coverflow:imageReflectionRatio="0.2" coverflow:reflectionGap="2dip" android:id="@+id/coverflowReflect"
 		android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5dip" 
 		android:layout_marginBottom="24dip" android:focusable="false"

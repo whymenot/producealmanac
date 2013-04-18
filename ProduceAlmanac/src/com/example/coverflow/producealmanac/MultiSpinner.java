@@ -72,6 +72,7 @@ public class MultiSpinner extends Spinner implements OnMultiChoiceClickListener,
 	@Override
 	public boolean performClick() {
 	    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+	    System.out.println("size of items: " + items.size());
 	    builder.setMultiChoiceItems(
 	            items.toArray(new CharSequence[items.size()]), selected, this);
 	    builder.setPositiveButton(com.example.coverflow.R.string.all,

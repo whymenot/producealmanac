@@ -71,7 +71,7 @@ public class CoverFlowTestingActivity extends Activity {
 		currentItems = new ArrayList<Item>();
 		
 		//@TODO GET CURRENT MONTH
-		int monthNum = 5;
+		int monthNum = 4;
 		
 		this.activeFilters = new ArrayList<String>();
 		
@@ -90,21 +90,12 @@ public class CoverFlowTestingActivity extends Activity {
 		
 		//done initializing backend data
 		
+		setContentView(R.layout.main);
 		
 		showUpdatedItems();
 		
 
-		//CoverFlow code below
-		//System.out.println("MAIN ACTIVITY STARTED, printing just before COVERFLOW setup");
-    	
-//        super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.main);
-        // note resources below are taken using getIdentifier to allow importing
-        // this library as library.
-        final CoverFlow reflectingCoverFlow = (CoverFlow) findViewById(this.getResources().getIdentifier(
-                "coverflowReflect", "id", "com.example.coverflow"));
-        setupCoverFlow(reflectingCoverFlow, true);
         
         
         final MultiSpinner multispinner = (MultiSpinner) findViewById(this.getResources().getIdentifier("SpinnerCollegues", "id", "com.example.coverflow"));
@@ -135,6 +126,7 @@ public class CoverFlowTestingActivity extends Activity {
     }
 
     public void showUpdatedItems() {
+    	System.out.println("CURRENT ITEMS SIZE: " + this.currentItems.size());
 		myAdapter = new ResourceImageAdapter(this);
 		
 		int resourceList[] = new int[currentItems.size()];
@@ -145,6 +137,18 @@ public class CoverFlowTestingActivity extends Activity {
 			System.out.println(resourceList[i]);
 		}
 		myAdapter.setResources(resourceList);
+		
+		//CoverFlow code below
+		//System.out.println("MAIN ACTIVITY STARTED, printing just before COVERFLOW setup");
+    	
+		//super.onCreate(savedInstanceState);
+
+		
+        // note resources below are taken using getIdentifier to allow importing
+        // this library as library.
+        final CoverFlow reflectingCoverFlow = (CoverFlow) findViewById(this.getResources().getIdentifier(
+                "coverflowReflect", "id", "com.example.coverflow"));
+        setupCoverFlow(reflectingCoverFlow, true);
 		
 	}
 
@@ -247,13 +251,13 @@ public class CoverFlowTestingActivity extends Activity {
 		String group = "group";
 		
 		//@TODO include filter Strings as last argument to putEntry()
-		putEntry(R.drawable.celeriac_detail, "artichokes are pretty", "anywhere", "red", "artichoke", group);
-		putEntry(R.drawable.celeriac_detail, "cabbages are evil", "trashcan", "green", "cabbage", group);
-		putEntry(R.drawable.celeriac_detail, "When peeled, celeriac's creamy white flesh resembles that of a turnip and tastes like a subtle blend of celery and parsley. This time of year, celeriac can be a perfect non-starch substitute for potatoes in a warming meal, and can be prepared in a similar way. It goes well with fresh green vegetables or salad and anything roasted or grilled.", "Celeriac can be stored for up to four months in the fridge.", "A ripe celeriac is firm with its peel intact.", "celeriac", group);
-		putEntry(R.drawable.celeriac_detail, "kale is kind", "who knows", "green", "kale", group);
-		putEntry(R.drawable.celeriac_detail, "leeks are...", "asasasd", "violet", "leek", group);
-		putEntry(R.drawable.celeriac_detail, "peas are small", "asdasd", "invisible", "peas", group);
-		putEntry(R.drawable.celeriac_detail, "turnips.. what are these?", "asdfasdf", "no idea", "turnip", group);
+		putEntry(R.drawable.celeriac_detail, "artichokes are pretty", "anywhere", "red", "artichoke", LEAFY);
+		putEntry(R.drawable.celeriac_detail, "cabbages are evil", "trashcan", "green", "cabbage", LEAFY);
+		putEntry(R.drawable.celeriac_detail, "When peeled, celeriac's creamy white flesh resembles that of a turnip and tastes like a subtle blend of celery and parsley. This time of year, celeriac can be a perfect non-starch substitute for potatoes in a warming meal, and can be prepared in a similar way. It goes well with fresh green vegetables or salad and anything roasted or grilled.", "Celeriac can be stored for up to four months in the fridge.", "A ripe celeriac is firm with its peel intact.", "celeriac", ROOTS);
+		putEntry(R.drawable.celeriac_detail, "kale is kind", "who knows", "green", "kale", LEAFY);
+		putEntry(R.drawable.celeriac_detail, "leeks are...", "asasasd", "violet", "leek", ROOTS);
+		putEntry(R.drawable.celeriac_detail, "peas are small", "asdasd", "invisible", "peas", BERRIES);
+		putEntry(R.drawable.celeriac_detail, "turnips.. what are these?", "asdfasdf", "no idea", "turnip", CITRUS);
 	}
 	
 	public void putEntry(int resID, String general, String storage, String ripe, String name, String group) {
@@ -278,7 +282,9 @@ public class CoverFlowTestingActivity extends Activity {
 	
 	public void updateList(){
 		this.currentItems = this.currentMonth.getAllItems();
-		for (Item i : this.currentItems){
+		@SuppressWarnings("unchecked")
+		ArrayList<Item> copy =(ArrayList<Item>) this.currentItems.clone();
+		for (Item i : copy){
 			//if statement checks the filters, else checks search terms
 			if (! this.activeFilters.contains(i.group)){
 				if( ! this.currentItems.remove(i)){
