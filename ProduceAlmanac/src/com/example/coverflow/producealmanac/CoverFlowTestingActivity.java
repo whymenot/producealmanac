@@ -38,6 +38,7 @@ public class CoverFlowTestingActivity extends Activity {
 	public ArrayList<String> activeFilters;
 	public Month currentMonth;
 	public Month[] months;
+	//public Store activeStore = null;
 	
 	
 	//Static filter strings
@@ -90,16 +91,7 @@ public class CoverFlowTestingActivity extends Activity {
 		//done initializing backend data
 		
 		
-		myAdapter = new ResourceImageAdapter(this);
-		
-		int resourceList[] = new int[currentItems.size()];
-		
-		for (int i = 0; i < currentItems.size(); i++) {
-			System.out.println(currentItems.get(i).name);
-			resourceList[i] = getResources().getIdentifier(currentItems.get(i).name + "_coverflow", "drawable", getPackageName());
-			System.out.println(resourceList[i]);
-		}
-		myAdapter.setResources(resourceList);
+		showUpdatedItems();
 		
 
 		//CoverFlow code below
@@ -148,7 +140,21 @@ public class CoverFlowTestingActivity extends Activity {
         multispinner.setPrompt("FILTER");
     }
 
-    private void createAllMonths() {
+    public void showUpdatedItems() {
+		myAdapter = new ResourceImageAdapter(this);
+		
+		int resourceList[] = new int[currentItems.size()];
+		
+		for (int i = 0; i < currentItems.size(); i++) {
+			System.out.println(currentItems.get(i).name);
+			resourceList[i] = getResources().getIdentifier(currentItems.get(i).name + "_coverflow", "drawable", getPackageName());
+			System.out.println(resourceList[i]);
+		}
+		myAdapter.setResources(resourceList);
+		
+	}
+
+	private void createAllMonths() {
     	/**Creates all Month instances...should only be called after
     	*  all Item instances have been created. Month Zero is "empty"
     	*  so 1->Jan, 2->Feb, ... 12->Dec
@@ -170,7 +176,8 @@ public class CoverFlowTestingActivity extends Activity {
 		currentItems.add(new Item("kale"));
 		currentItems.add(new Item("leek"));
 		currentItems.add(new Item("peas"));
-		currentItems.add(new Item("turnip"));		
+		currentItems.add(new Item("turnip"));
+		
 	}
 
 	/**
@@ -236,9 +243,7 @@ public class CoverFlowTestingActivity extends Activity {
         });
     }
     
-	public void populateMap() {
-		
-		
+	public void populateMap() {	
 		
 		
 		this.activeFilters = new ArrayList<String>();
@@ -264,4 +269,39 @@ public class CoverFlowTestingActivity extends Activity {
 		Object[] info = {general, storage, ripe, bitmap,group};
 		Item.infoMap.put(name, info);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public void setFilters(ArrayList<String> filters){
+		this.activeFilters= (ArrayList<String>) filters.clone();
+	}
+	
+	public void setMonth(int monthNum){
+		this.currentMonth = this.months[monthNum];
+	}
+	
+	public void setSearchString(String characters){
+		this.searchTerms = characters;
+	}
+	
+	public void updateList(){
+		this.currentItems = this.currentMonth.getAllItems();
+		for (Item i : this.currentItems){
+			//if statement checks the filters, else checks search terms
+			if (! this.activeFilters.contains(i.group)){
+				if( ! this.currentItems.remove(i)){
+					System.out.println("Trying to remove item not in list... ERROR, check item: " + i.toString());
+				}
+			}
+			else{
+				if (! i.name.contains(this.searchTerms)){
+					if( ! this.currentItems.remove(i)){
+						System.out.println("Trying to remove item not in list... ERROR, check item: " + i.toString());
+					}
+				}
+					
+			}
+		}
+		showUpdatedItems();
+	}
+	
 }
