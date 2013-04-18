@@ -8,7 +8,10 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Spinner;
 
 public class MultiSpinner extends Spinner implements OnMultiChoiceClickListener, OnCancelListener {
@@ -71,7 +74,23 @@ public class MultiSpinner extends Spinner implements OnMultiChoiceClickListener,
 	    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 	    builder.setMultiChoiceItems(
 	            items.toArray(new CharSequence[items.size()]), selected, this);
-	    builder.setPositiveButton(com.example.coverflow.R.string.ok,
+	    builder.setPositiveButton(com.example.coverflow.R.string.all,
+	            new DialogInterface.OnClickListener() {
+	
+	                @Override
+	                public void onClick(DialogInterface dialog, int which) {
+	                	// do nothing here.
+	                }
+	            });
+	    builder.setNeutralButton(com.example.coverflow.R.string.none,
+	            new DialogInterface.OnClickListener() {
+	
+	                @Override
+	                public void onClick(DialogInterface dialog, int which) {
+	                	// do nothing here.
+	                }
+	            });
+	    builder.setNegativeButton(com.example.coverflow.R.string.done,
 	            new DialogInterface.OnClickListener() {
 	
 	                @Override
@@ -80,7 +99,38 @@ public class MultiSpinner extends Spinner implements OnMultiChoiceClickListener,
 	                }
 	            });
 	    builder.setOnCancelListener(this);
-	    builder.show();
+	    final AlertDialog dialog = builder.create();
+	    //builder.show();
+	    dialog.show();
+	    
+	    // set up all, none buttons not to close the dialog,
+	    // and set what's happen when it is clicked.
+	    Button button_all = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+	    button_all.setOnClickListener(new View.OnClickListener() {
+	    	@Override
+	    	public void onClick(View v) {
+	    		System.out.println("All Clicked");
+                ListView list = ((AlertDialog) dialog).getListView();
+                for (int i = 0; i < list.getCount(); i++) {
+                	list.setItemChecked(i, true);
+                	selected[i] = true;
+                }
+	    	}
+	    });
+	    
+	    Button button_none = dialog.getButton(DialogInterface.BUTTON_NEUTRAL);
+	    button_none.setOnClickListener(new View.OnClickListener() {
+	    	@Override
+	    	public void onClick(View v) {
+	    		System.out.println("None Clicked");
+                ListView list = ((AlertDialog) dialog).getListView();
+                for (int i = 0; i < list.getCount(); i++) {
+                	list.setItemChecked(i, false);
+                	selected[i] = false;
+                }
+	    	}
+	    });
+
 	    return true;
 	}
 	

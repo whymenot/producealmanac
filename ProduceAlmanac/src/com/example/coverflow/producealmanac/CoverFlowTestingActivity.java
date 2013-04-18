@@ -70,7 +70,7 @@ public class CoverFlowTestingActivity extends Activity {
 		currentItems = new ArrayList<Item>();
 		
 		//@TODO GET CURRENT MONTH
-		int monthNum = 0;
+		int monthNum = 5;
 		
 		this.activeFilters = new ArrayList<String>();
 		
