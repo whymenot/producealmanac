@@ -114,26 +114,20 @@ public class CoverFlowTestingActivity extends Activity {
         spinnerItems.add(LEAFY);
         spinnerItems.add(CITRUS);
         spinnerItems.add(HERBS);
-        spinnerItems.add(HERBS);
-        spinnerItems.add(HERBS);
-        spinnerItems.add(HERBS);
-        spinnerItems.add(HERBS);
-        spinnerItems.add(HERBS);
-        spinnerItems.add(HERBS);
-        spinnerItems.add(HERBS);
-        spinnerItems.add(HERBS);
-        spinnerItems.add(HERBS);
-        spinnerItems.add(HERBS);
-        spinnerItems.add(HERBS);
-        spinnerItems.add(HERBS);
-        spinnerItems.add(HERBS);
+
         multispinner.setItems(spinnerItems, "FILTER", new MultiSpinnerListener() {
         	public void onItemsSelected(boolean[] selected) {
         		// what happens when selected.
         		System.out.println("What's selected ? ");
+        		ArrayList<String> selectedFilter = new ArrayList<String>();
         		for (int i = 0; i < selected.length; i++) {
-        			if (selected[i] == true) System.out.print(i + " , ");
+        			if (selected[i] == true) {
+        				System.out.print(i + " , ");
+        				selectedFilter.add(FILTERS[i]);
+        			}
         		}
+        		setFilters(selectedFilter);
+        		updateList();
         		System.out.println();
         	}
         });
