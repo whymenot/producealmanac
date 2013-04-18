@@ -270,9 +270,8 @@ public class CoverFlowTestingActivity extends Activity {
 		Item.infoMap.put(name, info);
 	}
 	
-	@SuppressWarnings("unchecked")
 	public void setFilters(ArrayList<String> filters){
-		this.activeFilters= (ArrayList<String>) filters.clone();
+		this.activeFilters= (ArrayList<String>) filters;
 	}
 	
 	public void setMonth(int monthNum){
@@ -297,8 +296,7 @@ public class CoverFlowTestingActivity extends Activity {
 					if( ! this.currentItems.remove(i)){
 						System.out.println("Trying to remove item not in list... ERROR, check item: " + i.toString());
 					}
-				}
-					
+				}					
 			}
 		}
 		showUpdatedItems();
