@@ -7,6 +7,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_detail">DetailActivity</string>
     <string name="filter">Filter</string>
-    <string name="ok">OK</string>
+    <string name="all">All</string>
+    <string name="none">None</string>
+    <string name="done">Done</string>
 
 </resources>
