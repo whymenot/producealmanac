@@ -1,117 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:orientation="vertical" 
-    android:typeface="sans">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="82.5dip"
-        android:background="@color/LightGreen"
-        android:orientation="vertical" >
-        
-       	<TextView
-	   		android:layout_width="wrap_content"
-	    	android:layout_height="wrap_content"
-	    	android:text="the produce almanac"
-	    	android:layout_gravity="left"
-	    	android:textColor="@android:color/white"
-	    	android:typeface="sans"
-	    	android:textSize="@dimen/produce_font"
-	    	android:paddingTop="10dip"
-	    	android:paddingLeft="20.6dip"
-	    	android:paddingRight="20.6dip"
-	    	 />
-        
-        
-    </LinearLayout>
-    
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="123.75dip"
-        android:background="@color/Brown"
-        android:orientation="vertical" >
-       	
-        
-        
-       	<LinearLayout
-        	android:layout_width="550dip"
-        	android:layout_marginTop="20dip"
-        	
-        	android:layout_marginLeft="20dip"
-        	android:layout_height="83.75dip"
-        	android:background="@color/TransparentWhite"
-        	android:orientation="vertical" >
-        	  <TextView
-       	    android:textColor="@android:color/white"
-        	android:layout_width="wrap_content"
-        	android:text="search"
-        	android:layout_marginLeft="20dip"
-        	android:layout_marginTop="25dip"
-        	android:layout_height="wrap_content"
-        	android:orientation="vertical"
-	    	android:textSize="@dimen/search_font" />
-       	  
-    	</LinearLayout>
-    	
-       	<com.example.coverflow.producealmanac.MultiSpinner android:id="@+id/SpinnerCollegues"
-    		android:layout_width="fill_parent"
-		    android:layout_height="wrap_content" 
-		    android:prompt="@string/filter"/>
-    	
-    </LinearLayout>
 
-    <LinearLayout
+
+        <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="220dip"
-        android:layout_marginTop="44dip"
+        android:layout_height="fill_parent"
+        android:typeface="sans" 
         android:orientation="vertical" 
+        android:layout_marginTop="44dip"
 		android:paddingLeft="20.6dip"
+		android:background="@android:color/white"
 	    android:paddingRight="20.6dip">
 
-                
-       	<TextView
-	   		android:layout_width="wrap_content"
-	    	android:layout_height="110dip"
-	    	android:text="EARLY"
-	    	android:textColor="@color/DeepGreen"
-
-	    	android:textStyle="bold"
-	    	android:textSize="@dimen/largest_font"
-	    	/>
        	
        	<TextView
 	   		android:layout_width="wrap_content"
 	    	android:layout_height="110dip"
 	    	android:textStyle="bold"
-	    	android:text="APRIL"
+	    	android:text="APRIL 22"
 	    	android:textColor="@color/DeepGreen"
 	    	android:typeface="sans"
 	    	android:textSize="@dimen/largest_font"
+	    	android:layout_marginBottom="10dip"
 	    	 />
-     </LinearLayout>
+    
+     
+	<Spinner
+    android:id="@+id/grocery_store_spinner"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/height_of_buttons"
+    android:layout_marginBottom="10dip"
+     />
+	
+	<com.example.coverflow.producealmanac.MultiSpinner 
+	    	android:id="@+id/SpinnerCollegues"
+    		android:layout_width="fill_parent"
+		    android:layout_height="@dimen/height_of_buttons"
+		    android:prompt="@string/filter"/>
+
+    
+
+	<SearchView
+	    android:layout_width="match_parent"
+        android:layout_height="@dimen/height_of_buttons"
+	    android:queryHint = "search"
+	    android:textSize="500sp"
+	    android:iconifiedByDefault="true"
+	    android:textColor="@android:color/white"
+	    />
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent" 
+    android:layout_height="500dip">
+    
     <LinearLayout
-	android:layout_width="fill_parent" android:layout_height="450dip">
-<!-- 
-	<com.example.coverflow.CoverFlow xmlns:coverflow="http://schemas.android.com/apk/res/com.example.coverflow"
-		coverflow:imageWidth="200dip" coverflow:imageHeight="300dip" coverflow:withReflection="true"
-		coverflow:imageReflectionRatio="0.2" coverflow:reflectionGap="2dip" android:id="@+id/coverflowReflect"
-		android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5dip" 
-		android:layout_marginBottom="24dip" android:focusable="false"
-		/>
--->
-	<GridView
-        android:id="@+id/gridview"
-        android:layout_width="fill_parent" 
-        android:layout_height="350dip"
-        android:columnWidth="150dp"
-        android:numColumns="auto_fit"
-        android:stretchMode="columnWidth"
-        android:gravity="center"/>
+        android:layout_width="fill_parent"
+        android:layout_height="450dip"
+        android:orientation="vertical">
+     	<GridView
+     	    android:id="@+id/gridview"
+     	    android:layout_width="fill_parent"
+     	    android:layout_height="467dp"
+     	    android:columnWidth="150dp"
+     	    android:gravity="center"
+     	    android:numColumns="auto_fit"
+     	    android:stretchMode="columnWidth" />
+     	</LinearLayout>
+    	
+</ScrollView>
 
-	</LinearLayout>
 </LinearLayout>
-
 

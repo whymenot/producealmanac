@@ -5,4 +5,5 @@
     <dimen name="produce_font">40sp</dimen>
     <dimen name="title_font">40sp</dimen>
     <dimen name="body_font">24sp</dimen>
+    <dimen name="height_of_buttons">80dip</dimen>
 </resources>
