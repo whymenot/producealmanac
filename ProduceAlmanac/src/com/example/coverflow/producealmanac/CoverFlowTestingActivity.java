@@ -36,18 +36,22 @@ import com.example.coverflow.producealmanac.MultiSpinner.MultiSpinnerListener;
  */
 public class CoverFlowTestingActivity extends Activity {
 
-	//currentItems will be the items currently in season, use a hashmap with key=time of year
-	ArrayList<Item> currentItems;
+	
+	ArrayList<Item> activeItems;
+	ArrayList<String> localNow; // used for searching, filters not relevant
+	ArrayList<String> localOut; // used for searching, local out of season
 	boolean populated=false;
+	
+	public String searchTerms = "";
+	public ArrayList<String> activeFilters;
+	public ArrayList<Store> activeStores = null;
+	
+	
 	TextView textView;
 	ResourceImageAdapter myAdapter;
 	
 	//search/filter terms
-	public String searchTerms = "";
-	public ArrayList<String> activeFilters;
-	public Month currentMonth;
-	public Month[] months;
-	//public Store activeStore = null;
+
 	
 	
 	//Static filter strings
