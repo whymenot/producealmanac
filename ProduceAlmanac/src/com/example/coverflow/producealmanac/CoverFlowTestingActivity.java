@@ -1,20 +1,29 @@
 package com.example.coverflow.producealmanac;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.coverflow.CoverFlow;
 import com.example.coverflow.R;
@@ -50,6 +59,8 @@ public class CoverFlowTestingActivity extends Activity {
 	
 	public final static String[] FILTERS = {BERRIES,ROOTS,LEAFY,CITRUS,HERBS};
 	
+	// for gridview
+	ImageAdapter myImageAdapter;
 
     /*
      * (non-Javadoc)
@@ -92,8 +103,45 @@ public class CoverFlowTestingActivity extends Activity {
 		
 		setContentView(R.layout.main);
 		
-		showUpdatedItems();
+		//showUpdatedItems();
 		
+        GridView gridview = (GridView) findViewById(R.id.gridview);
+        myImageAdapter = new ImageAdapter(this);
+        gridview.setAdapter(myImageAdapter);
+        
+		for(int i = 0; i < currentItems.size(); i++) {
+			//System.out.println(currentItems.get(i).name);
+			myImageAdapter.add(getResources().getIdentifier(currentItems.get(i).name + "_coverflow", "drawable", getPackageName()));
+			//System.out.println(getResources().getIdentifier(currentItems.get(i).name + "_coverflow", "drawable", getPackageName()));
+		}
+
+         
+		
+		/*
+		myGallery = (GridView)findViewById(R.id.gridview);
+        
+		for(int i = 0; i < currentItems.size(); i++) {
+			System.out.println(currentItems.get(i).name);
+			myGallery.addView(insertPhoto(getResources().getIdentifier(currentItems.get(i).name + "_coverflow", "drawable", getPackageName())));
+			System.out.println(getResources().getIdentifier(currentItems.get(i).name + "_coverflow", "drawable", getPackageName()));
+		}
+		
+		/*
+        String ExternalStorageDirectoryPath = Environment
+          .getExternalStorageDirectory()
+          .getAbsolutePath();
+        
+        String targetPath = ExternalStorageDirectoryPath + "res/drawable/";
+        
+        Toast.makeText(getApplicationContext(), targetPath, Toast.LENGTH_LONG).show();
+        File targetDirector = new File(targetPath);
+                 
+        File[] files = targetDirector.listFiles();
+        System.out.println(files.length);
+        for (File file : files){
+        	myGallery.addView(insertPhoto(file.getAbsolutePath()));
+        }
+        */
 
 
         
@@ -302,4 +350,90 @@ public class CoverFlowTestingActivity extends Activity {
 		showUpdatedItems();
 	}
 	
+    public class ImageAdapter extends BaseAdapter {
+        
+        private Context mContext;
+        ArrayList<Integer> itemList = new ArrayList<Integer>();
+        
+        public ImageAdapter(Context c) {
+         mContext = c; 
+        }
+        
+        void add(int resourceId){
+         itemList.add(resourceId); 
+        }
+
+     @Override
+     public int getCount() {
+      return itemList.size();
+     }
+
+     @Override
+     public Object getItem(int arg0) {
+      // TODO Auto-generated method stub
+      return null;
+     }
+
+     @Override
+     public long getItemId(int position) {
+      // TODO Auto-generated method stub
+      return 0;
+     }
+
+     @Override
+     public View getView(int position, View convertView, ViewGroup parent) {
+      ImageView imageView;
+            if (convertView == null) {  // if it's not recycled, initialize some attributes
+                imageView = new ImageView(mContext);
+                imageView.setLayoutParams(new GridView.LayoutParams(220, 220));
+                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                imageView.setPadding(8, 8, 8, 8);
+            } else {
+                imageView = (ImageView) convertView;
+            }
+
+            Bitmap bm = decodeSampledBitmapFromResource(itemList.get(position), 220, 220);
+
+            imageView.setImageBitmap(bm);
+            return imageView;
+     }
+     
+     public Bitmap decodeSampledBitmapFromResource(int resourceId, int reqWidth, int reqHeight) {
+      
+      Bitmap bm = null;
+      // First decode with inJustDecodeBounds=true to check dimensions
+      final BitmapFactory.Options options = new BitmapFactory.Options();
+      options.inJustDecodeBounds = true;
+      BitmapFactory.decodeResource(getApplicationContext().getResources(), resourceId);
+          
+      // Calculate inSampleSize
+      options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+          
+      // Decode bitmap with inSampleSize set
+      options.inJustDecodeBounds = false;
+      bm = BitmapFactory.decodeResource(getApplicationContext().getResources(), resourceId); 
+          
+      return bm;   
+     }
+     
+     public int calculateInSampleSize(
+       
+      BitmapFactory.Options options, int reqWidth, int reqHeight) {
+      // Raw height and width of image
+      final int height = options.outHeight;
+      final int width = options.outWidth;
+      int inSampleSize = 1;
+      
+      if (height > reqHeight || width > reqWidth) {
+       if (width > height) {
+        inSampleSize = Math.round((float)height / (float)reqHeight);    
+       } else {
+        inSampleSize = Math.round((float)width / (float)reqWidth);    
+       }   
+      }
+      
+      return inSampleSize;    
+     }
+
+    }
 }
