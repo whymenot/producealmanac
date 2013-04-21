@@ -119,7 +119,10 @@ public class CoverFlowTestingActivity extends Activity {
 
  */
 		TextView txtView = new TextView(this);
-		txtView.setText("CATEGORY1");
+		//should be different per each one
+		txtView.setText("leaf vegetables");
+		txtView.setTextColor(getResources().getColor(R.color.Brown));
+		txtView.setTextSize(40);
 		gridLinearLayout.addView(txtView);
 		
 		GridView gridview = new GridView(this);
@@ -130,6 +133,15 @@ public class CoverFlowTestingActivity extends Activity {
 		gridview.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
 		
 		gridLinearLayout.addView(gridview);
+		
+		
+		TextView txtView2 = new TextView(this);
+		//should be different per each one
+		
+		txtView2.setText("root vegetables");
+		txtView2.setTextColor(getResources().getColor(R.color.Brown));
+		txtView2.setTextSize(40);
+		gridLinearLayout.addView(txtView2);
 		
 		GridView gridview2 = new GridView(this);
 		gridview2.setLayoutParams(new GridView.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, 690));
@@ -179,6 +191,7 @@ public class CoverFlowTestingActivity extends Activity {
         
         
         final MultiSpinner multispinner = (MultiSpinner) findViewById(this.getResources().getIdentifier("SpinnerCollegues", "id", "com.example.coverflow"));
+      
         List<String> spinnerItems = new ArrayList<String>();
         spinnerItems.add(BERRIES);
         spinnerItems.add(ROOTS);
@@ -186,7 +199,7 @@ public class CoverFlowTestingActivity extends Activity {
         spinnerItems.add(CITRUS);
         spinnerItems.add(HERBS);
 
-        multispinner.setItems(spinnerItems, "FILTER", new MultiSpinnerListener() {
+        multispinner.setItems(spinnerItems, "filter by category", new MultiSpinnerListener() {
         	public void onItemsSelected(boolean[] selected) {
         		// what happens when selected.
         		System.out.println("What's selected ? ");
