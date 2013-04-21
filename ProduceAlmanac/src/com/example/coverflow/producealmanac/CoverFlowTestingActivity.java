@@ -103,8 +103,6 @@ public class CoverFlowTestingActivity extends Activity {
 		
 		setContentView(R.layout.main);
 		
-		//showUpdatedItems();
-		
 		LinearLayout gridLinearLayout = (LinearLayout) findViewById(R.id.grid_linearlayout);
 		
         //GridView gridview = (GridView) findViewById(R.id.gridview);
@@ -151,9 +149,6 @@ public class CoverFlowTestingActivity extends Activity {
 			myImageAdapter.add(getResources().getIdentifier(currentItems.get(i).name + "_coverflow", "drawable", getPackageName()));
 			//System.out.println(getResources().getIdentifier(currentItems.get(i).name + "_coverflow", "drawable", getPackageName()));
 		}
-
-         
-		
 		/*
 		myGallery = (GridView)findViewById(R.id.gridview);
         
