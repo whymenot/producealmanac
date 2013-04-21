@@ -123,7 +123,7 @@ public class CoverFlowTestingActivity extends Activity {
 		gridLinearLayout.addView(txtView);
 		
 		GridView gridview = new GridView(this);
-		gridview.setLayoutParams(new GridView.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, 450));
+		gridview.setLayoutParams(new GridView.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, 690));
 		gridview.setColumnWidth(220);
 		gridview.setGravity(Gravity.CENTER);
 		gridview.setNumColumns(GridView.AUTO_FIT);
@@ -132,7 +132,7 @@ public class CoverFlowTestingActivity extends Activity {
 		gridLinearLayout.addView(gridview);
 		
 		GridView gridview2 = new GridView(this);
-		gridview2.setLayoutParams(new GridView.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, 450));
+		gridview2.setLayoutParams(new GridView.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, 690));
 		gridview2.setColumnWidth(220);
 		gridview2.setGravity(Gravity.CENTER);
 		gridview2.setNumColumns(GridView.AUTO_FIT);
