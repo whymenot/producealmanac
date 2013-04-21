@@ -105,9 +105,46 @@ public class CoverFlowTestingActivity extends Activity {
 		
 		//showUpdatedItems();
 		
-        GridView gridview = (GridView) findViewById(R.id.gridview);
+		LinearLayout gridLinearLayout = (LinearLayout) findViewById(R.id.grid_linearlayout);
+		
+        //GridView gridview = (GridView) findViewById(R.id.gridview);
+		
+/*
+ *      	<GridView
+     	    android:id="@+id/gridview"
+     	    android:layout_width="fill_parent"
+     	    android:layout_height="467dp"
+     	    android:columnWidth="150dp"
+     	    android:gravity="center"
+     	    android:numColumns="auto_fit"
+     	    android:stretchMode="columnWidth" />
+
+ */
+		TextView txtView = new TextView(this);
+		txtView.setText("CATEGORY1");
+		gridLinearLayout.addView(txtView);
+		
+		GridView gridview = new GridView(this);
+		gridview.setLayoutParams(new GridView.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, 450));
+		gridview.setColumnWidth(220);
+		gridview.setGravity(Gravity.CENTER);
+		gridview.setNumColumns(GridView.AUTO_FIT);
+		gridview.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
+		
+		gridLinearLayout.addView(gridview);
+		
+		GridView gridview2 = new GridView(this);
+		gridview2.setLayoutParams(new GridView.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, 450));
+		gridview2.setColumnWidth(220);
+		gridview2.setGravity(Gravity.CENTER);
+		gridview2.setNumColumns(GridView.AUTO_FIT);
+		gridview2.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
+		
+		gridLinearLayout.addView(gridview2);
+		
         myImageAdapter = new ImageAdapter(this);
         gridview.setAdapter(myImageAdapter);
+        gridview2.setAdapter(myImageAdapter);
         
 		for(int i = 0; i < currentItems.size(); i++) {
 			//System.out.println(currentItems.get(i).name);

@@ -50,14 +50,16 @@
 	    android:textColor="@android:color/white"
 	    />
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
     android:layout_width="fill_parent" 
     android:layout_height="500dip">
     
     <LinearLayout
+        android:id="@+id/grid_linearlayout"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
+        <!--
      	<GridView
      	    android:id="@+id/gridview"
      	    android:layout_width="fill_parent"
@@ -66,7 +68,7 @@
      	    android:gravity="center"
      	    android:numColumns="auto_fit"
      	    android:stretchMode="columnWidth" />
-     
+     	    -->
      	</LinearLayout>
      	
     	
