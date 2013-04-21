@@ -102,134 +102,9 @@ public class CoverFlowTestingActivity extends Activity {
 		//done initializing backend data
 		
 		setContentView(R.layout.main);
-		
-		LinearLayout gridLinearLayout = (LinearLayout) findViewById(R.id.grid_linearlayout);
-		
-        //GridView gridview = (GridView) findViewById(R.id.gridview);
-		
-/*
- *      	<GridView
-     	    android:id="@+id/gridview"
-     	    android:layout_width="fill_parent"
-     	    android:layout_height="467dp"
-     	    android:columnWidth="150dp"
-     	    android:gravity="center"
-     	    android:numColumns="auto_fit"
-     	    android:stretchMode="columnWidth" />
 
- */
-		TextView txtView = new TextView(this);
-		//should be different per each one
-		txtView.setText("leaf vegetables");
-		txtView.setTextColor(getResources().getColor(R.color.Brown));
-		txtView.setTextSize(40);
-		gridLinearLayout.addView(txtView);
-		
-		ArrayList<ArrayList<Item>> itemsByFilter = new ArrayList<ArrayList<Item>>();
-		itemsByFilter.add(currentItems);
-		
-		ArrayList<Item> tmpItems = new ArrayList<Item>();
-		tmpItems.add(new Item("kale"));
-		tmpItems.add(new Item("artichoke"));
-		itemsByFilter.add(tmpItems);
-		itemsByFilter.add(tmpItems);
-		itemsByFilter.add(tmpItems);
-		itemsByFilter.add(tmpItems);
-		
-		
-		// create gridviews dynamically...
-		for (int i = 0; i < FILTERS.length; i++) {
-			ArrayList<Item> items = itemsByFilter.get(i);
-			
-			// skip if size of items is zero.
-			if (items.size() == 0) continue;
-			
-			GridView gridview = new GridView(this);
-			gridview.setLayoutParams(new GridView.LayoutParams(GridView.LayoutParams.MATCH_PARENT, 230 * ((int) Math.ceil(items.size()/3.0))));
-			gridview.setColumnWidth(220);
-			gridview.setGravity(Gravity.CENTER);
-			gridview.setNumColumns(GridView.AUTO_FIT);
-			gridview.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
+		showUpdatedItems();
 
-	        myImageAdapter = new ImageAdapter(this);
-	        
-			gridLinearLayout.addView(gridview);
-	        gridview.setAdapter(myImageAdapter);
-	        
-			for(int j = 0; j < items.size(); j++) {
-				//System.out.println(currentItems.get(i).name);
-				myImageAdapter.add(getResources().getIdentifier(items.get(j).name + "_coverflow", "drawable", getPackageName()));
-				//System.out.println(getResources().getIdentifier(currentItems.get(i).name + "_coverflow", "drawable", getPackageName()));
-			}
-
-		}
-		/*
-		GridView gridview = new GridView(this);
-		gridview.setLayoutParams(new GridView.LayoutParams(GridView.LayoutParams.MATCH_PARENT, 690));
-		gridview.setColumnWidth(220);
-		gridview.setGravity(Gravity.CENTER);
-		gridview.setNumColumns(GridView.AUTO_FIT);
-		gridview.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
-		
-		gridLinearLayout.addView(gridview);
-		
-		
-		TextView txtView2 = new TextView(this);
-		//should be different per each one
-		
-		txtView2.setText("root vegetables");
-		txtView2.setTextColor(getResources().getColor(R.color.Brown));
-		txtView2.setTextSize(40);
-		gridLinearLayout.addView(txtView2);
-		
-		GridView gridview2 = new GridView(this);
-		gridview2.setLayoutParams(new GridView.LayoutParams(GridView.LayoutParams.MATCH_PARENT, 690));
-		gridview2.setColumnWidth(220);
-		gridview2.setGravity(Gravity.CENTER);
-		gridview2.setNumColumns(GridView.AUTO_FIT);
-		gridview2.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
-		
-		gridLinearLayout.addView(gridview2);
-		
-        myImageAdapter = new ImageAdapter(this);
-        gridview.setAdapter(myImageAdapter);
-        gridview2.setAdapter(myImageAdapter);
-        
-		for(int i = 0; i < currentItems.size(); i++) {
-			//System.out.println(currentItems.get(i).name);
-			myImageAdapter.add(getResources().getIdentifier(currentItems.get(i).name + "_coverflow", "drawable", getPackageName()));
-			//System.out.println(getResources().getIdentifier(currentItems.get(i).name + "_coverflow", "drawable", getPackageName()));
-		}
-		*/
-		
-		/*
-		myGallery = (GridView)findViewById(R.id.gridview);
-        
-		for(int i = 0; i < currentItems.size(); i++) {
-			System.out.println(currentItems.get(i).name);
-			myGallery.addView(insertPhoto(getResources().getIdentifier(currentItems.get(i).name + "_coverflow", "drawable", getPackageName())));
-			System.out.println(getResources().getIdentifier(currentItems.get(i).name + "_coverflow", "drawable", getPackageName()));
-		}
-		
-		/*
-        String ExternalStorageDirectoryPath = Environment
-          .getExternalStorageDirectory()
-          .getAbsolutePath();
-        
-        String targetPath = ExternalStorageDirectoryPath + "res/drawable/";
-        
-        Toast.makeText(getApplicationContext(), targetPath, Toast.LENGTH_LONG).show();
-        File targetDirector = new File(targetPath);
-                 
-        File[] files = targetDirector.listFiles();
-        System.out.println(files.length);
-        for (File file : files){
-        	myGallery.addView(insertPhoto(file.getAbsolutePath()));
-        }
-        */
-
-
-        
         
         final MultiSpinner multispinner = (MultiSpinner) findViewById(this.getResources().getIdentifier("SpinnerCollegues", "id", "com.example.coverflow"));
       
@@ -260,30 +135,65 @@ public class CoverFlowTestingActivity extends Activity {
     }
 
     public void showUpdatedItems() {
-    	System.out.println("CURRENT ITEMS SIZE: " + this.currentItems.size());
-		myAdapter = new ResourceImageAdapter(this);
-		
-		int resourceList[] = new int[currentItems.size()];
-		
-		for (int i = 0; i < currentItems.size(); i++) {
-			System.out.println(currentItems.get(i).name);
-			resourceList[i] = getResources().getIdentifier(currentItems.get(i).name + "_coverflow", "drawable", getPackageName());
-			System.out.println(resourceList[i]);
-		}
-		myAdapter.setResources(resourceList);
-		
-		//CoverFlow code below
-		//System.out.println("MAIN ACTIVITY STARTED, printing just before COVERFLOW setup");
+		LinearLayout gridLinearLayout = (LinearLayout) findViewById(R.id.grid_linearlayout);
     	
-		//super.onCreate(savedInstanceState);
+		ArrayList<ArrayList<Item>> itemsByFilter = new ArrayList<ArrayList<Item>>();
+		itemsByFilter.add(currentItems);
+		
+		ArrayList<Item> tmpItems = new ArrayList<Item>();
+		tmpItems.add(new Item("kale"));
+		tmpItems.add(new Item("artichoke"));
+		itemsByFilter.add(tmpItems);
+		itemsByFilter.add(tmpItems);
+		itemsByFilter.add(tmpItems);
+		itemsByFilter.add(tmpItems);
+		
+		
+		// create gridviews dynamically...
+		for (int i = 0; i < FILTERS.length; i++) {
+			final ArrayList<Item> items = itemsByFilter.get(i);
+			
+			// skip if size of items is zero.
+			if (items.size() == 0) continue;
+			
+			TextView txtView = new TextView(this);
+			//should be different per each one
+			txtView.setText(FILTERS[i]);
+			txtView.setTextColor(getResources().getColor(R.color.Brown));
+			txtView.setTextSize(40);
+			gridLinearLayout.addView(txtView);
+			
+			GridView gridview = new GridView(this);
+			gridview.setLayoutParams(new GridView.LayoutParams(GridView.LayoutParams.MATCH_PARENT, 230 * ((int) Math.ceil(items.size()/3.0))));
+			gridview.setColumnWidth(220);
+			gridview.setGravity(Gravity.CENTER);
+			gridview.setNumColumns(GridView.AUTO_FIT);
+			gridview.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
 
-		
-        // note resources below are taken using getIdentifier to allow importing
-        // this library as library.
-        final CoverFlow reflectingCoverFlow = (CoverFlow) findViewById(this.getResources().getIdentifier(
-                "coverflowReflect", "id", "com.example.coverflow"));
-        setupCoverFlow(reflectingCoverFlow, true);
-		
+	        myImageAdapter = new ImageAdapter(this);
+	        gridview.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+						long arg3) {
+					
+					Intent intent = new Intent(CoverFlowTestingActivity.this, DetailActivity.class);
+					intent.putExtra("name", items.get(arg2).name);
+					startActivity(intent);
+				}
+	        	
+	        });
+	        
+			gridLinearLayout.addView(gridview);
+	        gridview.setAdapter(myImageAdapter);
+	        
+			for(int j = 0; j < items.size(); j++) {
+				//System.out.println(currentItems.get(i).name);
+				myImageAdapter.add(getResources().getIdentifier(items.get(j).name + "_coverflow", "drawable", getPackageName()));
+				//System.out.println(getResources().getIdentifier(currentItems.get(i).name + "_coverflow", "drawable", getPackageName()));
+			}
+
+		}
 	}
 
 	private void createAllMonths() {
@@ -312,69 +222,6 @@ public class CoverFlowTestingActivity extends Activity {
 		
 	}
 
-	/**
-     * Setup cover flow.
-     * 
-     * @param mCoverFlow
-     *            the m cover flow
-     * @param reflect
-     *            the reflect
-     */
-    private void setupCoverFlow(final CoverFlow mCoverFlow, final boolean reflect) {
-        BaseAdapter coverImageAdapter;
-        if (reflect) {
-            coverImageAdapter = new ReflectingImageAdapter(myAdapter);
-        } else {
-            coverImageAdapter = myAdapter;
-        }
-        mCoverFlow.setAdapter(coverImageAdapter);
-        mCoverFlow.setSelection(0, true);
-        setupListeners(mCoverFlow);
-    }
-
-    /**
-     * Sets the up listeners.
-     * 
-     * @param mCoverFlow
-     *            the new up listeners
-     */
-    private void setupListeners(final CoverFlow mCoverFlow) {
-        mCoverFlow.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(final AdapterView< ? > parent, final View view, final int position, final long id) {
-                //textView.setText("Item clicked! : " + id);
-            }
-
-        });
-        mCoverFlow.setOnItemSelectedListener(new OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(final AdapterView< ? > parent, final View view, final int position, final long id) {
-                //textView.setText("Item selected! : " + id);
-            }
-
-            @Override
-            public void onNothingSelected(final AdapterView< ? > parent) {
-                //textView.setText("Nothing clicked!");
-            }
-        });
-        
-        mCoverFlow.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				// TODO Auto-generated method stub
-				
-				System.out.println("CLICKED : " + arg2 + " , " + arg3);
-				
-				Intent intent = new Intent(CoverFlowTestingActivity.this, DetailActivity.class);
-				intent.putExtra("name", currentItems.get(arg2).name);
-				startActivity(intent);
-			}
-        	
-        });
-    }
-    
 	public void populateMap() {	
 		
 		
