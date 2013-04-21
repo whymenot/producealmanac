@@ -122,8 +122,47 @@ public class CoverFlowTestingActivity extends Activity {
 		txtView.setText("CATEGORY1");
 		gridLinearLayout.addView(txtView);
 		
+		ArrayList<ArrayList<Item>> itemsByFilter = new ArrayList<ArrayList<Item>>();
+		itemsByFilter.add(currentItems);
+		
+		ArrayList<Item> tmpItems = new ArrayList<Item>();
+		tmpItems.add(new Item("kale"));
+		tmpItems.add(new Item("artichoke"));
+		itemsByFilter.add(tmpItems);
+		itemsByFilter.add(tmpItems);
+		itemsByFilter.add(tmpItems);
+		itemsByFilter.add(tmpItems);
+		
+		
+		// create gridviews dynamically...
+		for (int i = 0; i < FILTERS.length; i++) {
+			ArrayList<Item> items = itemsByFilter.get(i);
+			
+			// skip if size of items is zero.
+			if (items.size() == 0) continue;
+			
+			GridView gridview = new GridView(this);
+			gridview.setLayoutParams(new GridView.LayoutParams(GridView.LayoutParams.MATCH_PARENT, 230 * ((int) Math.ceil(items.size()/3.0))));
+			gridview.setColumnWidth(220);
+			gridview.setGravity(Gravity.CENTER);
+			gridview.setNumColumns(GridView.AUTO_FIT);
+			gridview.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
+
+	        myImageAdapter = new ImageAdapter(this);
+	        
+			gridLinearLayout.addView(gridview);
+	        gridview.setAdapter(myImageAdapter);
+	        
+			for(int j = 0; j < items.size(); j++) {
+				//System.out.println(currentItems.get(i).name);
+				myImageAdapter.add(getResources().getIdentifier(items.get(j).name + "_coverflow", "drawable", getPackageName()));
+				//System.out.println(getResources().getIdentifier(currentItems.get(i).name + "_coverflow", "drawable", getPackageName()));
+			}
+
+		}
+		/*
 		GridView gridview = new GridView(this);
-		gridview.setLayoutParams(new GridView.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, 690));
+		gridview.setLayoutParams(new GridView.LayoutParams(GridView.LayoutParams.MATCH_PARENT, 690));
 		gridview.setColumnWidth(220);
 		gridview.setGravity(Gravity.CENTER);
 		gridview.setNumColumns(GridView.AUTO_FIT);
@@ -132,7 +171,7 @@ public class CoverFlowTestingActivity extends Activity {
 		gridLinearLayout.addView(gridview);
 		
 		GridView gridview2 = new GridView(this);
-		gridview2.setLayoutParams(new GridView.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, 690));
+		gridview2.setLayoutParams(new GridView.LayoutParams(GridView.LayoutParams.MATCH_PARENT, 690));
 		gridview2.setColumnWidth(220);
 		gridview2.setGravity(Gravity.CENTER);
 		gridview2.setNumColumns(GridView.AUTO_FIT);
@@ -149,6 +188,8 @@ public class CoverFlowTestingActivity extends Activity {
 			myImageAdapter.add(getResources().getIdentifier(currentItems.get(i).name + "_coverflow", "drawable", getPackageName()));
 			//System.out.println(getResources().getIdentifier(currentItems.get(i).name + "_coverflow", "drawable", getPackageName()));
 		}
+		*/
+		
 		/*
 		myGallery = (GridView)findViewById(R.id.gridview);
         
