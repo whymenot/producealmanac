@@ -31,6 +31,7 @@
     android:layout_width="fill_parent"
     android:layout_height="@dimen/height_of_buttons"
     android:layout_marginBottom="10dip"
+   
      />
 	
 	<com.example.coverflow.producealmanac.MultiSpinner 
