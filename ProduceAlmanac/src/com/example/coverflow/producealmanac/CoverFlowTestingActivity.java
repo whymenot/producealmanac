@@ -1,9 +1,9 @@
 package com.example.coverflow.producealmanac;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import android.app.Activity;
 import android.app.SearchManager;
@@ -13,7 +13,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -25,13 +24,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.SearchView.OnQueryTextListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.coverflow.CoverFlow;
 import com.example.coverflow.R;
-import com.example.coverflow.ReflectingImageAdapter;
 import com.example.coverflow.ResourceImageAdapter;
 import com.example.coverflow.producealmanac.MultiSpinner.MultiSpinnerListener;
 
@@ -40,18 +36,23 @@ import com.example.coverflow.producealmanac.MultiSpinner.MultiSpinnerListener;
  */
 public class CoverFlowTestingActivity extends Activity {
 
-	//currentItems will be the items currently in season, use a hashmap with key=time of year
-	ArrayList<Item> currentItems;
+	ArrayList<Item> activeItems; // is this needed?
+	ArrayList<String> localNow; // used for searching, filters not relevant
+	ArrayList<String> localOut; // used for searching, local out of season
 	boolean populated=false;
+	
+	public ArrayList<ArrayList<Item>> itemsByFilter = new ArrayList<ArrayList<Item>>();
+	
+	//public String searchTerms = "";
+	public ArrayList<String> activeFilters;
+	public ArrayList<Store> activeStores = null;
+	
+	
 	TextView textView;
 	ResourceImageAdapter myAdapter;
 	
 	//search/filter terms
-	public String searchTerms = "";
-	public ArrayList<String> activeFilters;
-	public Month currentMonth;
-	public Month[] months;
-	//public Store activeStore = null;
+
 	
 	
 	//Static filter strings
@@ -63,9 +64,11 @@ public class CoverFlowTestingActivity extends Activity {
 	
 	public final static String[] FILTERS = {BERRIES,ROOTS,LEAFY,CITRUS,HERBS};
 	
+	
+	
 	// for gridview
 	ImageAdapter myImageAdapter;
-	
+
 	// for search
     private ListView mListView;
     private SearchView searchView;
@@ -124,28 +127,21 @@ public class CoverFlowTestingActivity extends Activity {
 			populateMap();
 		}
 		
-		
-		currentItems = new ArrayList<Item>();
-		
-		//@TODO GET CURRENT MONTH
-		int monthNum = 4;
-		
-		this.activeFilters = new ArrayList<String>();
-		
-		currentItems = new ArrayList<Item>();
-		months = new Month[13];
-		
 		createAllItems();
-		createAllMonths();
 		
-		this.currentMonth = months[monthNum];
-		//getAllItems() returns copy of ArrayList, OK to modify
-		currentItems = currentMonth.getAllItems();
+		
+		getClosestStores();
+				
+		this.activeFilters = getActiveFilters();
+		this.localNow = getLocalNow();
+		this.localOut = getLocalOut();
+		
+		//activeItems = getItemsNow();
+		
+		this.itemsByFilter = getItemsByFilter();
 
-		//set all filters as active by default
-		this.activeFilters = new ArrayList<String>(Arrays.asList(FILTERS));
-		
 		//done initializing backend data
+
 
 		showUpdatedItems();
 
@@ -171,44 +167,131 @@ public class CoverFlowTestingActivity extends Activity {
         			}
         		}
         		setFilters(selectedFilter);
-        		updateList();
+        		updateItemsByFilter();
         		System.out.println();
         	}
         });
         multispinner.setPrompt("FILTER");
     }
+    private ArrayList<ArrayList<Item>> getItemsByFilter() {
+		/**Based on the active filters set, create a list of items for each
+		 * filter. The outer list being returned should always map 1 to 1 with
+		 * the FILTERS array, but the inner list of items can be any size (even empty).
+		 */
+    	ArrayList<ArrayList<Item>> filteredItems = new ArrayList<ArrayList<Item>>();
+    	ArrayList<Item> items;
+    	for (int i =0; i < FILTERS.length; i++){
+    		items = getActiveFilterList(i);
+    		filteredItems.add(items);    		
+    	}
+    	return filteredItems;
+	}
+
+	@SuppressWarnings("unchecked")
+	private ArrayList<Item> getActiveFilterList(int filterIndex) {
+		/**Check if filter index is active. If active, then 
+		 * return a list of all items in both this group
+		 * and localNow. if inactive, return an empty list.
+		 */
+		ArrayList<Item> items = new ArrayList<Item>();
+		Item item;
+		if (activeFilters.contains(FILTERS[filterIndex])){
+			for (String name: localNow){
+				item = Item.itemMap.get(name);
+				if (item.group==FILTERS[filterIndex]){
+					items.add(item);
+				}
+			}
+			
+		}
+		Collections.sort(items);
+		return items;
+	}
+
+	//don't think we need this method, keep for now though
+	private ArrayList<Item> getItemsNow() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private ArrayList<String> getLocalOut() {
+		/**This method relies on this.localNow being up to date and
+		 * returns a list of the names of items that are inactive in
+		 * at least one store, and active in NO stores.
+		 */
+		ArrayList<String> names = new ArrayList<String>();
+		ArrayList<Item> items;
+		for (Store store : this.activeStores){
+			items = store.getAllInactiveItems();
+			for (Item i : items){
+				if((!names.contains(i.name))  && (! this.localNow.contains(i.name))){
+					names.add(i.name);
+				}
+			}
+		}
+		return names;
+	}
+
+	private ArrayList<String> getLocalNow() {
+		/**Iterate through each store in activeStores, append item name to
+		 * list if it is not already in the list, then return names.
+		 */
+		ArrayList<String> names = new ArrayList<String>();
+		ArrayList<Item> items;
+		for (Store store : this.activeStores){
+			items = store.getAllActiveItems();
+			for (Item i : items){
+				if(! names.contains(i.name)){
+					names.add(i.name);
+				}
+			}
+		}
+		return names;
+	}
+
+	private ArrayList<String> getActiveFilters() {
+		//By default, return all filters
+		return new ArrayList<String>(Arrays.asList(FILTERS));
+	}
+
+	private void getClosestStores() {
+		/**Gets a list of the closest Stores and populates
+		 * the store's active and inactive lists.
+		 */
+		
+		// get data from GPS if possible
+		
+		this.activeStores = new ArrayList<Store>();
+		activeStores.add(new Store("Berkeley Bowl"));
+		activeStores.add(new Store("Yasai Market"));
+		activeStores.add(new Store("Safeway - College Ave."));
+		activeStores.add(new Store("Trader Joes - University Ave."));
+		activeStores.add(new Store("Whole Foods - Telegraph Ave."));	
+		Store.buildMaps();
+	}
+    
+    
 
     public void showUpdatedItems() {
 		LinearLayout gridLinearLayout = (LinearLayout) findViewById(R.id.grid_linearlayout);
 		// delete previous views under this
-		gridLinearLayout.removeAllViews();
-    	
-		ArrayList<ArrayList<Item>> itemsByFilter = new ArrayList<ArrayList<Item>>();
-		itemsByFilter.add(currentItems);
-		
-		ArrayList<Item> tmpItems = new ArrayList<Item>();
-		tmpItems.add(new Item("kale"));
-		tmpItems.add(new Item("artichoke"));
-		itemsByFilter.add(tmpItems);
-		itemsByFilter.add(tmpItems);
-		itemsByFilter.add(tmpItems);
-		itemsByFilter.add(tmpItems);
-		
-		
+		gridLinearLayout.removeAllViews();    	
+
+
 		// create gridviews dynamically...
 		for (int i = 0; i < FILTERS.length; i++) {
 			final ArrayList<Item> items = itemsByFilter.get(i);
-			
+
 			// skip if size of items is zero.
 			if (items.size() == 0) continue;
-			
+
 			TextView txtView = new TextView(this);
 			//should be different per each one
 			txtView.setText(FILTERS[i]);
 			txtView.setTextColor(getResources().getColor(R.color.Brown));
 			txtView.setTextSize(40);
 			gridLinearLayout.addView(txtView);
-			
+
 			GridView gridview = new GridView(this);
 			gridview.setLayoutParams(new GridView.LayoutParams(GridView.LayoutParams.MATCH_PARENT, 230 * ((int) Math.ceil(items.size()/3.0))));
 			gridview.setColumnWidth(220);
@@ -222,18 +305,18 @@ public class CoverFlowTestingActivity extends Activity {
 				@Override
 				public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 						long arg3) {
-					
+
 					System.out.println("clicked item : " + arg2);
 					Intent intent = new Intent(CoverFlowTestingActivity.this, DetailActivity.class);
 					intent.putExtra("name", items.get(arg2).name);
 					startActivity(intent);
 				}
-	        	
+
 	        });
-	        
+
 			gridLinearLayout.addView(gridview);
 	        gridview.setAdapter(myImageAdapter);
-	        
+
 			for(int j = 0; j < items.size(); j++) {
 				//System.out.println(currentItems.get(i).name);
 				myImageAdapter.add(getResources().getIdentifier(items.get(j).name + "_coverflow", "drawable", getPackageName()));
@@ -247,33 +330,31 @@ public class CoverFlowTestingActivity extends Activity {
     	/**Creates all Month instances...should only be called after
     	*  all Item instances have been created. Month Zero is "empty"
     	*  so 1->Jan, 2->Feb, ... 12->Dec
-    	**/
+    	
     	for (int i=0; i < 13; i++){
     		months[i] = new Month(i);
     	}		
+    	**/
 	}
 
 	private void createAllItems() {
 		//@TODO We should not be adding EVERYTHING to currentItems, we should
-		//just be creating item instances and copy the currentMonth's ArrayList
+		//just be creating item instances and copy the local items in another method
 		
 		
 		//FIX BELOW
-		currentItems.add(new Item("artichoke"));
-		currentItems.add(new Item("cabbage"));
-		currentItems.add(new Item("celeriac"));
-		currentItems.add(new Item("kale"));
-		currentItems.add(new Item("leek"));
-		currentItems.add(new Item("peas"));
-		currentItems.add(new Item("turnip"));
-		
+		new Item("artichoke");
+		new Item("cabbage");
+		new Item("celeriac");
+		new Item("kale");
+		new Item("leek");
+		new Item("peas");
+		new Item("turnip");
+
 	}
 
-	public void populateMap() {	
+	public void populateMap() {		
 		
-		
-		this.activeFilters = new ArrayList<String>();
-		//@TODO add all filter Strings to activeFilters by default
 		
 		//temporary... dummy group
 		String group = "group";
@@ -287,7 +368,7 @@ public class CoverFlowTestingActivity extends Activity {
 		putEntry(R.drawable.celeriac_detail, "peas are small", "asdasd", "invisible", "peas", BERRIES);
 		putEntry(R.drawable.celeriac_detail, "turnips.. what are these?", "asdfasdf", "no idea", "turnip", CITRUS);
 	}
-	
+
 	public void putEntry(int resID, String general, String storage, String ripe, String name, String group) {
 		Bitmap bitmap = BitmapFactory.decodeResource(getResources(), resID);
 		ImageView imgView = new ImageView(this);
@@ -295,41 +376,29 @@ public class CoverFlowTestingActivity extends Activity {
 		Object[] info = {general, storage, ripe, bitmap,group};
 		Item.infoMap.put(name, info);
 	}
-	
+
 	public void setFilters(ArrayList<String> filters){
 		this.activeFilters= (ArrayList<String>) filters;
 	}
-	
+
+	/**
 	public void setMonth(int monthNum){
 		this.currentMonth = this.months[monthNum];
 	}
-	
-	public void setSearchString(String characters){
-		this.searchTerms = characters;
-	}
-	
-	public void updateList(){
-		this.currentItems = this.currentMonth.getAllItems();
-		@SuppressWarnings("unchecked")
-		ArrayList<Item> copy =(ArrayList<Item>) this.currentItems.clone();
-		for (Item i : copy){
-			//if statement checks the filters, else checks search terms
-			if (! this.activeFilters.contains(i.group)){
-				if( ! this.currentItems.remove(i)){
-					System.out.println("Trying to remove item not in list... ERROR, check item: " + i.toString());
-				}
-			}
-			else{
-				if (! i.name.contains(this.searchTerms)){
-					if( ! this.currentItems.remove(i)){
-						System.out.println("Trying to remove item not in list... ERROR, check item: " + i.toString());
-					}
-				}					
-			}
-		}
+	**/
+
+
+
+	public void updateItemsByFilter(){
+		/** This method is called when a filter is toggled or when a store is selected / deselected.
+		 * It updates this.itemsByFilter 
+		 */
+		this.itemsByFilter = getItemsByFilter();
+		// UPDATE STORE INFO HERE
+		// must update this.acvtiveStores
 		showUpdatedItems();
 	}
-	
+
     public class ImageAdapter extends BaseAdapter {
         
         private Context mContext;
@@ -418,9 +487,6 @@ public class CoverFlowTestingActivity extends Activity {
     // methods for search
     }
 
- 
-    // add some dummy stuff for localNow to test
-    ArrayList<String> localNow = new ArrayList<String>();
     
     private void showResults(String newText) {
     	System.out.println("showResults is called!");
@@ -442,13 +508,7 @@ public class CoverFlowTestingActivity extends Activity {
     	// empty result.. just return
     	if (result.size() == 0) return;
     	
-    	ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, result);
+    	ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this, R.layout.main, result);
     	mListView.setAdapter(myAdapter);
-    }
-    
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
     }
 }

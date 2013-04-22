@@ -37,6 +37,10 @@ public class Item implements Comparable{
 		return this.name.compareTo(((Item) other).name);
 	}
 	
+	public String toString(){
+		return this.name;
+	}
+	
 
 
 		

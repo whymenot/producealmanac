@@ -1,6 +1,7 @@
 package com.example.coverflow.producealmanac;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 
@@ -11,18 +12,33 @@ public class Store {
 	 **/
 	
 	public static HashMap<String,Store> storeMap;
+	public static HashMap<Store,ArrayList<Item>> activeMap;
+	public static HashMap<Store,ArrayList<Item>> inactiveMap;
+	private static boolean populated=false;
 	private String storeName;
 	private ArrayList<Item> active; 
 	private String address;
 	private ArrayList<Item> inactive;
 	
+	final static String[] BERRIES = {"Blueberries"};
+	final static String[] CITRUS = {"Oranges"};
+	final static String[] HERBS = {"Cilantro"};
+	final static String[] LEAFY = {"Lettuce"};
+	final static String[] ROOTS = {"Celeriac"};
 	
 	
 	
 	public Store(String storeName){
+		if (!populated){
+			populated=true;
+			storeMap = new HashMap<String,Store>();
+			activeMap = new HashMap<Store,ArrayList<Item>>();
+			inactiveMap = new HashMap<Store,ArrayList<Item>>(); 
+		}
 		this.storeName = storeName;
 		this.active = new ArrayList<Item>();
 		this.inactive = new ArrayList<Item>();
+		Store.storeMap.put(storeName, this);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -86,6 +102,8 @@ public class Store {
 		addActiveItems(items);
 		this.sort();
 	}
+	
+	
 			
 	
 	public void setInactiveItems(ArrayList<String> items){
@@ -172,5 +190,136 @@ public class Store {
 	public String getName(){
 		return this.storeName;
 	}
+	
+	public boolean hasActive(Item item){
+		/* Returns true if the item is in the active list, false otherwise*/
+		return active.contains(item);
+	}
+	
+	public boolean hasInactive(Item item){
+		/* Returns true if the item is in the inactive list, false otherwise*/
+		return inactive.contains(item);
+	}
 
+	
+	public static void buildMaps(){
+		Store current = Store.storeMap.get("Berkeley Bowl");
+		ArrayList<Item> activeItems = new ArrayList<Item>();
+		ArrayList<Item> inactiveItems = new ArrayList<Item>();
+		
+		String[] berkeleyBowlActive = {"artichoke","cabbage","celeriac","turnip"};
+		String[] berkeleyBowlInactive = {"kale","leek","peas"};
+		
+		for (String name : berkeleyBowlActive){
+			activeItems.add(Item.itemMap.get(name));			
+		}
+		for (String name : berkeleyBowlInactive){
+			inactiveItems.add(Item.itemMap.get(name));			
+		}
+		
+		Store.activeMap.put(current,activeItems);
+		Store.inactiveMap.put(current,inactiveItems);
+		
+		activeItems = new ArrayList<Item>();
+		inactiveItems = new ArrayList<Item>();
+		
+		current = Store.storeMap.get("Yasai Market");
+		
+		String[] yasaiActive = {"artichoke","cabbage","kale"};
+		String[] yasaiInactive = {"celeriac", "turnip" , "peas"};
+		
+		for (String name : yasaiActive){
+			activeItems.add(Item.itemMap.get(name));			
+		}
+		for (String name : yasaiInactive){
+			inactiveItems.add(Item.itemMap.get(name));			
+		}
+		
+		Store.activeMap.put(current,activeItems);
+		Store.inactiveMap.put(current,inactiveItems);
+		
+		activeItems = new ArrayList<Item>();
+		inactiveItems = new ArrayList<Item>();
+		
+		current = Store.storeMap.get("Safeway - College Ave.");
+		
+		String[] safewayActive = {"artichoke","turnip","kale"};
+		String[] safewayInactive = {"celeriac", "leek" , "peas", "cabbage"};
+		
+		for (String name : safewayActive){
+			activeItems.add(Item.itemMap.get(name));			
+		}
+		for (String name : safewayInactive){
+			inactiveItems.add(Item.itemMap.get(name));			
+		}
+		
+		Store.activeMap.put(current,activeItems);
+		Store.inactiveMap.put(current,inactiveItems);
+		
+		activeItems = new ArrayList<Item>();
+		inactiveItems = new ArrayList<Item>();
+									 
+		current = Store.storeMap.get("Trader Joes - University Ave.");
+		
+		String[] traderJoesActive = {"artichoke","cabbage","kale", "leek"};
+		String[] traderJoesInactive = {"turnip" , "peas"};
+		
+		for (String name : traderJoesActive){
+			activeItems.add(Item.itemMap.get(name));			
+		}
+		for (String name : traderJoesInactive){
+			inactiveItems.add(Item.itemMap.get(name));			
+		}
+		System.out.println("Trader Joes: " + current);
+		System.out.println("ActiveJoes " + activeItems.size());
+		System.out.println("InactiveJoes " + inactiveItems.size());
+		
+		Store.activeMap.put(current,activeItems);
+		Store.inactiveMap.put(current,inactiveItems);
+		
+		activeItems = new ArrayList<Item>();
+		inactiveItems = new ArrayList<Item>();
+		
+		current = Store.storeMap.get("Whole Foods - Telegraph Ave.");
+		
+		String[] wholeFoodsActive = {"artichoke","cabbage","kale", "leek", "celeriac"};
+		String[] wholeFoodsInactive = {"turnip" , "peas"};
+		
+		for (String name : wholeFoodsActive){
+			activeItems.add(Item.itemMap.get(name));			
+		}
+		for (String name : wholeFoodsInactive){
+			inactiveItems.add(Item.itemMap.get(name));			
+		}
+		
+		Store.activeMap.put(current,activeItems);
+		Store.inactiveMap.put(current,inactiveItems);
+		
+		
+		System.out.println("SIZE: " + activeItems.size());
+		System.out.println("Stores: " + Store.storeMap.values());
+		//Set each store's internal lists
+		ArrayList<Item> currentItems;
+		Collection<Store> stores = Store.storeMap.values();
+		System.out.println("Stores: " + stores.size());
+		for (Store store : stores){
+			currentItems = Store.activeMap.get(store);	
+			System.out.println("CURRENT = " + currentItems);
+			System.out.println("Store: " + store);
+			for (Item i : currentItems){
+				store.addActiveItem(i.name);
+			}
+			currentItems = Store.inactiveMap.get(store);
+			for (Item i : currentItems){
+				store.addInactiveItem(i.name);
+			}
+		}
+
+		
+		
+	}
+	
+	public String toString(){
+		return this.getName();
+	}
 }
