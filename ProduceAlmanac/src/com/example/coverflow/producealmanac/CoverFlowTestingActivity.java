@@ -314,10 +314,11 @@ public class CoverFlowTestingActivity extends Activity {
 
 			gridLinearLayout.addView(gridview);
 	        gridview.setAdapter(myImageAdapter);
+	        String name;
 
 			for(int j = 0; j < items.size(); j++) {
 				//System.out.println(currentItems.get(i).name);
-				myImageAdapter.add(getResources().getIdentifier(items.get(j).name + "_coverflow", "drawable", getPackageName()));
+				myImageAdapter.add(getResources().getIdentifier(items.get(j).name.replace(' ', '_') + "_coverflow", "drawable", getPackageName()));
 				//System.out.println(getResources().getIdentifier(currentItems.get(i).name + "_coverflow", "drawable", getPackageName()));
 			}
 
