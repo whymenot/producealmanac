@@ -99,13 +99,13 @@ public class CoverFlowTestingActivity extends Activity {
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setIconifiedByDefault(true); // Do not iconify the widget; expand it by default
         
-    	System.out.println("before i set the linstener");
         //final SearchView.OnQueryTextListener queryTextListener = ; 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() { 
             @Override 
             public boolean onQueryTextChange(String newText) { 
                 // Do something 
             	showResults(newText);
+            	System.out.println("showResults DONE");
                 return true; 
             } 
 
@@ -487,7 +487,7 @@ public class CoverFlowTestingActivity extends Activity {
     
     private void showResults(String newText) {
     	System.out.println("showResults is called!");
-
+/*
         // add some dummy stuff for localNow to test
         ArrayList<String> localNow = new ArrayList<String>();
     	localNow.add("apple");
@@ -495,7 +495,7 @@ public class CoverFlowTestingActivity extends Activity {
     	localNow.add("bananas"); 
     	localNow.add("cantaloupe");
     	localNow.add("melon");
-    	
+*/    	
     	ArrayList<String> result = new ArrayList<String>();
     	
     	if (!newText.equals("")) {
@@ -507,7 +507,7 @@ public class CoverFlowTestingActivity extends Activity {
 	    	}
     	}
     	
-    	ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this, R.layout.main, result);
+    	ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, result);
     	mListView.setAdapter(myAdapter);
 
 
