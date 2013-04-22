@@ -13,6 +13,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.Gravity;
+
+import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -23,6 +26,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -90,13 +94,10 @@ public class CoverFlowTestingActivity extends Activity {
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         searchView = (SearchView) findViewById(R.id.searchView);
         
-        searchView.setQueryHint("helloooo");
-        
-        
         
         // Assumes current activity is the searchable activity
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        searchView.setIconifiedByDefault(false); // Do not iconify the widget; expand it by default
+        searchView.setIconifiedByDefault(true); // Do not iconify the widget; expand it by default
         
     	System.out.println("before i set the linstener");
         //final SearchView.OnQueryTextListener queryTextListener = ; 
@@ -104,18 +105,15 @@ public class CoverFlowTestingActivity extends Activity {
             @Override 
             public boolean onQueryTextChange(String newText) { 
                 // Do something 
-            	System.out.println("asdasdads");
             	showResults(newText);
-                return false; 
+                return true; 
             } 
 
             @Override 
             public boolean onQueryTextSubmit(String query) { 
                 // Do something 
-            	Toast.makeText(getBaseContext(), query, 
-        				Toast.LENGTH_SHORT).show();
-            	System.out.println("submitttttt");
-                return false; 
+            	searchView.setIconified(true); 
+                return true; 
             } 
         });
         //searchView.setOnCloseListener(this);
@@ -486,10 +484,12 @@ public class CoverFlowTestingActivity extends Activity {
 
     // methods for search
     }
-
     
     private void showResults(String newText) {
     	System.out.println("showResults is called!");
+
+        // add some dummy stuff for localNow to test
+        ArrayList<String> localNow = new ArrayList<String>();
     	localNow.add("apple");
     	localNow.add("cabbage");
     	localNow.add("bananas"); 
@@ -498,17 +498,40 @@ public class CoverFlowTestingActivity extends Activity {
     	
     	ArrayList<String> result = new ArrayList<String>();
     	
-    	for(int i = 0; i < localNow.size(); i++) {
-    		String tmp = localNow.get(i).toLowerCase();
-    		if (tmp.contains(newText.toLowerCase())) {
-    			result.add(tmp);
-    		}
+    	if (!newText.equals("")) {
+	    	for(int i = 0; i < localNow.size(); i++) {
+	    		String tmp = localNow.get(i).toLowerCase();
+	    		if (tmp.contains(newText.toLowerCase())) {
+	    			result.add(tmp);
+	    		}
+	    	}
     	}
-    	
-    	// empty result.. just return
-    	if (result.size() == 0) return;
     	
     	ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this, R.layout.main, result);
     	mListView.setAdapter(myAdapter);
+
+
+        mListView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				
+				System.out.println("clicked item : " + arg2);
+				Intent intent = new Intent(CoverFlowTestingActivity.this, DetailActivity.class);
+				intent.putExtra("name", ((TextView) arg1).getText());
+				startActivity(intent);
+			}
+        	
+        });
     }
+    /*
+    public void showPopup(View v) {
+        LayoutInflater inflater = (LayoutInflater) this
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            PopupWindow pw = new PopupWindow(inflater.inflate(
+                    R.layout.search, null, false), 300, 400, true);
+            pw.showAtLocation(findViewById(R.id.searchView), Gravity.CENTER, 0,
+                    0);
+    }*/
 }
