@@ -314,7 +314,6 @@ public class CoverFlowTestingActivity extends Activity {
 
 			gridLinearLayout.addView(gridview);
 	        gridview.setAdapter(myImageAdapter);
-	        String name;
 
 			for(int j = 0; j < items.size(); j++) {
 				//System.out.println(currentItems.get(i).name);
