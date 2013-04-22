@@ -10,5 +10,6 @@
     <string name="all">All</string>
     <string name="none">None</string>
     <string name="done">Done</string>
+    <string name="search_hint">apple</string>
 
 </resources>
