@@ -24,7 +24,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.SearchView.OnQueryTextListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.coverflow.CoverFlow;
 import com.example.coverflow.R;
@@ -83,6 +85,11 @@ public class CoverFlowTestingActivity extends Activity {
         // Get the SearchView and set the searchable configuration
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         searchView = (SearchView) findViewById(R.id.searchView);
+        
+        searchView.setQueryHint("helloooo");
+        
+        
+        
         // Assumes current activity is the searchable activity
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setIconifiedByDefault(false); // Do not iconify the widget; expand it by default
@@ -95,14 +102,16 @@ public class CoverFlowTestingActivity extends Activity {
                 // Do something 
             	System.out.println("asdasdads");
             	showResults(newText);
-                return true; 
+                return false; 
             } 
 
             @Override 
             public boolean onQueryTextSubmit(String query) { 
                 // Do something 
+            	Toast.makeText(getBaseContext(), query, 
+        				Toast.LENGTH_SHORT).show();
             	System.out.println("submitttttt");
-                return true; 
+                return false; 
             } 
         });
         //searchView.setOnCloseListener(this);
@@ -136,8 +145,6 @@ public class CoverFlowTestingActivity extends Activity {
 		this.activeFilters = new ArrayList<String>(Arrays.asList(FILTERS));
 		
 		//done initializing backend data
-		
-		setContentView(R.layout.main);
 
 		showUpdatedItems();
 
@@ -434,7 +441,7 @@ public class CoverFlowTestingActivity extends Activity {
     	// empty result.. just return
     	if (result.size() == 0) return;
     	
-    	ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this, R.layout.main, result);
+    	ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, result);
     	mListView.setAdapter(myAdapter);
     }
 }
