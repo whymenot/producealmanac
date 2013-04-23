@@ -207,7 +207,7 @@ public class Store {
 		Store current = Store.storeMap.get("Berkeley Bowl");
 		ArrayList<Item> activeItems = new ArrayList<Item>();
 		ArrayList<Item> inactiveItems = new ArrayList<Item>();
-		String[] berkeleyBowlActive = {"garlic", "carrots", "onion", "parsnip", "broccoli", "cauliflower", "asian greens","lettuce", "spinach", "eggplant", "summer squash", "cucumber"};
+		String[] berkeleyBowlActive = {"garlic", "carrots", "onion", "parsnip", "broccoli", "cauliflower", "asian greens","lettuce", "spinach", "eggplant", "summer squash", "cucumber", "bell peppers", "asparagus", "celery"};//, "kiwifruit", "strawberries", "blueberries"};
 		//String[] berkeleyBowlActive = {"garlic", "carrots", "broccoli", "cauliflower", "asian greens", "lettuce", "spinach", "eggplant", "summer squash", "cucumber", "bell peppers", "asparagus", "celery", "kiwifruit", "strawberries", "blueberries", "cherries", "nectarines", "peaches", "plums", "pluots", "apricots", "onion", "parsnip"};
 		String[] berkeleyBowlInactive = {};
 		

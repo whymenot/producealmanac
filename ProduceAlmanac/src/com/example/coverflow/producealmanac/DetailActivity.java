@@ -43,6 +43,10 @@ public class DetailActivity extends Activity {
 		TextView itemRipe = (TextView)findViewById(R.id.item_ripe);
 		TextView itemStorage = (TextView)findViewById(R.id.item_storage);
 		itemName.setText(currentItem.name);
+		//BIGGER NAMES
+		if (currentItem.name.equals("summer squash")|| currentItem.name.equals("bell peppers")){
+		itemName.setTextSize(50);
+		}
 		itemGeneral.setText(currentItem.description);
 		itemRipe.setText(currentItem.ripeness);
 		itemStorage.setText(currentItem.storage);
