@@ -203,11 +203,12 @@ public class Store {
 
 	
 	public static void buildMaps(){
+	
 		Store current = Store.storeMap.get("Berkeley Bowl");
 		ArrayList<Item> activeItems = new ArrayList<Item>();
 		ArrayList<Item> inactiveItems = new ArrayList<Item>();
-		
-		String[] berkeleyBowlActive = {"artichoke","cabbage","celeriac","turnip"};
+		String[] berkeleyBowlActive = {"garlic", "carrots", "onion"};
+		//String[] berkeleyBowlActive = {"garlic", "carrots", "broccoli", "cauliflower", "asian greens", "lettuce", "spinach", "eggplant", "summer squash", "cucumber", "bell peppers", "asparagus", "celery", "kiwifruit", "strawberries", "blueberries", "cherries", "nectarines", "peaches", "plums", "pluots", "apricots", "onion", "parsnip"};
 		String[] berkeleyBowlInactive = {};
 		
 		for (String name : berkeleyBowlActive){
@@ -225,7 +226,8 @@ public class Store {
 		
 		current = Store.storeMap.get("Yasai Market");
 		
-		String[] yasaiActive = {"artichoke","cabbage","kale"};
+		String[] yasaiActive = {"garlic", "carrots", "onion"};
+		//String[] yasaiActive = {"garlic", "carrots", "broccoli", "cauliflower", "asian greens"};
 		String[] yasaiInactive = {};
 		
 		for (String name : yasaiActive){
@@ -243,7 +245,8 @@ public class Store {
 		
 		current = Store.storeMap.get("Safeway - College Ave.");
 		
-		String[] safewayActive = {"artichoke","turnip","kale"};
+		String[] safewayActive= {"garlic", "carrots", "onion"};
+		//String[] safewayActive = {"garlic", "carrots", "broccoli", "cauliflower", "asian greens"};
 		String[] safewayInactive = {};
 		
 		for (String name : safewayActive){
@@ -261,7 +264,8 @@ public class Store {
 									 
 		current = Store.storeMap.get("Trader Joes - University Ave.");
 		
-		String[] traderJoesActive = {"artichoke","cabbage","kale", "leek"};
+		String[] traderJoesActive 	= {"garlic", "carrots", "onion"};
+		//String[] traderJoesActive = {"garlic", "carrots", "broccoli", "cauliflower", "asian greens"};
 		String[] traderJoesInactive = {};
 		
 		for (String name : traderJoesActive){
@@ -282,7 +286,8 @@ public class Store {
 		
 		current = Store.storeMap.get("Whole Foods - Telegraph Ave.");
 		
-		String[] wholeFoodsActive = {"artichoke","cabbage","kale", "leek", "celeriac"};
+		String[] wholeFoodsActive = {"garlic", "carrots", "onion"};
+		//String[] wholeFoodsActive = {"garlic", "carrots", "broccoli", "cauliflower", "asian greens"};
 		String[] wholeFoodsInactive = {};
 		
 		for (String name : wholeFoodsActive){
@@ -306,12 +311,16 @@ public class Store {
 			currentItems = Store.activeMap.get(store);	
 			System.out.println("CURRENT = " + currentItems);
 			System.out.println("Store: " + store);
+			if (currentItems!=null){
 			for (Item i : currentItems){
 				store.addActiveItem(i.name);
 			}
+			}
 			currentItems = Store.inactiveMap.get(store);
+			if (currentItems!=null){
 			for (Item i : currentItems){
 				store.addInactiveItem(i.name);
+			}
 			}
 		}
 

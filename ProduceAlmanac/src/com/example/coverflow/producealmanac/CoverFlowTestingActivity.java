@@ -155,7 +155,7 @@ public class CoverFlowTestingActivity extends Activity {
         for (String s: FILTERS){
         	spinnerItems.add(s);
         }
-
+        Log.i("debugging", "after filers");
         multispinner.setItems(spinnerItems, "filter by category", new MultiSpinnerListener() {
         	public void onItemsSelected(boolean[] selected) {
         		// what happens when selected.
@@ -169,10 +169,12 @@ public class CoverFlowTestingActivity extends Activity {
         		}
         		setFilters(selectedFilter);
         		updateItemsByFilter();
-        		System.out.println();
         	}
         });
+        Log.i("debugging", "after spinner");
         multispinner.setPrompt("FILTER");
+        Log.i("debugging", "end of oncreate");
+        
     }
     private ArrayList<ArrayList<Item>> getItemsByFilter() {
 		/**Based on the active filters set, create a list of items for each
@@ -347,17 +349,20 @@ public class CoverFlowTestingActivity extends Activity {
 		//FIX BELOW
 
 		new Item("garlic");
-		Log.i("debugging", "check in createallitems 1");
-	
 		
 		new Item("carrots");
+		new Item("onion");
 		
+		/**
+		Log.i("debugging", "check in createallitems 1");
+	
+
 
 		new Item("broccoli");
 		
 		new Item("cauliflower");
 		
-		new Item("asian_greens");
+		new Item("asian greens");
 	
 		Log.i("debugging", "before lettuce");
 		new Item("lettuce");
@@ -366,11 +371,11 @@ public class CoverFlowTestingActivity extends Activity {
 		Log.i("debugging", "before eggplant");
 		new Item("eggplant");
 		Log.i("debugging", "before summer squash");
-		new Item("summer_squash");
+		new Item("summer squash");
 		Log.i("debugging", "before cucumber");
 		new Item("cucumber");
 		Log.i("debugging", "bp");
-		new Item("bell_peppers");
+		new Item("bell peppers");
 		Log.i("debugging", "asp");
 		new Item("asparagus");
 		Log.i("debugging", "cel");
@@ -396,8 +401,8 @@ public class CoverFlowTestingActivity extends Activity {
 		
 		//problematic
 		Log.i("debugging", "on");
-		new Item("onion");
-		new Item("parsnip");
+
+		new Item("parsnip");*/
 	}
 
 	public void populateMap() {		
@@ -410,17 +415,17 @@ public class CoverFlowTestingActivity extends Activity {
 		putEntry(R.drawable.celeriac_detail, "artichokes are pretty", "anywhere", "red", "garlic", BULBS);
 		putEntry(R.drawable.celeriac_detail, "cabbages are evil", "trashcan", "green", "onion", BULBS);
 		putEntry(R.drawable.celeriac_detail, "cabbages are evil", "trashcan", "green", "carrots", ROOTS);
-		putEntry(R.drawable.celeriac_detail, "cabbages are evil", "trashcan", "green", "parsnip", ROOTS);
+		/*putEntry(R.drawable.celeriac_detail, "cabbages are evil", "trashcan", "green", "parsnip", ROOTS);
 		putEntry(R.drawable.celeriac_detail, "cabbages are evil", "trashcan", "green", "broccoli", FLOWER);
 		putEntry(R.drawable.celeriac_detail, "cabbages are evil", "trashcan", "green", "cauliflower", FLOWER);
-		putEntry(R.drawable.asian_greens_detail, "None require long cooking; on the contrary, most Asian greens should be cooked quickly, sealing in their sweetness by stir-frying or steaming. Try swapping Asian greens for mustard, Swiss chard, or spinach when preparing a favorite recipe.", "Larger, more mature greens can remain in the refrigerator for up to five days, while smaller, tender greens should be used within three days of purchase.", "dry and firm", "asian_greens", LEAF);
+		putEntry(R.drawable.asian_greens_detail, "None require long cooking; on the contrary, most Asian greens should be cooked quickly, sealing in their sweetness by stir-frying or steaming. Try swapping Asian greens for mustard, Swiss chard, or spinach when preparing a favorite recipe.", "Larger, more mature greens can remain in the refrigerator for up to five days, while smaller, tender greens should be used within three days of purchase.", "dry and firm", "asian greens", LEAF);
 		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "lettuce", LEAF);
 		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "spinach", LEAF);
 		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "eggplant", FVEG);
 
-		putEntry(R.drawable.summer_squash_detail, "Summer squash can be grilled, steamed, boiled, sauteed, fried or used in stir fry recipes. They mix well with onions, tomatoes and okra in vegetable medleys.", "Place, unwashed in plastic bags, in the crisper drawer of the refrigerator. The storage life of summer squash is brief, so use within two to three days.", " Summer squash is best when immature, young and tender.", "summer_squash", FVEG);
+		putEntry(R.drawable.summer_squash_detail, "Summer squash can be grilled, steamed, boiled, sauteed, fried or used in stir fry recipes. They mix well with onions, tomatoes and okra in vegetable medleys.", "Place, unwashed in plastic bags, in the crisper drawer of the refrigerator. The storage life of summer squash is brief, so use within two to three days.", " Summer squash is best when immature, young and tender.", "summer squash", FVEG);
 		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "cucumber", FVEG);
-		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "bell_peppers", FVEG);
+		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "bell peppers", FVEG);
 		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "asparagus", STALK);
 		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "celery", STALK);
 		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "kiwifruit", BERRIES);
@@ -431,7 +436,8 @@ public class CoverFlowTestingActivity extends Activity {
 		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "peaches", DRUPES);
 		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "plums", DRUPES);
 		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "pluots", DRUPES);
-		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "apricots", DRUPES);	}
+		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "apricots", DRUPES);	
+		*/}
 
 	public void putEntry(int resID, String general, String storage, String ripe, String name, String group) {
 		Bitmap bitmap = BitmapFactory.decodeResource(getResources(), resID);
