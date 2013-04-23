@@ -13,24 +13,7 @@
         android:typeface="sans" 
         >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="82.5dip"
-            android:background="@color/LightGreen"
-            android:orientation="vertical" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:paddingLeft="20.6dip"
-                android:paddingRight="20.6dip"
-                android:paddingTop="10dip"
-                android:text="the produce almanac"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/produce_font"
-                android:typeface="sans" />
-        </LinearLayout>
+    
 <LinearLayout 
     android:layout_width="match_parent"
     android:background="@android:color/white"

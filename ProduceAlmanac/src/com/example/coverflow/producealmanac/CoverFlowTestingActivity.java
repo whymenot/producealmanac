@@ -377,15 +377,17 @@ public class CoverFlowTestingActivity extends Activity {
 		
 		Log.i("debugging", "bp");
 		new Item("bell peppers");
-		Log.i("debugging", "asp");
+		/**Log.i("debugging", "asp");
 		new Item("asparagus");
 		Log.i("debugging", "cel");
 		new Item("celery");
-		/**
+		
+		
 		Log.i("debugging", "kiw");
 		new Item("kiwifruit");
-		Log.i("debugging", "str");
 		new Item("strawberries");
+		Log.i("debugging", "str");
+		
 		Log.i("debugging", "bl");
 		new Item("blueberries");
 		
@@ -427,14 +429,14 @@ public class CoverFlowTestingActivity extends Activity {
 		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "spinach", LEAF);
 		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "eggplant", FVEG);
 
-		putEntry(R.drawable.summer_squash_detail, "Summer squash can be grilled, steamed, boiled, sauteed, fried or used in stir fry recipes. They mix well with onions, tomatoes and okra in vegetable medleys.", "Place, unwashed in plastic bags, in the crisper drawer of the refrigerator. The storage life of summer squash is brief, so use within two to three days.", " Summer squash is best when immature, young and tender.", "summer squash", FVEG);
+		putEntry(R.drawable.summer_squash_detail, "Summer squash can be grilled, steamed, boiled, sauteed, fried or used in stir fry recipes. They mix well with onions, tomatoes and okra in vegetable medleys.", "Place, unwashed in plastic bags, in the crisper drawer of the refrigerator. The storage life of summer squash is brief, so use within two to three days.", "Summer squash is best when immature, young and tender.", "summer squash", FVEG);
 		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "cucumber", FVEG);
 		
 		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "bell peppers", FVEG);
-		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "asparagus", STALK);
+		/*putEntry(R.drawable.celeriac_detail, "c", "t", "green", "asparagus", STALK);
 		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "celery", STALK);
-		/*putEntry(R.drawable.celeriac_detail, "c", "t", "green", "kiwifruit", BERRIES);
-		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "strawberries", BERRIES);
+		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "kiwifruit", BERRIES);
+				putEntry(R.drawable.celeriac_detail, "c", "t", "green", "strawberries", BERRIES);
 		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "blueberries", BERRIES);
 		
 		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "cherries", DRUPES);
