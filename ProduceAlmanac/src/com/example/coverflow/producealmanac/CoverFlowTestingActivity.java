@@ -46,7 +46,7 @@ public class CoverFlowTestingActivity extends Activity {
 	ArrayList<String> localNow; // used for searching, filters not relevant
 	ArrayList<String> localOut; // used for searching, local out of season
 	boolean populated=false;
-	
+	int NUMBEROF = 6;
 	public ArrayList<ArrayList<Item>> itemsByFilter = new ArrayList<ArrayList<Item>>();
 	
 	//public String searchTerms = "";
@@ -352,8 +352,8 @@ public class CoverFlowTestingActivity extends Activity {
 		
 		new Item("carrots");
 		new Item("onion");
+		new Item("parsnip");
 		
-		/**
 		Log.i("debugging", "check in createallitems 1");
 	
 
@@ -363,7 +363,7 @@ public class CoverFlowTestingActivity extends Activity {
 		new Item("cauliflower");
 		
 		new Item("asian greens");
-	
+		//worked up to asian greens
 		Log.i("debugging", "before lettuce");
 		new Item("lettuce");
 		Log.i("debugging", "before spinach");
@@ -374,6 +374,7 @@ public class CoverFlowTestingActivity extends Activity {
 		new Item("summer squash");
 		Log.i("debugging", "before cucumber");
 		new Item("cucumber");
+		/**
 		Log.i("debugging", "bp");
 		new Item("bell peppers");
 		Log.i("debugging", "asp");
@@ -402,7 +403,7 @@ public class CoverFlowTestingActivity extends Activity {
 		//problematic
 		Log.i("debugging", "on");
 
-		new Item("parsnip");*/
+		*/
 	}
 
 	public void populateMap() {		
@@ -415,16 +416,18 @@ public class CoverFlowTestingActivity extends Activity {
 		putEntry(R.drawable.celeriac_detail, "artichokes are pretty", "anywhere", "red", "garlic", BULBS);
 		putEntry(R.drawable.celeriac_detail, "cabbages are evil", "trashcan", "green", "onion", BULBS);
 		putEntry(R.drawable.celeriac_detail, "cabbages are evil", "trashcan", "green", "carrots", ROOTS);
-		/*putEntry(R.drawable.celeriac_detail, "cabbages are evil", "trashcan", "green", "parsnip", ROOTS);
+		putEntry(R.drawable.celeriac_detail, "cabbages are evil", "trashcan", "green", "parsnip", ROOTS);
 		putEntry(R.drawable.celeriac_detail, "cabbages are evil", "trashcan", "green", "broccoli", FLOWER);
 		putEntry(R.drawable.celeriac_detail, "cabbages are evil", "trashcan", "green", "cauliflower", FLOWER);
 		putEntry(R.drawable.asian_greens_detail, "None require long cooking; on the contrary, most Asian greens should be cooked quickly, sealing in their sweetness by stir-frying or steaming. Try swapping Asian greens for mustard, Swiss chard, or spinach when preparing a favorite recipe.", "Larger, more mature greens can remain in the refrigerator for up to five days, while smaller, tender greens should be used within three days of purchase.", "dry and firm", "asian greens", LEAF);
+		
 		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "lettuce", LEAF);
 		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "spinach", LEAF);
 		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "eggplant", FVEG);
 
 		putEntry(R.drawable.summer_squash_detail, "Summer squash can be grilled, steamed, boiled, sauteed, fried or used in stir fry recipes. They mix well with onions, tomatoes and okra in vegetable medleys.", "Place, unwashed in plastic bags, in the crisper drawer of the refrigerator. The storage life of summer squash is brief, so use within two to three days.", " Summer squash is best when immature, young and tender.", "summer squash", FVEG);
 		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "cucumber", FVEG);
+		/*
 		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "bell peppers", FVEG);
 		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "asparagus", STALK);
 		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "celery", STALK);
