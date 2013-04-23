@@ -208,7 +208,7 @@ public class Store {
 		ArrayList<Item> inactiveItems = new ArrayList<Item>();
 		
 		String[] berkeleyBowlActive = {"artichoke","cabbage","celeriac","turnip"};
-		String[] berkeleyBowlInactive = {"kale","leek","peas"};
+		String[] berkeleyBowlInactive = {};
 		
 		for (String name : berkeleyBowlActive){
 			activeItems.add(Item.itemMap.get(name));			
@@ -226,7 +226,7 @@ public class Store {
 		current = Store.storeMap.get("Yasai Market");
 		
 		String[] yasaiActive = {"artichoke","cabbage","kale"};
-		String[] yasaiInactive = {"celeriac", "turnip" , "peas"};
+		String[] yasaiInactive = {};
 		
 		for (String name : yasaiActive){
 			activeItems.add(Item.itemMap.get(name));			
@@ -244,7 +244,7 @@ public class Store {
 		current = Store.storeMap.get("Safeway - College Ave.");
 		
 		String[] safewayActive = {"artichoke","turnip","kale"};
-		String[] safewayInactive = {"celeriac", "leek" , "peas", "cabbage"};
+		String[] safewayInactive = {};
 		
 		for (String name : safewayActive){
 			activeItems.add(Item.itemMap.get(name));			
@@ -262,7 +262,7 @@ public class Store {
 		current = Store.storeMap.get("Trader Joes - University Ave.");
 		
 		String[] traderJoesActive = {"artichoke","cabbage","kale", "leek"};
-		String[] traderJoesInactive = {"turnip" , "peas"};
+		String[] traderJoesInactive = {};
 		
 		for (String name : traderJoesActive){
 			activeItems.add(Item.itemMap.get(name));			
@@ -283,7 +283,7 @@ public class Store {
 		current = Store.storeMap.get("Whole Foods - Telegraph Ave.");
 		
 		String[] wholeFoodsActive = {"artichoke","cabbage","kale", "leek", "celeriac"};
-		String[] wholeFoodsInactive = {"turnip" , "peas"};
+		String[] wholeFoodsInactive = {};
 		
 		for (String name : wholeFoodsActive){
 			activeItems.add(Item.itemMap.get(name));			

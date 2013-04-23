@@ -13,6 +13,7 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 
 import android.view.LayoutInflater;
@@ -61,15 +62,16 @@ public class CoverFlowTestingActivity extends Activity {
 	
 	
 	//Static filter strings
-	public final static String BERRIES = "Berries";
-	public final static String ROOTS  = "Root Vegetables";
-	public final static String LEAFY = "Leafy Greens";
-	public final static String CITRUS = "Citrus Fruits";
-	public final static String HERBS = "Fresh Herbs";
+	public final static String BULBS = "bulb vegetables";
+	public final static String ROOTS  = "root vegetables";
+	public final static String FLOWER = "flower bud vegetables";
+	public final static String LEAF = "leaf vegetables";
+	public final static String FVEG = "fruit vegetables";
+	public final static String STALK = "stalk vegetables";
+	public final static String BERRIES = "berries";
+	public final static String DRUPES = "drupes";
 	
-	public final static String[] FILTERS = {BERRIES,ROOTS,LEAFY,CITRUS,HERBS};
-	
-	
+	public final static String[] FILTERS = {BULBS, ROOTS, FLOWER, LEAF, FVEG, STALK, BERRIES, DRUPES};
 	
 	// for gridview
 	ImageAdapter myImageAdapter;
@@ -120,7 +122,6 @@ public class CoverFlowTestingActivity extends Activity {
             } 
         });
         //searchView.setOnCloseListener(this);
- 
         mListView = (ListView) findViewById(R.id.list);
 
 		if(!populated){
@@ -128,33 +129,32 @@ public class CoverFlowTestingActivity extends Activity {
 			populateMap();
 		}
 		
+	
 		createAllItems();
-		
+		Log.i("debugging", "after createAllItems");
 		
 		getClosestStores();
-				
+		Log.i("debugging", "after getClosestStores");	
 		this.activeFilters = getActiveFilters();
 		this.localNow = getLocalNow();
 		this.localOut = getLocalOut();
-		
+		Log.i("debugging", "after this. stuff");
 		//activeItems = getItemsNow();
 		
 		this.itemsByFilter = getItemsByFilter();
-
+		Log.i("debugging", "after getitemsbyfilter");
 		//done initializing backend data
 
 
 		showUpdatedItems();
 
-        
+		Log.i("debugging", "after showupdateditems");
         final MultiSpinner multispinner = (MultiSpinner) findViewById(this.getResources().getIdentifier("SpinnerCollegues", "id", "com.example.coverflow"));
       
         List<String> spinnerItems = new ArrayList<String>();
-        spinnerItems.add(BERRIES);
-        spinnerItems.add(ROOTS);
-        spinnerItems.add(LEAFY);
-        spinnerItems.add(CITRUS);
-        spinnerItems.add(HERBS);
+        for (String s: FILTERS){
+        	spinnerItems.add(s);
+        }
 
         multispinner.setItems(spinnerItems, "filter by category", new MultiSpinnerListener() {
         	public void onItemsSelected(boolean[] selected) {
@@ -261,7 +261,6 @@ public class CoverFlowTestingActivity extends Activity {
 		 */
 		
 		// get data from GPS if possible
-		
 		this.activeStores = new ArrayList<Store>();
 		activeStores.add(new Store("Berkeley Bowl"));
 		activeStores.add(new Store("Yasai Market"));
@@ -339,19 +338,66 @@ public class CoverFlowTestingActivity extends Activity {
 	}
 
 	private void createAllItems() {
+		//this method is not modular, it should take a list of names
+		//TODO make this method less stupid
 		//@TODO We should not be adding EVERYTHING to currentItems, we should
 		//just be creating item instances and copy the local items in another method
 		
 		
 		//FIX BELOW
-		new Item("artichoke");
-		new Item("cabbage");
-		new Item("celeriac");
-		new Item("kale");
-		new Item("leek");
-		new Item("peas");
-		new Item("turnip");
 
+		new Item("garlic");
+		Log.i("debugging", "check in createallitems 1");
+	
+		
+		new Item("carrots");
+		
+
+		new Item("broccoli");
+		
+		new Item("cauliflower");
+		
+		new Item("asian_greens");
+	
+		Log.i("debugging", "before lettuce");
+		new Item("lettuce");
+		Log.i("debugging", "before spinach");
+		new Item("spinach");
+		Log.i("debugging", "before eggplant");
+		new Item("eggplant");
+		Log.i("debugging", "before summer squash");
+		new Item("summer_squash");
+		Log.i("debugging", "before cucumber");
+		new Item("cucumber");
+		Log.i("debugging", "bp");
+		new Item("bell_peppers");
+		Log.i("debugging", "asp");
+		new Item("asparagus");
+		Log.i("debugging", "cel");
+		new Item("celery");
+		Log.i("debugging", "kiw");
+		new Item("kiwifruit");
+		Log.i("debugging", "str");
+		new Item("strawberries");
+		Log.i("debugging", "bl");
+		new Item("blueberries");
+		Log.i("debugging", "ch");
+		new Item("cherries");
+		Log.i("debugging", "nec");
+		new Item("nectarines");
+		Log.i("debugging", "pea");
+		new Item("peaches");
+		Log.i("debugging", "pl");
+		new Item("plums");
+		Log.i("debugging", "pl");
+		new Item("pluots");
+		Log.i("debugging", "ap");
+		new Item("apricots");
+		
+		//problematic
+		Log.i("debugging", "on");
+		new Item("onion");
+		new Item("parsnip");
 	}
 
 	public void populateMap() {		
@@ -361,14 +407,31 @@ public class CoverFlowTestingActivity extends Activity {
 		String group = "group";
 		
 		//@TODO include filter Strings as last argument to putEntry()
-		putEntry(R.drawable.celeriac_detail, "artichokes are pretty", "anywhere", "red", "artichoke", LEAFY);
-		putEntry(R.drawable.celeriac_detail, "cabbages are evil", "trashcan", "green", "cabbage", LEAFY);
-		putEntry(R.drawable.celeriac_detail, "When peeled, celeriac's creamy white flesh resembles that of a turnip and tastes like a subtle blend of celery and parsley. This time of year, celeriac can be a perfect non-starch substitute for potatoes in a warming meal, and can be prepared in a similar way. It goes well with fresh green vegetables or salad and anything roasted or grilled.", "Celeriac can be stored for up to four months in the fridge.", "A ripe celeriac is firm with its peel intact.", "celeriac", ROOTS);
-		putEntry(R.drawable.celeriac_detail, "kale is kind", "who knows", "green", "kale", LEAFY);
-		putEntry(R.drawable.celeriac_detail, "leeks are...", "asasasd", "violet", "leek", LEAFY);
-		putEntry(R.drawable.celeriac_detail, "peas are small", "asdasd", "invisible", "peas", BERRIES);
-		putEntry(R.drawable.celeriac_detail, "turnips.. what are these?", "asdfasdf", "no idea", "turnip", CITRUS);
-	}
+		putEntry(R.drawable.celeriac_detail, "artichokes are pretty", "anywhere", "red", "garlic", BULBS);
+		putEntry(R.drawable.celeriac_detail, "cabbages are evil", "trashcan", "green", "onion", BULBS);
+		putEntry(R.drawable.celeriac_detail, "cabbages are evil", "trashcan", "green", "carrots", ROOTS);
+		putEntry(R.drawable.celeriac_detail, "cabbages are evil", "trashcan", "green", "parsnip", ROOTS);
+		putEntry(R.drawable.celeriac_detail, "cabbages are evil", "trashcan", "green", "broccoli", FLOWER);
+		putEntry(R.drawable.celeriac_detail, "cabbages are evil", "trashcan", "green", "cauliflower", FLOWER);
+		putEntry(R.drawable.asian_greens_detail, "None require long cooking; on the contrary, most Asian greens should be cooked quickly, sealing in their sweetness by stir-frying or steaming. Try swapping Asian greens for mustard, Swiss chard, or spinach when preparing a favorite recipe.", "Larger, more mature greens can remain in the refrigerator for up to five days, while smaller, tender greens should be used within three days of purchase.", "dry and firm", "asian_greens", LEAF);
+		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "lettuce", LEAF);
+		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "spinach", LEAF);
+		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "eggplant", FVEG);
+
+		putEntry(R.drawable.summer_squash_detail, "Summer squash can be grilled, steamed, boiled, sauteed, fried or used in stir fry recipes. They mix well with onions, tomatoes and okra in vegetable medleys.", "Place, unwashed in plastic bags, in the crisper drawer of the refrigerator. The storage life of summer squash is brief, so use within two to three days.", " Summer squash is best when immature, young and tender.", "summer_squash", FVEG);
+		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "cucumber", FVEG);
+		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "bell_peppers", FVEG);
+		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "asparagus", STALK);
+		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "celery", STALK);
+		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "kiwifruit", BERRIES);
+		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "strawberries", BERRIES);
+		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "blueberries", BERRIES);
+		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "cherries", DRUPES);
+		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "nectarines", DRUPES);
+		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "peaches", DRUPES);
+		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "plums", DRUPES);
+		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "pluots", DRUPES);
+		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "apricots", DRUPES);	}
 
 	public void putEntry(int resID, String general, String storage, String ripe, String name, String group) {
 		Bitmap bitmap = BitmapFactory.decodeResource(getResources(), resID);
