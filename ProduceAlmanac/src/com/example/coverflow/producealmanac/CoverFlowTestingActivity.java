@@ -30,6 +30,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.SearchView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -71,7 +72,18 @@ public class CoverFlowTestingActivity extends Activity {
 	public final static String BERRIES = "berries";
 	public final static String DRUPES = "drupes";
 	
+	public final static String BERKELEYBOWL = "Berkeley Bowl";
+	public final static String TRADERJOES = "Trader Joes";
+	public final static String SAFEWAY = "Safeway";
+	public final static String YASAIMARKET = "Yasai Market";
+	public final static String WHOLEFOODS = "Whole Foods";
+	
+	ArrayAdapter<String> storeAdapter;
+	
+	
 	public final static String[] FILTERS = {BULBS, ROOTS, FLOWER, LEAF, FVEG, STALK, BERRIES, DRUPES};
+	public final static String[] STORES = {BERKELEYBOWL, TRADERJOES, SAFEWAY, YASAIMARKET, WHOLEFOODS};
+	
 	
 	// for gridview
 	ImageAdapter myImageAdapter;
@@ -174,6 +186,11 @@ public class CoverFlowTestingActivity extends Activity {
         Log.i("debugging", "after spinner");
         multispinner.setPrompt("FILTER");
         Log.i("debugging", "end of oncreate");
+        
+        final Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
+        storeAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,STORES);
+        storeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        spinner2.setAdapter(storeAdapter);
         
     }
     private ArrayList<ArrayList<Item>> getItemsByFilter() {
