@@ -30,6 +30,10 @@
             android:name="com.example.coverflow.producealmanac.MainActivity"
             android:label="@string/title_activity_main" >
         </activity>
+        
+        <activity
+            android:name="com.example.coverflow.producealmanac.NotificationActivity"
+			/>
         <activity
             android:name="com.example.coverflow.producealmanac.DetailActivity"
             android:label="@string/title_activity_detail" >

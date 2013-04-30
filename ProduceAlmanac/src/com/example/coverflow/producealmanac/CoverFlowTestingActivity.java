@@ -103,6 +103,10 @@ public class CoverFlowTestingActivity extends Activity {
     	super.onCreate(savedInstanceState);
     	setContentView(R.layout.main);
     	
+    	
+    	//TESTING NOTIFICATION SCREEN
+    	testNotifs();
+    	
     	this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     	
     	// set search functionality
@@ -228,6 +232,11 @@ public class CoverFlowTestingActivity extends Activity {
 		return items;
 	}
 
+	public void testNotifs(){
+		Intent notifIntent = new Intent(this, NotificationActivity.class);
+		startActivity(notifIntent);
+	}
+	
 	//don't think we need this method, keep for now though
 	private ArrayList<Item> getItemsNow() {
 		// TODO Auto-generated method stub
@@ -386,7 +395,7 @@ public class CoverFlowTestingActivity extends Activity {
 		Log.i("debugging", "before spinach");
 		new Item("spinach");
 		Log.i("debugging", "before eggplant");
-		new Item("eggplant");
+		
 		Log.i("debugging", "before summer squash");
 		new Item("summer squash");
 		Log.i("debugging", "before cucumber");
@@ -395,6 +404,7 @@ public class CoverFlowTestingActivity extends Activity {
 		Log.i("debugging", "bp");
 		new Item("bell peppers");
 		/**Log.i("debugging", "asp");
+		 * new Item("eggplant");
 		new Item("asparagus");
 		Log.i("debugging", "cel");
 		new Item("celery");
@@ -444,7 +454,7 @@ public class CoverFlowTestingActivity extends Activity {
 		
 		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "lettuce", LEAF);
 		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "spinach", LEAF);
-		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "eggplant", FVEG);
+		//putEntry(R.drawable.celeriac_detail, "c", "t", "green", "eggplant", FVEG);
 
 		putEntry(R.drawable.summer_squash_detail, "Summer squash can be grilled, steamed, boiled, sauteed, fried or used in stir fry recipes. They mix well with onions, tomatoes and okra in vegetable medleys.", "Place, unwashed in plastic bags, in the crisper drawer of the refrigerator. The storage life of summer squash is brief, so use within two to three days.", "Summer squash is best when immature, young and tender.", "summer squash", FVEG);
 		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "cucumber", FVEG);
