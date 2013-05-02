@@ -42,11 +42,11 @@
             android:label="@string/title_activity_detail" >
         </activity>
         
-        <receiver android:name=".AlarmReceiver" >
+        <receiver android:name="com.example.coverflow.producealmanac.AlarmReceiver" >
         </receiver>
 
         <service
-            android:name="NotificationService"
+            android:name="com.example.coverflow.producealmanac.NotificationService"
             android:enabled="true" />
     </application>
 
