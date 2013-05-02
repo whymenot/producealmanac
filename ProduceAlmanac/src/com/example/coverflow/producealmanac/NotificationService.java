@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.IBinder;
 
 public class NotificationService extends Service {
-	int a = 3;
 
 	private NotificationManager mManager;
 
@@ -38,7 +37,7 @@ public class NotificationService extends Service {
 		Intent intent1 = new Intent(this.getApplicationContext(), CoverFlowTestingActivity.class);
 
 		Notification notification = new Notification(com.example.coverflow.R.drawable.ic_launcher,
-				"See My App something for you" + a, System.currentTimeMillis());
+				"Melon is in Season!", System.currentTimeMillis());
 
 		intent1.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP
 				| Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -50,12 +49,9 @@ public class NotificationService extends Service {
 		notification.flags |= Notification.FLAG_AUTO_CANCEL;
 
 		notification.setLatestEventInfo(this.getApplicationContext(),
-				"SANBOOK", "See My App something for you_info..." + a,
+				"ProduceAlmanac", "See this delicious melon that is in season...",
 				pendingNotificationIntent);
-		if (a > 0) {
-			a--;
-			mManager.notify(0, notification);
-		}
+		mManager.notify(0, notification);
 	}
 
 	@Override
