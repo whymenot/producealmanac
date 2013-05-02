@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
@@ -15,9 +16,8 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
-
-import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -28,7 +28,6 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.PopupWindow;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -57,6 +56,8 @@ public class CoverFlowTestingActivity extends Activity {
 	
 	TextView textView;
 	ResourceImageAdapter myAdapter;
+	
+	ActionBar actionBar;
 	
 	//search/filter terms
 
@@ -103,9 +104,10 @@ public class CoverFlowTestingActivity extends Activity {
     	super.onCreate(savedInstanceState);
     	setContentView(R.layout.main);
     	
-    	
+    	//actionBar = getActionBar();
+    	//actionBar.show();
     	//TESTING NOTIFICATION SCREEN
-    	testNotifs();
+    	//testNotifs();
     	
     	this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     	
@@ -403,7 +405,7 @@ public class CoverFlowTestingActivity extends Activity {
 		
 		Log.i("debugging", "bp");
 		new Item("bell peppers");
-		/**Log.i("debugging", "asp");
+		/**sLog.i("debugging", "asp");
 		 * new Item("eggplant");
 		new Item("asparagus");
 		Log.i("debugging", "cel");
@@ -631,6 +633,26 @@ public class CoverFlowTestingActivity extends Activity {
 			}
         	
         });
+    	}
+    
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+		
+      switch (item.getItemId()) { //basic structure borrowed from Kate's drawing app in section
+      case R.id.notification:
+            Toast.makeText(this, "The brush is now " + getResources().getString(R.string.notification) + " .",
+                        Toast.LENGTH_SHORT).show(); 
+            return true;
+     default:
+            return super.onOptionsItemSelected(item);
+      }
     }
     /*
     public void showPopup(View v) {
@@ -641,4 +663,5 @@ public class CoverFlowTestingActivity extends Activity {
             pw.showAtLocation(findViewById(R.id.searchView), Gravity.CENTER, 0,
                     0);
     }*/
+
 }
