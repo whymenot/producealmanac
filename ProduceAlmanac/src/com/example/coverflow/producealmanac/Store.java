@@ -20,11 +20,6 @@ public class Store {
 	private String address;
 	private ArrayList<Item> inactive;
 	
-	final static String[] BERRIES = {"Blueberries"};
-	final static String[] CITRUS = {"Oranges"};
-	final static String[] HERBS = {"Cilantro"};
-	final static String[] LEAFY = {"Lettuce"};
-	final static String[] ROOTS = {"Celeriac"};
 	
 	
 	
@@ -207,8 +202,8 @@ public class Store {
 		Store current = Store.storeMap.get("Berkeley Bowl");
 		ArrayList<Item> activeItems = new ArrayList<Item>();
 		ArrayList<Item> inactiveItems = new ArrayList<Item>();
-		String[] berkeleyBowlActive = {"garlic", "carrots", "onion", "parsnip", "broccoli", "cauliflower", "asian greens","lettuce", "spinach", "summer squash", "cucumber", "bell peppers"};//, "bell peppers", "asparagus", "celery"};, "kiwifruit", "strawberries", "blueberries" "eggplant"};
-		//String[] berkeleyBowlActive = {"garlic", "carrots", "broccoli", "cauliflower", "asian greens", "lettuce", "spinach", "eggplant", "summer squash", "cucumber", "bell peppers", "asparagus", "celery", "kiwifruit", "strawberries", "blueberries", "cherries", "nectarines", "peaches", "plums", "pluots", "apricots", "onion", "parsnip"};
+		//String[] berkeleyBowlActive = {"garlic", "carrots", "onion", "parsnip", "broccoli", "cauliflower", "asian greens","lettuce", "spinach", "summer squash", "cucumber", "bell peppers"};//, "bell peppers", "asparagus", "celery"};, "kiwifruit", "strawberries", "blueberries" "eggplant"};
+		String[] berkeleyBowlActive = {"garlic", "carrots", "broccoli", "cauliflower", "asian greens", "lettuce", "spinach", "eggplant", "summer squash", "cucumber", "bell peppers", "asparagus", "celery", "kiwifruit", "strawberries", "blueberries", "cherries", "nectarines", "peaches", "plums", "pluots", "apricots", "onion", "parsnip"};
 		String[] berkeleyBowlInactive = {};
 		
 		for (String name : berkeleyBowlActive){
