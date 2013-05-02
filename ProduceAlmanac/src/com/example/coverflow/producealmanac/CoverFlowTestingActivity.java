@@ -2,11 +2,14 @@ package com.example.coverflow.producealmanac;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -669,5 +672,38 @@ public class CoverFlowTestingActivity extends Activity {
             pw.showAtLocation(findViewById(R.id.searchView), Gravity.CENTER, 0,
                     0);
     }*/
+    public void createNotificationService() {
+		Calendar Calendar_Object = Calendar.getInstance();
+		
+		/*
+		Calendar_Object.set(Calendar.MONTH, 4);
+		Calendar_Object.set(Calendar.YEAR, 2013);
+		Calendar_Object.set(Calendar.DAY_OF_MONTH, 2);
 
+		Calendar_Object.set(Calendar.HOUR_OF_DAY, 0);
+		Calendar_Object.set(Calendar.MINUTE, 22);
+		Calendar_Object.set(Calendar.SECOND, 0);
+		*/
+		// notify after 15 sec...
+		Calendar_Object.add(Calendar.SECOND, 15);
+		
+		// MyView is my current Activity, and AlarmReceiver is the
+		// BoradCastReceiver
+		Intent myIntent = new Intent(CoverFlowTestingActivity.this, AlarmReceiver.class);
+
+		PendingIntent pendingIntent = PendingIntent.getBroadcast(CoverFlowTestingActivity.this,
+				0, myIntent, 0);
+
+		AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+		/*
+		 * The following sets the Alarm in the specific time by getting the long
+		 * value of the alarm date time which is in calendar object by calling
+		 * the getTimeInMillis(). Since Alarm supports only long value , we're
+		 * using this method.
+		 */
+		//alarmManager.setRepeating(AlarmManager.RTC, 0, 20000, pendingIntent);
+		alarmManager.set(AlarmManager.RTC, Calendar_Object.getTimeInMillis(),
+				pendingIntent);
+    }
 }
