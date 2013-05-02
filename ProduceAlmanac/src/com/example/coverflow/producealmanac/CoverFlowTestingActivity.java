@@ -205,6 +205,10 @@ public class CoverFlowTestingActivity extends Activity {
         storeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinner2.setAdapter(storeAdapter);
         
+        
+        // NOTIFICATION!!
+		createNotificationService();
+        
     }
     private ArrayList<ArrayList<Item>> getItemsByFilter() {
 		/**Based on the active filters set, create a list of items for each
