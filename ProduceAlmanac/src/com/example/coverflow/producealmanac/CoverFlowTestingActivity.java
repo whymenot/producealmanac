@@ -521,9 +521,10 @@ public class CoverFlowTestingActivity extends Activity {
 		Log.i("debugging", "cel");
 		new Item("celery");
 		
-		
-		Log.i("debugging", "kiw");
 		new Item("kiwifruit");
+		/*
+		Log.i("debugging", "kiw");
+		
 		new Item("strawberries");
 		Log.i("debugging", "str");
 		
@@ -545,7 +546,7 @@ public class CoverFlowTestingActivity extends Activity {
 		
 		//problematic
 		//Log.i("debugging", "on");
-
+*/
 		
 	}
 
@@ -574,8 +575,10 @@ public class CoverFlowTestingActivity extends Activity {
 		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "bell peppers", VEGGIES);
 		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "asparagus", VEGGIES);
 		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "celery", VEGGIES);
+		
+		
 		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "kiwifruit", FRUITS);
-		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "strawberries", FRUITS);
+		/*putEntry(R.drawable.celeriac_detail, "c", "t", "green", "strawberries", FRUITS);
 		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "blueberries", FRUITS);
 		
 		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "cherries", FRUITS);
@@ -584,7 +587,7 @@ public class CoverFlowTestingActivity extends Activity {
 		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "plums", FRUITS);
 		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "pluots", FRUITS);
 		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "apricots", FRUITS);	
-		}
+		*/}
 
 	public void putEntry(int resID, String general, String storage, String ripe, String name, String group) {
 		Bitmap bitmap = BitmapFactory.decodeResource(getResources(), resID);
@@ -812,9 +815,9 @@ public class CoverFlowTestingActivity extends Activity {
     
 	 public void initializeButtons(){
 			
-		 button1 = (Button)findViewById(R.id.button1);
+		 //button1 = (Button)findViewById(R.id.button1);
 		 button1.setText("+");
-		 row1 = (LinearLayout) findViewById(R.id.bowlRow);
+		 //row1 = (LinearLayout) findViewById(R.id.bowlRow);
 		 LinearLayout s1 = new LinearLayout(this);
 		 s1.setOrientation(LinearLayout.VERTICAL);
 		 CheckBox checkBox1 = new CheckBox(this);

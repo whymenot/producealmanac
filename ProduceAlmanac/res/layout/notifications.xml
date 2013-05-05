@@ -6,30 +6,48 @@
     android:orientation="vertical"
     android:layout_margin="20dip" >
 
-    <LinearLayout 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/bowlRow"
-    android:orientation="horizontal" >
+    android:id="@+id/row_all_stores"
+    android:orientation="horizontal"
+    android:gravity="bottom"
+     >
     <Button
-        android:id="@+id/button1"
-        android:layout_width="100dip"
+        android:id="@+id/buttonAllStores"
+        android:layout_width="@dimen/width_of_button"
         android:layout_height="100dip"
+        android:textSize = "@dimen/button_font"
         android:text="Button" />
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Berkeley Bowl" />
+        android:text="All Stores"
+        android:gravity="bottom"
+        android:textSize="@dimen/store_title_size" />
     
     </LinearLayout>
 
 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/row_berkeley_bowl"
+    android:orientation="horizontal" >
     <Button
-        android:id="@+id/button2"
-        android:layout_width="60dip"
+        android:id="@+id/buttonBerkeleyBowl"
+        android:layout_width="100dip"
+        android:layout_height="100dip"
+        android:textSize = "@dimen/button_font"
+        android:text="+" />
+
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="Berkeley Bowl" />
+    
+    </LinearLayout>
 
 </LinearLayout>
