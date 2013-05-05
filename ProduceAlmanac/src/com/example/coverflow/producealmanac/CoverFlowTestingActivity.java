@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import android.app.ActionBar;
@@ -27,6 +28,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -62,7 +65,14 @@ public class CoverFlowTestingActivity extends Activity {
 	
 	ActionBar actionBar;
 	
-	//search/filter terms
+	//Button/notification stuffs
+	ArrayList<View> allViews= new ArrayList<View>();
+	HashMap<View, View> subLayouts= new HashMap<View, View>();
+	HashMap<View, Boolean> expanded = new HashMap<View, Boolean>();
+	LinearLayout masterView;
+	Button button1;
+	Button button2;
+	LinearLayout row1;
 
 	
 	
@@ -205,10 +215,6 @@ public class CoverFlowTestingActivity extends Activity {
         storeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinner2.setAdapter(storeAdapter);
         
-        
-        // NOTIFICATION!!
-		createNotificationService();
-        
     }
     private ArrayList<ArrayList<Item>> getItemsByFilter() {
 		/**Based on the active filters set, create a list of items for each
@@ -325,13 +331,99 @@ public class CoverFlowTestingActivity extends Activity {
 
 			// skip if size of items is zero.
 			if (items.size() == 0) continue;
+			
 
+			final LinearLayout s1 = new LinearLayout(this);
+			s1.setOrientation(LinearLayout.HORIZONTAL);
+			
+			final Button button = new Button(this);
+			button.setText("-");
+			
+			button.setOnClickListener(new View.OnClickListener(){
+				public void onClick(View v) {
+					if (button.getText().equals("+")) {
+						s1.setVisibility(LinearLayout.INVISIBLE);
+					} else {
+						s1.setVisibility(LinearLayout.VISIBLE);
+					}
+				}
+				/**
+				public void onClick(View v){
+					boolean expanding;
+					if (expanded.get(v)){
+						expanding = false;
+						expanded.put(v, false);
+					}
+					else {
+						expanded.put(v, true);
+						expanding=true;
+					}
+					
+					
+					View subLayout = subLayouts.get(v);
+					
+					//if (allViews.contains(subLayout)){
+						//masterView.removeView(subLayout);
+					//}
+					int i = 0;
+					int position=0;
+					ViewGroup currentViewGroup;
+					for (View currentView : allViews){
+						currentViewGroup = (ViewGroup) currentView;
+						int numChildren = currentViewGroup.getChildCount();
+						for (int j = 0; j < numChildren; j++){
+							if (currentViewGroup.getChildAt(j)==v){
+								position=i+1;
+								break;
+							}
+						}
+						i++;
+					}
+						
+					LinearLayout nextRow = (LinearLayout) allViews.get(position-1);
+					
+					Log.i("debugging", "gets past j/i loop and position was: "+ position);
+					if (expanding){
+						Button nextButton = (Button) v;
+						nextButton.setText("-");
+						
+						//REMOVE OLD BUTTON
+						nextRow.removeViewAt(0);
+						nextRow.addView(nextButton, 0);
+						//TODO edge case end of list 
+						if (position!=0){
+							allViews.remove(position-1);
+							allViews.add(position-1, nextRow);
+							allViews.add(position, subLayout);
+						}
+					}
+					else {
+						//CONTRACTING
+						Button nextButton = (Button) v;
+						nextButton.setText("+");
+						nextRow.removeViewAt(0);
+						nextRow.addView(nextButton, 0);
+						if (position!=0){
+							allViews.remove(position-1);
+							allViews.add(position-1, nextRow);
+							allViews.remove(position);
+							
+						}
+					}
+					resetMasterLayout();
+				
+				}
+			**/});
+			expanded.put(button, false);
+			
 			TextView txtView = new TextView(this);
 			//should be different per each one
 			txtView.setText(FILTERS[i]);
 			txtView.setTextColor(getResources().getColor(R.color.Brown));
 			txtView.setTextSize(40);
-			gridLinearLayout.addView(txtView);
+			s1.addView(button);
+			s1.addView(txtView);
+			gridLinearLayout.addView(s1);
 
 			GridView gridview = new GridView(this);
 			gridview.setLayoutParams(new GridView.LayoutParams(GridView.LayoutParams.MATCH_PARENT, 230 * ((int) Math.ceil(items.size()/3.0))));
@@ -710,4 +802,103 @@ public class CoverFlowTestingActivity extends Activity {
 		alarmManager.set(AlarmManager.RTC, Calendar_Object.getTimeInMillis(),
 				pendingIntent);
     }
+    
+	 public void initializeButtons(){
+			
+		 button1 = (Button)findViewById(R.id.button1);
+		 button1.setText("+");
+		 row1 = (LinearLayout) findViewById(R.id.bowlRow);
+		 LinearLayout s1 = new LinearLayout(this);
+		 s1.setOrientation(LinearLayout.VERTICAL);
+		 CheckBox checkBox1 = new CheckBox(this);
+		 checkBox1.setText("since i'm coming home");
+		 
+		 CheckBox checkBox2 = new CheckBox(this);
+		 checkBox2.setText("well my body's been a mess");
+		//TODO add checkboxes		
+		 s1.addView(checkBox1);
+		 s1.addView(checkBox2);
+		 subLayouts.put(button1, s1);
+		 allViews.add(row1);
+		 //allViews.add(s1);
+		 button1.setOnClickListener(buttonListener);
+		 expanded.put(button1, false);
+	 }
+	 
+		View.OnClickListener buttonListener = new View.OnClickListener(){
+			
+			public void onClick(View v){
+				boolean expanding;
+				if (expanded.get(v)){
+					expanding = false;
+					expanded.put(v, false);
+				}
+				else {
+					expanded.put(v, true);
+					expanding=true;
+				}
+				
+				
+				View subLayout = subLayouts.get(v);
+				
+				//if (allViews.contains(subLayout)){
+					//masterView.removeView(subLayout);
+				//}
+				int i = 0;
+				int position=0;
+				ViewGroup currentViewGroup;
+				for (View currentView : allViews){
+					currentViewGroup = (ViewGroup) currentView;
+					int numChildren = currentViewGroup.getChildCount();
+					for (int j = 0; j < numChildren; j++){
+						if (currentViewGroup.getChildAt(j)==v){
+							position=i+1;
+							break;
+						}
+					}
+					i++;
+				}
+					
+				LinearLayout nextRow = (LinearLayout) allViews.get(position-1);
+				
+				Log.i("debugging", "gets past j/i loop and position was: "+ position);
+				if (expanding){
+					Button nextButton = (Button) v;
+					nextButton.setText("-");
+					
+					//REMOVE OLD BUTTON
+					nextRow.removeViewAt(0);
+					nextRow.addView(nextButton, 0);
+					//TODO edge case end of list 
+					if (position!=0){
+						allViews.remove(position-1);
+						allViews.add(position-1, nextRow);
+						allViews.add(position, subLayout);
+					}
+				}
+				else {
+					//CONTRACTING
+					Button nextButton = (Button) v;
+					nextButton.setText("+");
+					nextRow.removeViewAt(0);
+					nextRow.addView(nextButton, 0);
+					if (position!=0){
+						allViews.remove(position-1);
+						allViews.add(position-1, nextRow);
+						allViews.remove(position);
+						
+					}
+				}
+				resetMasterLayout();
+			
+			}
+		};
+		
+		public void resetMasterLayout(){
+			masterView.removeAllViews();
+			for (View v: allViews){
+				Log.i("debuggingNew", "adding a view");
+				masterView.addView(v);
+			}
+		}
 }
