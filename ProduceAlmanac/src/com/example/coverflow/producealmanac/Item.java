@@ -14,7 +14,6 @@ public class Item implements Comparable{
 	public String description;
 	public String ripeness;
 	public String storage;
-	public Bitmap picture;
 	public String group;
 	/*
 	HOW TO LOAD A PICTURE FROM THE DRAWABLE FOLDER
@@ -27,8 +26,7 @@ public class Item implements Comparable{
 		this.description = (String) infoMap.get(name)[0];
 		this.storage = (String) infoMap.get(name)[1];
 		this.ripeness = (String) infoMap.get(name)[2];
-		this.picture = (Bitmap) infoMap.get(name)[3];
-		this.group = (String) infoMap.get(name)[4];
+		this.group = (String) infoMap.get(name)[3];
 		Item.itemMap.put(name, this);
 	}
 	@Override

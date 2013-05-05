@@ -557,43 +557,40 @@ public class CoverFlowTestingActivity extends Activity {
 		String group = "group";
 		
 		//@TODO include filter Strings as last argument to putEntry()
-		putEntry(R.drawable.celeriac_detail, "artichokes are pretty", "anywhere", "red", "garlic", VEGGIES);
-		putEntry(R.drawable.celeriac_detail, "cabbages are evil", "trashcan", "green", "onion", VEGGIES);
-		putEntry(R.drawable.celeriac_detail, "cabbages are evil", "trashcan", "green", "carrots", VEGGIES);
-		putEntry(R.drawable.celeriac_detail, "cabbages are evil", "trashcan", "green", "parsnip", VEGGIES);
-		putEntry(R.drawable.celeriac_detail, "cabbages are evil", "trashcan", "green", "broccoli", VEGGIES);
-		putEntry(R.drawable.celeriac_detail, "cabbages are evil", "trashcan", "green", "cauliflower", VEGGIES);
-		putEntry(R.drawable.asian_greens_detail, "None require long cooking; on the contrary, most Asian greens should be cooked quickly, sealing in their sweetness by stir-frying or steaming. Try swapping Asian greens for mustard, Swiss chard, or spinach when preparing a favorite recipe.", "Larger, more mature greens can remain in the refrigerator for up to five days, while smaller, tender greens should be used within three days of purchase.", "dry and firm", "asian greens", VEGGIES);
+		putEntry("artichokes are pretty", "anywhere", "red", "garlic", VEGGIES);
+		putEntry("cabbages are evil", "trashcan", "green", "onion", VEGGIES);
+		putEntry("cabbages are evil", "trashcan", "green", "carrots", VEGGIES);
+		putEntry("cabbages are evil", "trashcan", "green", "parsnip", VEGGIES);
+		putEntry("cabbages are evil", "trashcan", "green", "broccoli", VEGGIES);
+		putEntry("cabbages are evil", "trashcan", "green", "cauliflower", VEGGIES);
+		putEntry("None require long cooking; on the contrary, most Asian greens should be cooked quickly, sealing in their sweetness by stir-frying or steaming. Try swapping Asian greens for mustard, Swiss chard, or spinach when preparing a favorite recipe.", "Larger, more mature greens can remain in the refrigerator for up to five days, while smaller, tender greens should be used within three days of purchase.", "dry and firm", "asian greens", VEGGIES);
 		
-		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "lettuce", VEGGIES);
-		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "spinach", VEGGIES);
-		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "eggplant", VEGGIES);
+		putEntry("c", "t", "green", "lettuce", VEGGIES);
+		putEntry("c", "t", "green", "spinach", VEGGIES);
+		putEntry("c", "t", "green", "eggplant", VEGGIES);
 
-		putEntry(R.drawable.summer_squash_detail, "Summer squash can be grilled, steamed, boiled, sauteed, fried or used in stir fry recipes. They mix well with onions, tomatoes and okra in vegetable medleys.", "Place, unwashed in plastic bags, in the crisper drawer of the refrigerator. The storage life of summer squash is brief, so use within two to three days.", "Summer squash is best when immature, young and tender.", "summer squash", VEGGIES);
-		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "cucumber", VEGGIES);
+		putEntry("Summer squash can be grilled, steamed, boiled, sauteed, fried or used in stir fry recipes. They mix well with onions, tomatoes and okra in vegetable medleys.", "Place, unwashed in plastic bags, in the crisper drawer of the refrigerator. The storage life of summer squash is brief, so use within two to three days.", "Summer squash is best when immature, young and tender.", "summer squash", VEGGIES);
+		putEntry("c", "t", "green", "cucumber", VEGGIES);
 		
-		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "bell peppers", VEGGIES);
-		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "asparagus", VEGGIES);
-		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "celery", VEGGIES);
+		putEntry("c", "t", "green", "bell peppers", VEGGIES);
+		putEntry("c", "t", "green", "asparagus", VEGGIES);
+		putEntry("c", "t", "green", "celery", VEGGIES);
 		
 		
-		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "kiwifruit", FRUITS);
-		/*putEntry(R.drawable.celeriac_detail, "c", "t", "green", "strawberries", FRUITS);
-		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "blueberries", FRUITS);
+		putEntry("c", "t", "green", "kiwifruit", FRUITS);
+		putEntry("c", "t", "green", "strawberries", FRUITS);
+		putEntry("c", "t", "green", "blueberries", FRUITS);
 		
-		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "cherries", FRUITS);
-		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "nectarines", FRUITS);
-		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "peaches", FRUITS);
-		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "plums", FRUITS);
-		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "pluots", FRUITS);
-		putEntry(R.drawable.celeriac_detail, "c", "t", "green", "apricots", FRUITS);	
-		*/}
+		putEntry("c", "t", "green", "cherries", FRUITS);
+		putEntry("c", "t", "green", "nectarines", FRUITS);
+		putEntry("c", "t", "green", "peaches", FRUITS);
+		putEntry("c", "t", "green", "plums", FRUITS);
+		putEntry("c", "t", "green", "pluots", FRUITS);
+		putEntry("c", "t", "green", "apricots", FRUITS);
+	}
 
-	public void putEntry(int resID, String general, String storage, String ripe, String name, String group) {
-		Bitmap bitmap = BitmapFactory.decodeResource(getResources(), resID);
-		ImageView imgView = new ImageView(this);
-		imgView.setImageBitmap(bitmap);
-		Object[] info = {general, storage, ripe, bitmap,group};
+	public void putEntry(String general, String storage, String ripe, String name, String group) {
+		Object[] info = {general, storage, ripe ,group};
 		Item.infoMap.put(name, info);
 	}
 
