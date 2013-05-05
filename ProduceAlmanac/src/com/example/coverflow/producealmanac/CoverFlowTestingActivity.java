@@ -336,17 +336,7 @@ public class CoverFlowTestingActivity extends Activity {
 			final LinearLayout s1 = new LinearLayout(this);
 			s1.setOrientation(LinearLayout.HORIZONTAL);
 			
-			final Button button = new Button(this);
-			button.setText("-");
-			
-			button.setOnClickListener(new View.OnClickListener(){
-				public void onClick(View v) {
-					if (button.getText().equals("+")) {
-						s1.setVisibility(LinearLayout.INVISIBLE);
-					} else {
-						s1.setVisibility(LinearLayout.VISIBLE);
-					}
-				}
+
 				/**
 				public void onClick(View v){
 					boolean expanding;
@@ -413,7 +403,12 @@ public class CoverFlowTestingActivity extends Activity {
 					resetMasterLayout();
 				
 				}
-			**/});
+			**/
+			
+			final Button button = new Button(this);
+			button.setText("-");
+			
+
 			expanded.put(button, false);
 			
 			TextView txtView = new TextView(this);
@@ -425,12 +420,24 @@ public class CoverFlowTestingActivity extends Activity {
 			s1.addView(txtView);
 			gridLinearLayout.addView(s1);
 
-			GridView gridview = new GridView(this);
+			final GridView gridview = new GridView(this);
 			gridview.setLayoutParams(new GridView.LayoutParams(GridView.LayoutParams.MATCH_PARENT, 230 * ((int) Math.ceil(items.size()/3.0))));
 			gridview.setColumnWidth(220);
 			gridview.setGravity(Gravity.CENTER);
 			gridview.setNumColumns(GridView.AUTO_FIT);
 			gridview.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
+			
+			
+			button.setOnClickListener(new View.OnClickListener(){
+				public void onClick(View v) {
+					if (button.getText().equals("-")) {
+						gridview.setVisibility(GridView.GONE);
+						button.setText("+");
+					} else {
+						gridview.setVisibility(GridView.VISIBLE);
+						button.setText("-");
+					}
+				}});
 
 	        myImageAdapter = new ImageAdapter(this);
 	        gridview.setOnItemClickListener(new OnItemClickListener() {
