@@ -52,8 +52,8 @@ public class DetailActivity extends Activity {
 		itemRipe.setText(currentItem.ripeness);
 		itemStorage.setText(currentItem.storage);
 		LinearLayout picture = (LinearLayout) findViewById(R.id.item_photo);
-		//picture.setBackgroundResource(getResources().getIdentifier(currentItem.name.replace(' ', '_') + "_detail", "drawable", getPackageName()));
-		picture.setBackgroundResource(getResources().getIdentifier("celeriac_detail", "drawable", getPackageName()));
+		picture.setBackgroundResource(getResources().getIdentifier(currentItem.name.replace(' ', '_') + "_detail", "drawable", getPackageName()));
+		//picture.setBackgroundResource(getResources().getIdentifier("celeriac_detail", "drawable", getPackageName()));
 		
 	}
 }
