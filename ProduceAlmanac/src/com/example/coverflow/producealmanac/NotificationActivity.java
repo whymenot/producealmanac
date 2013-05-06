@@ -3,20 +3,14 @@ package com.example.coverflow.producealmanac;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
@@ -29,7 +23,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.coverflow.R;
 
@@ -76,7 +69,7 @@ public class NotificationActivity extends Activity{
 	CheckBox yasaiFruit;
 	CheckBox yasaiVegetable;
 	ArrayList<String> personalYasai;
-	Button save;
+	
 	
 	SharedPreferences settings;
 	// pastSaved_allNew,
@@ -91,18 +84,7 @@ public class NotificationActivity extends Activity{
 	    	super.onCreate(savedInstanceState);
 	    	setContentView(R.layout.notifications);
 	    	masterView = (LinearLayout) findViewById(R.id.master);
-	    	save = (Button) findViewById(R.id.save);
-/*	    	final ActionBar ab = getActionBar();
-	        ab.setDisplayShowHomeEnabled(false);
-	        ab.setDisplayShowTitleEnabled(false);     
-	        final LayoutInflater inflater = (LayoutInflater)getSystemService("layout_inflater");
-	        View view = inflater.inflate(R.layout.action_bar_edit_mode,null); 
-	        ab.setCustomView(view);
-	        ab.setDisplayShowCustomEnabled(true);
-	        save = (Button) findViewById(R.id.save);
-	        ab.setBackgroundDrawable(new ColorDrawable(Color.GRAY));
-	        save.setBackgroundColor(Color.GRAY);
-*/	    	loadSavedValues();
+	    	loadSavedValues();
 	    	initializeButtons();
 
 	 }
@@ -132,7 +114,7 @@ public class NotificationActivity extends Activity{
 			toSave_allNew += allStoresVegetable.isChecked()?"true":"false";
 
 			// starting with 2, since index 0and1 are for allStoresFruit, allStoresVegetable.
-			for (int i = 2; i < s1.getChildCount()-2; i++) {
+			for (int i = 2; i < s1.getChildCount(); i++) {
 				toSave_searchAdded += ((TextView)((LinearLayout)s1.getChildAt(i)).getChildAt(0)).getText();
 				toSave_searchAdded += ":";
 			}
@@ -142,8 +124,6 @@ public class NotificationActivity extends Activity{
 	    	editor.putString("notification_saved_allNew", toSave_allNew);
 	    	editor.putString("notification_saved_searchAdded", toSave_searchAdded);
 	    	editor.commit();
-            Toast.makeText(this, "Notification settings saved!",
-                    Toast.LENGTH_SHORT).show();
 		}
 	 
 	 
@@ -326,7 +306,7 @@ public class NotificationActivity extends Activity{
 		 t.setTextSize(getResources().getDimension(R.dimen.check_box_text_size));
 		 t.setTextColor(getResources().getColor(R.color.TextGrey));
 		 t.setGravity(Gravity.LEFT);
-		 t.setText("new " + newStore);
+		 t.setText("new" + newStore);
 
 		 
 		 LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(
@@ -488,24 +468,4 @@ public class NotificationActivity extends Activity{
 			}
 		}
 
-		@Override
-		public boolean onCreateOptionsMenu(Menu menu) {
-			// Inflate the menu; this adds items to the action bar if it is present.
-			getMenuInflater().inflate(R.menu.notification, menu);
-			return true;
-		}
-		
-	    public boolean onOptionsItemSelected(MenuItem item) {
-			
-	        switch (item.getItemId()) { //basic structure borrowed from Kate's drawing app in section
-	        case R.id.notification_button_save:
-	              Toast.makeText(this, "Saving notification settings",
-	                          Toast.LENGTH_SHORT).show();
-	              saveAllValues();
-	              finish();
-	              return true;
-	       default:
-	              return super.onOptionsItemSelected(item);
-	        }
-	      }
 }
