@@ -163,6 +163,7 @@ public class NotificationActivity extends Activity{
 		 allStoresFruit = new CheckBox(this);
 		 allStoresVegetable = new CheckBox(this);
 		 searchAllStores = new SearchView(this);
+		 
 		 searchAllStores.setId(SEARCH);
 		 setSearchViewIcon();
 		 
@@ -186,7 +187,7 @@ public class NotificationActivity extends Activity{
 		 LinearLayout.LayoutParams subLayoutParams = new LinearLayout.LayoutParams(
 			     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-		 subLayoutParams.setMargins(getResources().getDimensionPixelSize(R.dimen.width_of_button), 10, 20, 0);
+		 subLayoutParams.setMargins(20, 10, 20, 0);
 		 
 		 LinearLayout.LayoutParams titleLayoutParams = new LinearLayout.LayoutParams(
 			     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -196,7 +197,7 @@ public class NotificationActivity extends Activity{
 		 layout.setOrientation(LinearLayout.VERTICAL);
 		 fruitCheckBox.setText("all new fruits");
 		 fruitCheckBox.setButtonDrawable(getResources().getDrawable(R.drawable.custom_checkbox));
-		 fruitCheckBox.setTextSize(30);
+		 fruitCheckBox.setTextSize(getResources().getDimension(R.dimen.check_box_text_size));
 		 fruitCheckBox.setPadding(30, 30, 0, 0);
 		 fruitCheckBox.setGravity(Gravity.BOTTOM);
 		 fruitCheckBox.setTextColor(getResources().getColor(R.color.TextGrey));
@@ -206,7 +207,7 @@ public class NotificationActivity extends Activity{
 		 
 		 vegetableCheckBox.setText("all new vegetables");
 		 vegetableCheckBox.setButtonDrawable(getResources().getDrawable(R.drawable.custom_checkbox));
-		 vegetableCheckBox.setTextSize(30);
+		 vegetableCheckBox.setTextSize(getResources().getDimension(R.dimen.check_box_text_size));
 		 vegetableCheckBox.setPadding(30, 30, 0, 0);
 		 vegetableCheckBox.setGravity(Gravity.BOTTOM);
 		 vegetableCheckBox.setTextColor(getResources().getColor(R.color.TextGrey));
@@ -228,6 +229,7 @@ public class NotificationActivity extends Activity{
 				 for (int i = 0; i < pastSaved_search.length; i++) {
 					 if (!pastSaved_search[i].equals("")) addStore(pastSaved_search[i]);
 				 }
+		 search.setPadding(0,  20, 20, 20);
 		 layout.addView(search);
 		 layout.addView(listAllStores);
 		 
@@ -290,22 +292,32 @@ public class NotificationActivity extends Activity{
 		 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 
 		 LinearLayout textRow = new LinearLayout(this);
+		 
+		 textRow.setWeightSum(1);
 		 //textRow.setLayoutParams(layoutParams);
 		 Log.i("debugging", "after assigning params");
 		 textRow.setOrientation(LinearLayout.HORIZONTAL);
 		 
 		 LinearLayout.LayoutParams textRowParams = new LinearLayout.LayoutParams(
-			     LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-		 textRowParams.setMargins(getResources().getDimensionPixelSize(R.dimen.width_of_button), 0, 0, 0);
+			     LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, .97f);
+		
+		 textRowParams.setMargins(115, 0, 0, 0);
 		 TextView t = new TextView(this);
-		 t.setText(newStore);
+		 t.setTextSize(getResources().getDimension(R.dimen.check_box_text_size));
+		 t.setTextColor(getResources().getColor(R.color.TextGrey));
+		 t.setGravity(Gravity.LEFT);
+		 t.setText("new " + newStore);
+
+		 
+		 LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(
+			     LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, .03f);
+		
+
 		 Button b = new Button(this);
-		 b.setBackground(getResources().getDrawable(R.drawable.clear));
+		 b.setBackground(getResources().getDrawable(R.drawable.navigation_cancel));
 		 b.setGravity(Gravity.RIGHT);
 		 
-		 LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		 buttonParams.gravity=Gravity.RIGHT;
-		 b.setLayoutParams(buttonParams);
+		 textRow.setPadding(0, 20, 0, 0);
 		 b.setOnClickListener(deleteFromPersonalListener);
 		 buttons.put(b, newStore);
 		

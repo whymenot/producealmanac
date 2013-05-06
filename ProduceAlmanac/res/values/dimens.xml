@@ -5,6 +5,8 @@
     <dimen name="produce_font">40sp</dimen>
     <dimen name="title_font">40sp</dimen>
     <dimen name="body_font">24sp</dimen>
+    
+     <dimen name="check_box_text_size">15sp</dimen>
     <dimen name="height_of_buttons">80dip</dimen>
     
     <dimen name="button_font">40sp</dimen>

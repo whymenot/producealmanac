@@ -35,6 +35,8 @@
         android:textColorHint="@color/TextGrey"
         android:textSize="@dimen/store_title_size" />
     
+
+    
     </LinearLayout>
 
 
