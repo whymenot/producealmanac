@@ -11,6 +11,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
@@ -114,8 +116,8 @@ public class NotificationActivity extends Activity{
 			toSave_allNew += allStoresVegetable.isChecked()?"true":"false";
 
 			// starting with 2, since index 0and1 are for allStoresFruit, allStoresVegetable.
-			for (int i = 2; i < s1.getChildCount(); i++) {
-				toSave_searchAdded += ((TextView)((LinearLayout)s1.getChildAt(i)).getChildAt(0)).getText();
+			for (int i = 2; i < s1.getChildCount()-2; i++) {
+				toSave_searchAdded += ((TextView)((LinearLayout)s1.getChildAt(i)).getChildAt(0)).getText().toString().replace("new ", "");
 				toSave_searchAdded += ":";
 			}
 
@@ -468,4 +470,22 @@ public class NotificationActivity extends Activity{
 			}
 		}
 
+		@Override
+		public boolean onCreateOptionsMenu(Menu menu) {
+			// Inflate the menu; this adds items to the action bar if it is present.
+			getMenuInflater().inflate(R.menu.notification, menu);
+			return true;
+		}
+		
+	    public boolean onOptionsItemSelected(MenuItem item) {
+			
+	        switch (item.getItemId()) { //basic structure borrowed from Kate's drawing app in section
+	        case R.id.notification_button_save:
+	              saveAllValues();
+	              finish();
+	              return true;
+	       default:
+	              return super.onOptionsItemSelected(item);
+	        }
+	      }
 }
