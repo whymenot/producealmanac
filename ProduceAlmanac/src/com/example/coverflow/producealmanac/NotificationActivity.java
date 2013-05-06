@@ -133,7 +133,7 @@ public class NotificationActivity extends Activity{
 
 			// starting with 2, since index 0and1 are for allStoresFruit, allStoresVegetable.
 			for (int i = 2; i < s1.getChildCount()-2; i++) {
-				toSave_searchAdded += ((TextView)((LinearLayout)s1.getChildAt(i)).getChildAt(0)).getText();
+				toSave_searchAdded += ((TextView)((LinearLayout)s1.getChildAt(i)).getChildAt(0)).getText().toString().replace("new ", "");
 				toSave_searchAdded += ":";
 			}
 
@@ -142,8 +142,6 @@ public class NotificationActivity extends Activity{
 	    	editor.putString("notification_saved_allNew", toSave_allNew);
 	    	editor.putString("notification_saved_searchAdded", toSave_searchAdded);
 	    	editor.commit();
-            Toast.makeText(this, "Notification settings saved!",
-                    Toast.LENGTH_SHORT).show();
 		}
 	 
 	 
@@ -499,8 +497,6 @@ public class NotificationActivity extends Activity{
 			
 	        switch (item.getItemId()) { //basic structure borrowed from Kate's drawing app in section
 	        case R.id.notification_button_save:
-	              Toast.makeText(this, "Saving notification settings",
-	                          Toast.LENGTH_SHORT).show();
 	              saveAllValues();
 	              finish();
 	              return true;
