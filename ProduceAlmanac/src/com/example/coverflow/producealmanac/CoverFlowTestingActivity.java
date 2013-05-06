@@ -19,6 +19,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.LruCache;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,6 +27,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -58,6 +60,10 @@ public class CoverFlowTestingActivity extends Activity {
 	//public String searchTerms = "";
 	public ArrayList<String> activeFilters;
 	public ArrayList<Store> activeStores = null;
+	public Store selectedStore = null;
+	
+	// caching bitmaps..
+	private LruCache<String, Bitmap> mMemoryCache;
 	
 	
 	TextView textView;
@@ -126,6 +132,23 @@ public class CoverFlowTestingActivity extends Activity {
     	//TESTING NOTIFICATION SCREEN
     	//testNotifs();
     	
+        // Get max available VM memory, exceeding this amount will throw an
+        // OutOfMemory exception. Stored in kilobytes as LruCache takes an
+        // int in its constructor.
+        final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
+
+        // Use 1/8th of the available memory for this memory cache.
+        final int cacheSize = maxMemory / 4;
+
+        mMemoryCache = new LruCache<String, Bitmap>(cacheSize) {
+            @Override
+            protected int sizeOf(String key, Bitmap bitmap) {
+                // The cache size will be measured in kilobytes rather than
+                // number of items.
+                return bitmap.getByteCount() / 1024;
+            }
+        };
+    	
     	this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     	
     	// set search functionality
@@ -176,10 +199,12 @@ public class CoverFlowTestingActivity extends Activity {
 		Log.i("debugging", "after this. stuff");
 		//activeItems = getItemsNow();
 		
+		// temporarily set to initial selectedStore to BERKELEYBOWL
+		this.selectedStore = Store.storeMap.get(BERKELEYBOWL);
+		
 		this.itemsByFilter = getItemsByFilter();
 		Log.i("debugging", "after getitemsbyfilter");
 		//done initializing backend data
-
 
 		showUpdatedItems();
 
@@ -215,7 +240,44 @@ public class CoverFlowTestingActivity extends Activity {
         storeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinner2.setAdapter(storeAdapter);
         
+        spinner2.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				setStoreAndUpdateItems(Store.storeMap.get(((TextView)arg1).getText()));
+				System.out.println("### onitemselected called");
+				storeChanged();
+				System.out.println("### onitemselected ended....");
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+        	
+        });
     }
+    
+    public void addBitmapToMemoryCache(String key, Bitmap bitmap) {
+        if (getBitmapFromMemCache(key) == null) {
+            mMemoryCache.put(key, bitmap);
+        }
+    }
+
+    public Bitmap getBitmapFromMemCache(String key) {
+        return mMemoryCache.get(key);
+    }
+    
+    public void storeChanged() {
+    	this.updateItemsByFilter();
+    }
+    
+    public void setStoreAndUpdateItems(Store store) {
+    	this.selectedStore = store;
+    }
+    
     private ArrayList<ArrayList<Item>> getItemsByFilter() {
 		/**Based on the active filters set, create a list of items for each
 		 * filter. The outer list being returned should always map 1 to 1 with
@@ -241,7 +303,7 @@ public class CoverFlowTestingActivity extends Activity {
 		if (activeFilters.contains(FILTERS[filterIndex])){
 			for (String name: localNow){
 				item = Item.itemMap.get(name);
-				if (item.group==FILTERS[filterIndex]){
+				if (item.group==FILTERS[filterIndex] && selectedStore.hasActive(item)){
 					items.add(item);
 				}
 			}
@@ -317,11 +379,10 @@ public class CoverFlowTestingActivity extends Activity {
     
     
 
-    public void showUpdatedItems() {
+    public final void showUpdatedItems() {
 		LinearLayout gridLinearLayout = (LinearLayout) findViewById(R.id.grid_linearlayout);
 		// delete previous views under this
-		gridLinearLayout.removeAllViews();    	
-
+		gridLinearLayout.removeAllViews();
 
 		// create gridviews dynamically...
 		for (int i = 0; i < FILTERS.length; i++) {
@@ -654,10 +715,17 @@ public class CoverFlowTestingActivity extends Activity {
             } else {
                 imageView = (ImageView) convertView;
             }
+            
+            final String imageKey = String.valueOf(itemList.get(position));
+            final Bitmap bitmap = getBitmapFromMemCache(imageKey);
+            if (bitmap != null) {
+                imageView.setImageBitmap(bitmap);
+            } else {
+            	Bitmap bm = decodeSampledBitmapFromResource(itemList.get(position), 220, 220);
+            	addBitmapToMemoryCache(String.valueOf(itemList.get(position)), bm);
+            	imageView.setImageBitmap(bm);
+            }
 
-            Bitmap bm = decodeSampledBitmapFromResource(itemList.get(position), 220, 220);
-
-            imageView.setImageBitmap(bm);
             return imageView;
      }
      
@@ -667,14 +735,14 @@ public class CoverFlowTestingActivity extends Activity {
       // First decode with inJustDecodeBounds=true to check dimensions
       final BitmapFactory.Options options = new BitmapFactory.Options();
       options.inJustDecodeBounds = true;
-      BitmapFactory.decodeResource(getApplicationContext().getResources(), resourceId);
+      BitmapFactory.decodeResource(getApplicationContext().getResources(), resourceId, options);
           
       // Calculate inSampleSize
       options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
           
       // Decode bitmap with inSampleSize set
       options.inJustDecodeBounds = false;
-      bm = BitmapFactory.decodeResource(getApplicationContext().getResources(), resourceId); 
+      bm = BitmapFactory.decodeResource(getApplicationContext().getResources(), resourceId, options); 
           
       return bm;   
      }
