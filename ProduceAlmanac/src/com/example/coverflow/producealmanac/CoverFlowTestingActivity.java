@@ -615,9 +615,9 @@ public class CoverFlowTestingActivity extends Activity {
 		
 		//@TODO include filter Strings as last argument to putEntry()
 		putEntry("artichokes are pretty", "anywhere", "red", "artichoke", VEGGIES);
-		putEntry("artichokes are pretty", "anywhere", "red", "garlic", VEGGIES);
-		putEntry("cabbages are evil", "trashcan", "green", "onion", VEGGIES);
-		putEntry("cabbages are evil", "trashcan", "green", "carrots", VEGGIES);
+		putEntry("Garlic is a bulbous plant with a pungent and slightly spicy taste and odor that mellows with cooking. It can be sauteed, roasted, or added raw to a dish to enhance its flavor.", "Garlic is typically stored at room temperature, but peeled cloves can be preserved in wine or vinegar", "firm with no soft spots", "garlic", VEGGIES);
+		putEntry("Onions are common bulbous vegetables used in many cuisines around the world. They have a strong odor and taste that mellows with cooking.", "Onions are typically stored at room temperature.", "firm with no brown spots", "onion", VEGGIES);
+		putEntry("Carrots are known for their high vitamin-A content, which can improve vision. They have a sweet and crisp taste and are used in dishes ranging from soups and stews to deserts.", "Carrots can last for several months when stored in the refrigerator", "firm and crisp texture", "carrots", VEGGIES);
 		putEntry("cabbages are evil", "trashcan", "green", "parsnip", VEGGIES);
 		putEntry("cabbages are evil", "trashcan", "green", "broccoli", VEGGIES);
 		putEntry("cabbages are evil", "trashcan", "green", "cauliflower", VEGGIES);
