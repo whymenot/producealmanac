@@ -6,5 +6,7 @@
 <color name="TransparentWhite">#60FFFFFF</color>
 <color name= "TextGreen">#6D8A79</color>
 <color name= "TextBrown">#433224</color>
+<color name="OffGrey">#eeeeee</color>
+<color name="TextGrey">#8b8a8a</color>
 
 </resources>
