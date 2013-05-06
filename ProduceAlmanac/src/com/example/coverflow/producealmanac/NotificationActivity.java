@@ -6,6 +6,7 @@ import java.util.HashMap;
 import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -66,17 +67,64 @@ public class NotificationActivity extends Activity{
 	CheckBox yasaiVegetable;
 	ArrayList<String> personalYasai;
 	
+	SharedPreferences settings;
+	// pastSaved_allNew,
+	//	format : true false for each, real example -> "true:false"
+	// pastSaved_searchAdded 
+	//	format : strings concatenated with ":", real example -> "apples,pears"
+	String pastSaved_allNew = "";
+	String pastSaved_searchAdded = "";
 	
 	 protected void onCreate(final Bundle savedInstanceState) {
 
 	    	super.onCreate(savedInstanceState);
 	    	setContentView(R.layout.notifications);
 	    	masterView = (LinearLayout) findViewById(R.id.master);
+	    	loadSavedValues();
 	    	initializeButtons();
 	    	
 	 }
 	 LinearLayout s1;	 
 	 LinearLayout checkBoxRow1;
+	 
+	 
+	// this method should be called once in onCreate().
+	// load saved values from internal storage.
+	public void loadSavedValues() {
+		settings = getApplicationContext().getSharedPreferences("producealmanac", MODE_PRIVATE);
+		pastSaved_allNew = settings.getString("notification_saved_allNew", "");
+		pastSaved_searchAdded = settings.getString("notification_saved_searchAdded", "");
+		
+		// test purpose..
+		//pastSaved_allNew = "false:true";
+		//pastSaved_searchAdded = "apples:oranges:";
+	}
+	
+	
+	// this method is to saved all check boxes and search result settings.
+	// shuld be called when user clicks "save" or something.
+	public void saveAllValues() {
+		String toSave_allNew = "";
+		String toSave_searchAdded = "";
+		
+		//save two check boxes (allStoresFruit, allStoresVegetable) status
+		toSave_allNew += allStoresFruit.isChecked()?"true":"false";
+		toSave_allNew += ":";
+		toSave_allNew += allStoresVegetable.isChecked()?"true":"false";
+		
+		// starting with 2, since index 0and1 are for allStoresFruit, allStoresVegetable.
+		for (int i = 2; i < s1.getChildCount(); i++) {
+			toSave_searchAdded += ((TextView)((LinearLayout)s1.getChildAt(i)).getChildAt(0)).getText();
+			toSave_searchAdded += ":";
+		}
+		
+		// finally, save into internal storage.
+		SharedPreferences.Editor editor = settings.edit();
+    	editor.putString("notification_saved_allNew", toSave_allNew);
+    	editor.putString("notification_saved_searchAdded", toSave_searchAdded);
+    	editor.commit();
+	}
+	 
 	 public void initializeButtons(){
 		//android:icon="@android:drawable/presence_offline"
 		 //ALLSTORES
@@ -135,9 +183,23 @@ public class NotificationActivity extends Activity{
 		 fruitCheckBox.setText("all new fruits");
 		 
 		 vegetableCheckBox.setText("all new vegetables");
+		 
+		 // added for handling saved check box settings.
+		 String pastSaved_checkBox[] = pastSaved_allNew.split(":");
+		 if (pastSaved_checkBox.length == 2) {
+			 fruitCheckBox.setChecked(pastSaved_checkBox[0].equals("true")?true:false);
+			 vegetableCheckBox.setChecked(pastSaved_checkBox[1].equals("true")?true:false);
+		}
 		
 		 layout.addView(fruitCheckBox, layoutParams);
 		 layout.addView(vegetableCheckBox, layoutParams);
+		 
+		 // added for handling previously added by search.
+		 String pastSaved_search[] = pastSaved_searchAdded.split(":");
+		 for (int i = 0; i < pastSaved_search.length; i++) {
+			 if (!pastSaved_search[i].equals("")) addStore(pastSaved_search[i]);
+		 }
+		 
 		 layout.addView(search, layoutParams);
 		 layout.addView(listAllStores, layoutParams);
 		 subLayouts.put(button, layout);
