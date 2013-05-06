@@ -45,13 +45,13 @@
     android:layout_marginBottom="10dip"
    
      />
-	
+	<!--
 	<com.example.coverflow.producealmanac.MultiSpinner 
 	    	android:id="@+id/SpinnerCollegues"
     		android:layout_width="fill_parent"
 		    android:layout_height="@dimen/height_of_buttons"
 		    android:prompt="@string/filter"/>
-
+	-->
     
 
 	<SearchView

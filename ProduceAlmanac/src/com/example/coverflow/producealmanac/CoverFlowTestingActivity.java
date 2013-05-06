@@ -207,7 +207,7 @@ public class CoverFlowTestingActivity extends Activity {
 		//done initializing backend data
 
 		showUpdatedItems();
-
+/*
 		Log.i("debugging", "after showupdateditems");
         final MultiSpinner multispinner = (MultiSpinner) findViewById(this.getResources().getIdentifier("SpinnerCollegues", "id", "com.example.coverflow"));
       
@@ -234,7 +234,8 @@ public class CoverFlowTestingActivity extends Activity {
         Log.i("debugging", "after spinner");
         multispinner.setPrompt("FILTER");
         Log.i("debugging", "end of oncreate");
-        
+*/
+		
         final Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
         storeAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,STORES);
         storeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
