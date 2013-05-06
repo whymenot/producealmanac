@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -26,9 +27,10 @@ import android.widget.TextView;
 import com.example.coverflow.R;
 
 public class NotificationActivity extends Activity{
-
+	final int SEARCH = 14;
 	ArrayList<View> allViews= new ArrayList<View>();
 	HashMap<View, View> subLayouts= new HashMap<View, View>();
+	HashMap<View, LinearLayout.LayoutParams> layoutParams = new HashMap<View, LinearLayout.LayoutParams>();
 	HashMap<View, Boolean> expanded = new HashMap<View, Boolean>();
 	LinearLayout masterView;
 	Button button1;
@@ -40,6 +42,7 @@ public class NotificationActivity extends Activity{
 	CheckBox allStoresVegetable;
 	SearchView searchAllStores;
 	ListView listAllStores;
+	
 	ArrayList<String> personalAllStores= new ArrayList<String>();
 	
 	Button buttonBerkeleyBowl;
@@ -67,6 +70,7 @@ public class NotificationActivity extends Activity{
 	CheckBox yasaiVegetable;
 	ArrayList<String> personalYasai;
 	
+	
 	SharedPreferences settings;
 	// pastSaved_allNew,
 	//	format : true false for each, real example -> "true:false"
@@ -74,7 +78,7 @@ public class NotificationActivity extends Activity{
 	//	format : strings concatenated with ":", real example -> "apples,pears"
 	String pastSaved_allNew = "";
 	String pastSaved_searchAdded = "";
-	
+
 	 protected void onCreate(final Bundle savedInstanceState) {
 
 	    	super.onCreate(savedInstanceState);
@@ -82,107 +86,131 @@ public class NotificationActivity extends Activity{
 	    	masterView = (LinearLayout) findViewById(R.id.master);
 	    	loadSavedValues();
 	    	initializeButtons();
-	    	
+
 	 }
+	// this method should be called once in onCreate().
+		// load saved values from internal storage.
+		public void loadSavedValues() {
+			settings = getApplicationContext().getSharedPreferences("producealmanac", MODE_PRIVATE);
+			pastSaved_allNew = settings.getString("notification_saved_allNew", "");
+			pastSaved_searchAdded = settings.getString("notification_saved_searchAdded", "");
+
+			/* test purpose..
+			pastSaved_allNew = "false:true";
+			pastSaved_searchAdded = "apples:oranges:";
+			*/
+		}
+
+
+		// this method is to saved all check boxes and search result settings.
+		// shuld be called when user clicks "save" or something.
+		public void saveAllValues() {
+			String toSave_allNew = "";
+			String toSave_searchAdded = "";
+
+			//save two check boxes (allStoresFruit, allStoresVegetable) status
+			toSave_allNew += allStoresFruit.isChecked()?"true":"false";
+			toSave_allNew += ":";
+			toSave_allNew += allStoresVegetable.isChecked()?"true":"false";
+
+			// starting with 2, since index 0and1 are for allStoresFruit, allStoresVegetable.
+			for (int i = 2; i < s1.getChildCount(); i++) {
+				toSave_searchAdded += ((TextView)((LinearLayout)s1.getChildAt(i)).getChildAt(0)).getText();
+				toSave_searchAdded += ":";
+			}
+
+			// finally, save into internal storage.
+			SharedPreferences.Editor editor = settings.edit();
+	    	editor.putString("notification_saved_allNew", toSave_allNew);
+	    	editor.putString("notification_saved_searchAdded", toSave_searchAdded);
+	    	editor.commit();
+		}
+	 
+	 
+	 public void  setSearchViewIcon(){
+	 SearchView mSearchView = ((SearchView)findViewById(SEARCH));
+	 Log.i("debugging", "search view is: " + mSearchView);/*
+	    try
+	    {
+	        Field searchField = SearchView.class.getDeclaredField("mSearchButton");
+	        searchField.setAccessible(true);
+	        ImageView searchBtn = (ImageView)searchField.get(mSearchView);
+	        searchBtn.setImageResource(R.drawable.navigation_content_new);
+	        searchField = SearchView.class.getDeclaredField("mSearchPlate");
+	        searchField.setAccessible(true);
+	       	    }
+	    catch (NoSuchFieldException e)
+	    {
+	    } catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+	   
+	 }
+	 
 	 LinearLayout s1;	 
 	 LinearLayout checkBoxRow1;
-	 
-	 
-	// this method should be called once in onCreate().
-	// load saved values from internal storage.
-	public void loadSavedValues() {
-		settings = getApplicationContext().getSharedPreferences("producealmanac", MODE_PRIVATE);
-		pastSaved_allNew = settings.getString("notification_saved_allNew", "");
-		pastSaved_searchAdded = settings.getString("notification_saved_searchAdded", "");
-		
-		// test purpose..
-		//pastSaved_allNew = "false:true";
-		//pastSaved_searchAdded = "apples:oranges:";
-	}
-	
-	
-	// this method is to saved all check boxes and search result settings.
-	// shuld be called when user clicks "save" or something.
-	public void saveAllValues() {
-		String toSave_allNew = "";
-		String toSave_searchAdded = "";
-		
-		//save two check boxes (allStoresFruit, allStoresVegetable) status
-		toSave_allNew += allStoresFruit.isChecked()?"true":"false";
-		toSave_allNew += ":";
-		toSave_allNew += allStoresVegetable.isChecked()?"true":"false";
-		
-		// starting with 2, since index 0and1 are for allStoresFruit, allStoresVegetable.
-		for (int i = 2; i < s1.getChildCount(); i++) {
-			toSave_searchAdded += ((TextView)((LinearLayout)s1.getChildAt(i)).getChildAt(0)).getText();
-			toSave_searchAdded += ":";
-		}
-		
-		// finally, save into internal storage.
-		SharedPreferences.Editor editor = settings.edit();
-    	editor.putString("notification_saved_allNew", toSave_allNew);
-    	editor.putString("notification_saved_searchAdded", toSave_searchAdded);
-    	editor.commit();
-	}
-	 
+	 LinearLayout allStoresContainer;
 	 public void initializeButtons(){
 		//android:icon="@android:drawable/presence_offline"
 		 //ALLSTORES
 		 Button b = (Button) findViewById(R.id.buttonAllStores);
 		 row1 = (LinearLayout) findViewById(R.id.row_all_stores);
-		 
 		 s1 = new LinearLayout(this);
 		 allStoresFruit = new CheckBox(this);
 		 allStoresVegetable = new CheckBox(this);
 		 searchAllStores = new SearchView(this);
+		 searchAllStores.setId(SEARCH);
+		 setSearchViewIcon();
+		 
 		 listAllStores = new ListView(this);
 		 initializeCheckBoxes(s1, allStoresFruit, allStoresVegetable, row1, b, searchAllStores);
 		 initializeSearch(searchAllStores);
 		 
 		 
 		 
-		 Button bowlButton = (Button) findViewById(R.id.buttonBerkeleyBowl);
-		 row2 = (LinearLayout) findViewById(R.id.row_berkeley_bowl);
-		 LinearLayout s2 = new LinearLayout(this);
-		 berkeleyBowlFruit = new CheckBox(this);
-		 berkeleyBowlVegetable = new CheckBox(this);
-		 //initializeCheckBoxes(s2, berkeleyBowlFruit, berkeleyBowlVegetable, row2, bowlButton, searchBerkeleyBowl);
-
-		 //BERKELEYBOWL
-		 /**row2 = (LinearLayout) findViewById(R.id.row_berkeley_bowl);
-		 LinearLayout s2 = new LinearLayout(this);
-		 berkeleyBowlFruit = new CheckBox(this);
-		 berkeleyBowlVegetable = new CheckBox(this);
-		 initializeCheckBoxes(s2, berkeleyBowlFruit, berkeleyBowlVegetable, row2);
-		 resetMasterLayout();
-		
-		 button2 = (Button)findViewById(R.id.button2);
-		 button2.setText("+");
-		 LinearLayout s2 = new LinearLayout(this);		 
-		//TODO add checkboxes
-		 TextView t2 = new TextView(this);
-		 t2.setText("well my body's been a mess");
-		 s2.addView(t2);
-		 subLayouts.put(button2, s2);
-		 allViews.add(button2);
-		 //allViews.add(s2);
-		 button2.setOnClickListener(buttonListener);
-		 expanded.put(button2, false);
-		 resetMasterLayout();*/
 		 
+		 
+		 //BERKELEY BOWL
 	 }
 	 
 	 public void initializeCheckBoxes(LinearLayout layout, CheckBox fruitCheckBox, CheckBox vegetableCheckBox, LinearLayout row, Button button, SearchView search){
-		 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-			     LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-		 Log.i("debugging", "width of button is: "+ R.dimen.width_of_button);
-		 layoutParams.setMargins(getResources().getDimensionPixelSize(R.dimen.width_of_button), 0, 0, 0);
+		 //LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+			     //LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+		 //layoutParams.setMargins(getResources().getDimensionPixelSize(R.dimen.width_of_button), 0, 0, 0);
 	 
-		 button.setText("+");
+		 LinearLayout.LayoutParams subLayoutParams = new LinearLayout.LayoutParams(
+			     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+		 subLayoutParams.setMargins(getResources().getDimensionPixelSize(R.dimen.width_of_button), 10, 20, 0);
+		 
+		 LinearLayout.LayoutParams titleLayoutParams = new LinearLayout.LayoutParams(
+			     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+		
+		 titleLayoutParams.setMargins(20, 20, 20, 0);
+		 layout.setBackgroundColor(Color.WHITE);
 		 layout.setOrientation(LinearLayout.VERTICAL);
 		 fruitCheckBox.setText("all new fruits");
+		 fruitCheckBox.setButtonDrawable(getResources().getDrawable(R.drawable.custom_checkbox));
+		 fruitCheckBox.setTextSize(30);
+		 fruitCheckBox.setPadding(30, 30, 0, 0);
+		 fruitCheckBox.setGravity(Gravity.BOTTOM);
+		 fruitCheckBox.setTextColor(getResources().getColor(R.color.TextGrey));
+		 
+		 
+		 
 		 
 		 vegetableCheckBox.setText("all new vegetables");
+		 vegetableCheckBox.setButtonDrawable(getResources().getDrawable(R.drawable.custom_checkbox));
+		 vegetableCheckBox.setTextSize(30);
+		 vegetableCheckBox.setPadding(30, 30, 0, 0);
+		 vegetableCheckBox.setGravity(Gravity.BOTTOM);
+		 vegetableCheckBox.setTextColor(getResources().getColor(R.color.TextGrey));
+		 
 		 
 		 // added for handling saved check box settings.
 		 String pastSaved_checkBox[] = pastSaved_allNew.split(":");
@@ -190,20 +218,23 @@ public class NotificationActivity extends Activity{
 			 fruitCheckBox.setChecked(pastSaved_checkBox[0].equals("true")?true:false);
 			 vegetableCheckBox.setChecked(pastSaved_checkBox[1].equals("true")?true:false);
 		}
-		
-		 layout.addView(fruitCheckBox, layoutParams);
-		 layout.addView(vegetableCheckBox, layoutParams);
 		 
-		 // added for handling previously added by search.
-		 String pastSaved_search[] = pastSaved_searchAdded.split(":");
-		 for (int i = 0; i < pastSaved_search.length; i++) {
-			 if (!pastSaved_search[i].equals("")) addStore(pastSaved_search[i]);
-		 }
 		 
-		 layout.addView(search, layoutParams);
-		 layout.addView(listAllStores, layoutParams);
+		 layout.addView(fruitCheckBox);
+		 layout.addView(vegetableCheckBox);
+		 
+		// added for handling previously added by search.
+				 String pastSaved_search[] = pastSaved_searchAdded.split(":");
+				 for (int i = 0; i < pastSaved_search.length; i++) {
+					 if (!pastSaved_search[i].equals("")) addStore(pastSaved_search[i]);
+				 }
+		 layout.addView(search);
+		 layout.addView(listAllStores);
+		 
 		 subLayouts.put(button, layout);
 		 allViews.add(row);
+		 layoutParams.put(row, titleLayoutParams);
+		 layoutParams.put(layout, subLayoutParams);
 		 button.setOnClickListener(buttonListener);
 		 expanded.put(button, false);
 	 }
@@ -384,7 +415,7 @@ public class NotificationActivity extends Activity{
 				Log.i("debugging", "gets past j/i loop and position was: "+ position);
 				if (expanding){
 					Button nextButton = (Button) v;
-					nextButton.setText("-");
+					nextButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.navigation_collapse));
 					//nextButton.setBackgroundColor(getResources().getColor(R.color.ButtonRed));
 					//REMOVE OLD BUTTON
 					nextRow.removeViewAt(0);
@@ -399,7 +430,7 @@ public class NotificationActivity extends Activity{
 				else {
 					//CONTRACTING
 					Button nextButton = (Button) v;
-					nextButton.setText("+");
+					nextButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.navigation_expand));
 					//nextButton.setBackgroundColor(getResources().getColor(R.color.ButtonGreen));
 					nextRow.removeViewAt(0);
 					nextRow.addView(nextButton, 0);
@@ -417,9 +448,11 @@ public class NotificationActivity extends Activity{
 		
 		public void resetMasterLayout(){
 			masterView.removeAllViews();
+			
+			
 			for (View v: allViews){
 				Log.i("debuggingNew", "adding a view");
-				masterView.addView(v);
+				masterView.addView(v, layoutParams.get(v));
 			}
 		}
 

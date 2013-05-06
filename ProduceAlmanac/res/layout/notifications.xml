@@ -1,52 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/master"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/master"
-    android:orientation="vertical"
-    android:layout_margin="20dip" >
+    
+    android:background="@color/OffGrey"
+    android:orientation="vertical" >
 
+    
+    
     <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/row_all_stores"
-    android:orientation="horizontal"
-    android:gravity="bottom"
-     >
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/row_all_stores"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dip"
+        android:background="@android:color/white"
+        android:gravity="left|center" >
+
     <Button
         android:id="@+id/buttonAllStores"
         android:layout_width="@dimen/width_of_button"
         android:layout_height="100dip"
-        android:textSize = "@dimen/button_font"
-        android:text="Button" />
+        android:background="@drawable/navigation_expand"
+        android:textSize="@dimen/button_font" />
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="All Stores"
         android:gravity="bottom"
+        android:text="All Stores"
+        android:textColor="@color/TextGrey"
+        android:textColorHint="@color/TextGrey"
         android:textSize="@dimen/store_title_size" />
     
     </LinearLayout>
 
 
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/row_berkeley_bowl"
     android:orientation="horizontal" >
-    <Button
-        android:id="@+id/buttonBerkeleyBowl"
-        android:layout_width="100dip"
-        android:layout_height="100dip"
-        android:textSize = "@dimen/button_font"
-        android:text="+" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Berkeley Bowl" />
     
     </LinearLayout>
 
