@@ -199,7 +199,7 @@ public class Store {
 	
 	public static void buildMaps(){
 	
-		Store current = Store.storeMap.get("Berkeley Bowl");
+		Store current = Store.storeMap.get(CoverFlowTestingActivity.BERKELEYBOWL);
 		ArrayList<Item> activeItems = new ArrayList<Item>();
 		ArrayList<Item> inactiveItems = new ArrayList<Item>();
 		//String[] berkeleyBowlActive = {"garlic", "carrots", "onion", "parsnip", "broccoli", "cauliflower", "asian greens","lettuce", "spinach", "eggplant", "summer squash", "cucumber", "bell peppers", "asparagus", "celery", "kiwifruit"};//, "strawberries", "blueberries"};
@@ -219,7 +219,7 @@ public class Store {
 		activeItems = new ArrayList<Item>();
 		inactiveItems = new ArrayList<Item>();
 		
-		current = Store.storeMap.get("Yasai Market");
+		current = Store.storeMap.get(CoverFlowTestingActivity.YASAIMARKET);
 		
 		String[] yasaiActive = {"garlic", "carrots", "onion"};
 		//String[] yasaiActive = {"garlic", "carrots", "broccoli", "cauliflower", "asian greens"};
@@ -238,7 +238,7 @@ public class Store {
 		activeItems = new ArrayList<Item>();
 		inactiveItems = new ArrayList<Item>();
 		
-		current = Store.storeMap.get("Safeway - College Ave.");
+		current = Store.storeMap.get(CoverFlowTestingActivity.SAFEWAY);
 		
 		String[] safewayActive= {"garlic", "carrots", "onion"};
 		//String[] safewayActive = {"garlic", "carrots", "broccoli", "cauliflower", "asian greens"};
@@ -257,7 +257,7 @@ public class Store {
 		activeItems = new ArrayList<Item>();
 		inactiveItems = new ArrayList<Item>();
 									 
-		current = Store.storeMap.get("Trader Joes - University Ave.");
+		current = Store.storeMap.get(CoverFlowTestingActivity.TRADERJOES);
 		
 		String[] traderJoesActive 	= {"garlic", "carrots", "onion"};
 		//String[] traderJoesActive = {"garlic", "carrots", "broccoli", "cauliflower", "asian greens"};
@@ -279,7 +279,7 @@ public class Store {
 		activeItems = new ArrayList<Item>();
 		inactiveItems = new ArrayList<Item>();
 		
-		current = Store.storeMap.get("Whole Foods - Telegraph Ave.");
+		current = Store.storeMap.get(CoverFlowTestingActivity.WHOLEFOODS);
 		
 		String[] wholeFoodsActive = {"garlic", "carrots", "onion"};
 		//String[] wholeFoodsActive = {"garlic", "carrots", "broccoli", "cauliflower", "asian greens"};

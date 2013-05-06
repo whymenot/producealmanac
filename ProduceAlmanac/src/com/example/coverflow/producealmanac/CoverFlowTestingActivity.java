@@ -309,11 +309,9 @@ public class CoverFlowTestingActivity extends Activity {
 		
 		// get data from GPS if possible
 		this.activeStores = new ArrayList<Store>();
-		activeStores.add(new Store("Berkeley Bowl"));
-		activeStores.add(new Store("Yasai Market"));
-		activeStores.add(new Store("Safeway - College Ave."));
-		activeStores.add(new Store("Trader Joes - University Ave."));
-		activeStores.add(new Store("Whole Foods - Telegraph Ave."));	
+		for (String store : STORES){
+			activeStores.add(new Store(store));
+		}
 		Store.buildMaps();
 	}
     
@@ -555,6 +553,7 @@ public class CoverFlowTestingActivity extends Activity {
 		String group = "group";
 		
 		//@TODO include filter Strings as last argument to putEntry()
+		putEntry("artichokes are pretty", "anywhere", "red", "artichoke", VEGGIES);
 		putEntry("artichokes are pretty", "anywhere", "red", "garlic", VEGGIES);
 		putEntry("cabbages are evil", "trashcan", "green", "onion", VEGGIES);
 		putEntry("cabbages are evil", "trashcan", "green", "carrots", VEGGIES);
