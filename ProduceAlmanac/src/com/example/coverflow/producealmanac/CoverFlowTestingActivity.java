@@ -522,7 +522,6 @@ public class CoverFlowTestingActivity extends Activity {
 		new Item("celery");
 		
 		new Item("kiwifruit");
-		/*
 		Log.i("debugging", "kiw");
 		
 		new Item("strawberries");
@@ -546,7 +545,6 @@ public class CoverFlowTestingActivity extends Activity {
 		
 		//problematic
 		//Log.i("debugging", "on");
-*/
 		
 	}
 
