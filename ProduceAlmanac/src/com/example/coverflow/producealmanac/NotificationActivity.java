@@ -3,14 +3,17 @@ package com.example.coverflow.producealmanac;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
@@ -69,7 +72,7 @@ public class NotificationActivity extends Activity{
 	CheckBox yasaiFruit;
 	CheckBox yasaiVegetable;
 	ArrayList<String> personalYasai;
-	
+	Button save;
 	
 	SharedPreferences settings;
 	// pastSaved_allNew,
@@ -84,6 +87,17 @@ public class NotificationActivity extends Activity{
 	    	super.onCreate(savedInstanceState);
 	    	setContentView(R.layout.notifications);
 	    	masterView = (LinearLayout) findViewById(R.id.master);
+	    	save = (Button) findViewById(R.id.save);
+	    	final ActionBar ab = getActionBar();
+	        ab.setDisplayShowHomeEnabled(false);
+	        ab.setDisplayShowTitleEnabled(false);     
+	        final LayoutInflater inflater = (LayoutInflater)getSystemService("layout_inflater");
+	        View view = inflater.inflate(R.layout.action_bar_edit_mode,null); 
+	        ab.setCustomView(view);
+	        ab.setDisplayShowCustomEnabled(true);
+	        save = (Button) findViewById(R.id.save);
+	        ab.setBackgroundDrawable(new ColorDrawable(Color.BLUE));
+	        save.setBackgroundColor(Color.BLUE);
 	    	loadSavedValues();
 	    	initializeButtons();
 
