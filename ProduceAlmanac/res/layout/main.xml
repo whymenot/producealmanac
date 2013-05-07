@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+	
+
+
+        <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:typeface="sans" 
+        android:orientation="vertical" 
+        android:layout_marginTop="44dip"
+		android:paddingLeft="20.6dip"
+		android:background="@android:color/white"
+	    android:paddingRight="20.6dip"
+	    xmlns:tools="http://schemas.android.com/tools"
+	    tools:context=".CoverFlowTestingActivity">
+
+       	
+       	<TextView
+	   		android:layout_width="wrap_content"
+	    	android:layout_height="110dip"
+	    	android:textStyle="bold"
+	    	android:text="APRIL 22"
+	    	android:textColor="@color/DeepGreen"
+	    	android:typeface="sans"
+	    	android:textSize="@dimen/largest_font"
+	    	android:layout_marginBottom="10dip"
+	    	 />
+       	<TextView
+	   		android:layout_width="wrap_content"
+	    	android:layout_height="70dip"
+	    	android:textStyle="bold"
+	    	android:text="in season today:"
+	    	android:textColor="@color/Brown"
+	    	android:typeface="sans"
+	    	android:textSize="@dimen/produce_font"
+	    	android:layout_marginBottom="10dip"
+	    	 />
+    
+     
+	<Spinner
+    android:id="@+id/spinner2"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/height_of_buttons"
+    android:layout_marginBottom="10dip"
+   
+     />
+	<!--
+	<com.example.coverflow.producealmanac.MultiSpinner 
+	    	android:id="@+id/SpinnerCollegues"
+    		android:layout_width="fill_parent"
+		    android:layout_height="@dimen/height_of_buttons"
+		    android:prompt="@string/filter"/>
+	-->
+    
+
+	<SearchView
+	    android:id="@+id/searchView"
+	    android:layout_width="match_parent"
+        android:layout_height="@dimen/height_of_buttons"
+	    android:queryHint = "search"
+	    android:textSize="500sp"
+	    android:iconifiedByDefault="true"
+	    android:textColor="@android:color/white"
+	    />
+	<ListView android:layout_width="fill_parent"
+	          android:id="@+id/list"
+              android:layout_height="wrap_content" />
+
+<ScrollView
+    android:layout_width="fill_parent" 
+    android:layout_height="fill_parent">
+    
+    <LinearLayout
+        android:id="@+id/grid_linearlayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="60dip">
+        <!--
+     	<GridView
+     	    android:id="@+id/gridview"
+     	    android:layout_width="fill_parent"
+     	    android:layout_height="467dp"
+     	    android:columnWidth="150dp"
+     	    android:gravity="center"
+     	    android:numColumns="auto_fit"
+     	    android:stretchMode="columnWidth" />
+     	    -->
+     	</LinearLayout>
+     	
+    	
+</ScrollView>
+
+</LinearLayout>
+

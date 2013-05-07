@@ -259,6 +259,9 @@ public class CoverFlowTestingActivity extends Activity {
 			}
         	
         });
+        
+        // NOTIFICATION!!
+        createNotificationService();
     }
     
     public void addBitmapToMemoryCache(String key, Bitmap bitmap) {
