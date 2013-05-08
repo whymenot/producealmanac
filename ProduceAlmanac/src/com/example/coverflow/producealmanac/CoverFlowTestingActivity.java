@@ -643,12 +643,12 @@ public class CoverFlowTestingActivity extends Activity {
 		putEntry("The common strawberry is actually a hybrid of fruits, and not a member of the botanical berry family. Nevertheless, this sweet and succulent fruit is enjoyed by many on it's own, mixed into a fruit salad, or even used in ice creams or milkshakes.", "Strawberries spoil quickly so they should be consumed as soon as possible. They may last in the refrigerator for a few days, but freezing them will preserve them for up to a year.", "Ripe strawberries should be a beautiful bright red; spots of light green indicate under-ripeness and a dark red indicates over-ripeness.", "strawberries", FRUITS);
 		putEntry("Blueberries are high in antioxidants and very nutritious; ranging in flavor from tart and sour to sweet. While they can be baked into pies or other deserts, eating them raw provides the greatest nutritional benefits.", "t", "green", "blueberries", FRUITS);
 		
-		putEntry("c", "t", "green", "cherries", FRUITS);
-		putEntry("c", "t", "green", "nectarines", FRUITS);
-		putEntry("c", "t", "green", "peaches", FRUITS);
-		putEntry("c", "t", "green", "plums", FRUITS);
-		putEntry("c", "t", "green", "pluots", FRUITS);
-		putEntry("c", "t", "green", "apricots", FRUITS);
+		putEntry("Cherries are small tree fruits with a central “stony-hard” seed surrounded by edible fleshy fruit. Externally the fruits have bright red or purple color with very thin peel.", "Place your cherries in the refrigerator as soon as possible in a plastic bag. Do not wash prior to storage, as moisture can be absorbed where the stem meets the fruit and lead to splits or spoilage.", "Cherries are best with a red glow and no brown specks", "cherries", FRUITS);
+		putEntry("Nectarines is virtually identical to the fruit we call peaches, except for one noticeable feature. The skin of most peaches contains fuzz, while the skin of nectarines is smooth. Nectarines can be tracked back to ancient China", "Store nectarines at room temperature until ripe — this usually takes 2 to 3 days.", "Nectarines are best when you slightly apply a little bit of pressure to show a little bit of squishiness. Any squishier, the fruit is most likely rotten", "nectarines", FRUITS);
+		putEntry("Peaches are a round juicy fruit with yellowish-red skin and a rough stone in the middle. ", "Refigerate in a plastic bag and use within two days", "A good indicator of maturity is a well-defined cleft in the shape of the peach. Avoid those with any hint of green as they will never fully ripen", "peaches", FRUITS);
+		putEntry("Plums are part of the Drupe family, which are fruits that  have a hard stone pit surrounding their seeds. When plums are dried, they are known as prunes.", "Store at room temperature until ripe, then refrigerate in a plastic bag", "Plums smell sweet and fruity when they are ripe. An underripe plum will have little to no scent at all and avoid mushy plums", "plums", FRUITS);
+		putEntry("The pluot is a hybrid between plums and apricots that come in vast array of colors", "Store ripe stone fruit in the refrigerator and use promptly", "Ripe pluots taste like plums but are less acidic, thanks to their apricot parent. They also have a noticeable fragrance when ripened", "pluots", FRUITS);
+		putEntry("Apricot is a yellow/orange fruit that has a hue of red when exposed to sunlight for an extended period of time", "Once ripe, refrigerate in a plastic bag", "Place Apricots on a flat surface with space between the fruit to ripen them at room temperature. It is best to turn them occasionally so that they will ripen evenly", "apricots", FRUITS);
 	}
 
 	public void putEntry(String general, String storage, String ripe, String name, String group) {
