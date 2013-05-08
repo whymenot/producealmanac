@@ -40,6 +40,9 @@ public class NotificationActivity extends Activity{
 	Button button2;
 	LinearLayout row1;
 	LinearLayout row2;
+	LinearLayout row3;
+	LinearLayout row4;
+	LinearLayout row5;
 	Button buttonAllStores;
 	CheckBox allStoresFruit;
 	CheckBox allStoresVegetable;
@@ -80,7 +83,16 @@ public class NotificationActivity extends Activity{
 	// pastSaved_searchAdded 
 	//	format : strings concatenated with ":", real example -> "apples,pears"
 	String pastSaved_allNew = "";
-	String pastSaved_searchAdded = "";
+	String pastSaved_berkeleyBowlNew = "";
+	String pastSaved_yasaiNew = "";
+	String pastSaved_traderJoesNew = "";
+	String pastSaved_safewayNew = "";
+	
+	String pastSaved_searchAddedAll = "";
+	String pastSaved_searchAddedBerkeleyBowl = "";
+	String pastSaved_searchAddedYasai = "";
+	String pastSaved_searchAddedTraderJoes = "";
+	String pastSaved_searchAddedSafeway = "";
 
 	 protected void onCreate(final Bundle savedInstanceState) {
 
@@ -96,7 +108,16 @@ public class NotificationActivity extends Activity{
 		public void loadSavedValues() {
 			settings = getApplicationContext().getSharedPreferences("producealmanac", MODE_PRIVATE);
 			pastSaved_allNew = settings.getString("notification_saved_allNew", "");
-			pastSaved_searchAdded = settings.getString("notification_saved_searchAdded", "");
+			pastSaved_berkeleyBowlNew = settings.getString("notification_saved_berkeleyBowlNew", "");
+			pastSaved_yasaiNew = settings.getString("notification_saved_yasaiNew", "");
+			pastSaved_traderJoesNew = settings.getString("notification_saved_traderJoesNew", "");
+			pastSaved_safewayNew = settings.getString("notification_saved_safewayNew", "");
+			
+			pastSaved_searchAddedAll = settings.getString("notification_saved_searchAddedAll", "");
+			pastSaved_searchAddedBerkeleyBowl = settings.getString("notification_saved_searchAddedBerkeleyBowl", "");
+			pastSaved_searchAddedYasai = settings.getString("notification_saved_searchAddedYasai", "");
+			pastSaved_searchAddedTraderJoes = settings.getString("notification_saved_searchAddedTraderJoes", "");
+			pastSaved_searchAddedSafeway = settings.getString("notification_saved_searchAddedSafeway", "");
 
 			/* test purpose..
 			pastSaved_allNew = "false:true";
@@ -109,23 +130,78 @@ public class NotificationActivity extends Activity{
 		// shuld be called when user clicks "save" or something.
 		public void saveAllValues() {
 			String toSave_allNew = "";
-			String toSave_searchAdded = "";
+			String toSave_berkeleyBowlNew = "";
+			String toSave_yasaiNew ="";
+			String toSave_traderJoesNew = "";
+			String toSave_safewayNew = "";
+			
+			String toSave_searchAddedAll = "";
+			String toSave_searchAddedBerkeleyBowl = "";
+			String toSave_searchAddedYasai = "";
+			String toSave_searchAddedTraderJoes = "";
+			String toSave_searchAddedSafeway = "";
+			
 
 			//save two check boxes (allStoresFruit, allStoresVegetable) status
 			toSave_allNew += allStoresFruit.isChecked()?"true":"false";
 			toSave_allNew += ":";
 			toSave_allNew += allStoresVegetable.isChecked()?"true":"false";
 
+			toSave_berkeleyBowlNew += berkeleyBowlFruit.isChecked()?"true":"false";
+			toSave_berkeleyBowlNew += ":";
+			toSave_berkeleyBowlNew += berkeleyBowlVegetable.isChecked()?"true":"false";
+
+			toSave_yasaiNew += yasaiFruit.isChecked()?"true":"false";
+			toSave_yasaiNew += ":";
+			toSave_yasaiNew += yasaiVegetable.isChecked()?"true":"false";
+
+			toSave_traderJoesNew += traderJoesFruit.isChecked()?"true":"false";
+			toSave_traderJoesNew += ":";
+			toSave_traderJoesNew += traderJoesVegetable.isChecked()?"true":"false";
+
+			toSave_safewayNew += safewayFruit.isChecked()?"true":"false";
+			toSave_safewayNew += ":";
+			toSave_safewayNew += safewayVegetable.isChecked()?"true":"false";
+
 			// starting with 2, since index 0and1 are for allStoresFruit, allStoresVegetable.
 			for (int i = 2; i < s1.getChildCount()-2; i++) {
-				toSave_searchAdded += ((TextView)((LinearLayout)s1.getChildAt(i)).getChildAt(0)).getText().toString().replace("new ", "");
-				toSave_searchAdded += ":";
+				toSave_searchAddedAll += ((TextView)((LinearLayout)s1.getChildAt(i)).getChildAt(0)).getText().toString().replace("new ", "");
+				toSave_searchAddedAll += ":";
+			}
+
+			for (int i = 2; i < s2.getChildCount()-2; i++) {
+				toSave_searchAddedBerkeleyBowl += ((TextView)((LinearLayout)s2.getChildAt(i)).getChildAt(0)).getText().toString().replace("new ", "");
+				toSave_searchAddedBerkeleyBowl += ":";
+			}
+
+			for (int i = 2; i < s3.getChildCount()-2; i++) {
+				toSave_searchAddedYasai += ((TextView)((LinearLayout)s3.getChildAt(i)).getChildAt(0)).getText().toString().replace("new ", "");
+				toSave_searchAddedYasai += ":";
+			}
+
+			for (int i = 2; i < s4.getChildCount()-2; i++) {
+				toSave_searchAddedTraderJoes += ((TextView)((LinearLayout)s4.getChildAt(i)).getChildAt(0)).getText().toString().replace("new ", "");
+				toSave_searchAddedYasai += ":";
+			}
+
+			for (int i = 2; i < s5.getChildCount()-2; i++) {
+				toSave_searchAddedSafeway += ((TextView)((LinearLayout)s5.getChildAt(i)).getChildAt(0)).getText().toString().replace("new ", "");
+				toSave_searchAddedSafeway += ":";
 			}
 
 			// finally, save into internal storage.
 			SharedPreferences.Editor editor = settings.edit();
 	    	editor.putString("notification_saved_allNew", toSave_allNew);
-	    	editor.putString("notification_saved_searchAdded", toSave_searchAdded);
+	    	editor.putString("notification_saved_berkeleyBowlNew", toSave_berkeleyBowlNew);
+	    	editor.putString("notification_saved_yasaiNew", toSave_yasaiNew);
+	    	editor.putString("notification_saved_traderJoesNew", toSave_traderJoesNew);
+	    	editor.putString("notification_saved_safewayNew", toSave_safewayNew);
+	    	
+	    	editor.putString("notification_saved_searchAddedAll", toSave_searchAddedAll);
+	    	editor.putString("notification_saved_searchAddedBerkeleyBowl", toSave_searchAddedBerkeleyBowl);
+	    	editor.putString("notification_saved_searchAddedYasai", toSave_searchAddedYasai);
+	    	editor.putString("notification_saved_searchAddedTraderJoes", toSave_searchAddedTraderJoes);
+	    	editor.putString("notification_saved_searchAddedSafeway", toSave_searchAddedSafeway);
 	    	editor.commit();
 		}
 	 
@@ -183,6 +259,7 @@ public class NotificationActivity extends Activity{
 		 //ALLSTORES
 		 allStoresCheckBox = (CheckBox) findViewById(R.id.buttonAllStores);
 		 row1 = (LinearLayout) findViewById(R.id.row_all_stores);
+		 row1.setTag("all");
 		 s1 = new LinearLayout(this);
 		 allStoresFruit = new CheckBox(this);
 		 allStoresVegetable = new CheckBox(this);
@@ -197,6 +274,7 @@ public class NotificationActivity extends Activity{
 		 //BERKELEY BOWL
 		 berkeleyBowlCheckBox = (CheckBox) findViewById(R.id.buttonBerkeleyBowl);
 		 row2 = (LinearLayout) findViewById(R.id.row_berkeley_bowl);
+		 row2.setTag("berkeleyBowl");
 		 s2 = new LinearLayout(this);
 		 berkeleyBowlFruit = new CheckBox(this);
 		 berkeleyBowlVegetable = new CheckBox(this);
@@ -207,9 +285,40 @@ public class NotificationActivity extends Activity{
 		 
 		 
 		 //YASAI
+		 yasaiCheckBox = (CheckBox) findViewById(R.id.buttonYasai);
+		 row3 = (LinearLayout) findViewById(R.id.row_yasai);
+		 row3.setTag("yasai");
+		 s3 = new LinearLayout(this);
+		 yasaiFruit = new CheckBox(this);
+		 yasaiVegetable = new CheckBox(this);
+		 searchYasai = new SearchView(this);
+		 listYasai = new ListView(this);
+		 initializeCheckBoxes(s3, yasaiFruit, yasaiVegetable, row3, yasaiCheckBox, searchYasai, listYasai);
+		 initializeSearch(searchYasai);
 		 
 		 //TRADER JOES
+		 traderJoesCheckBox = (CheckBox) findViewById(R.id.buttonTraderJoes);
+		 row4 = (LinearLayout) findViewById(R.id.row_trader_joes);
+		 row4.setTag("traderJoes");
+		 s4 = new LinearLayout(this);
+		 traderJoesFruit = new CheckBox(this);
+		 traderJoesVegetable = new CheckBox(this);
+		 searchTraderJoes = new SearchView(this);
+		 listTraderJoes = new ListView(this);
+		 initializeCheckBoxes(s4, traderJoesFruit, traderJoesVegetable, row4, traderJoesCheckBox, searchTraderJoes, listTraderJoes);
+		 initializeSearch(searchTraderJoes);
 		 
+		 //Safeway
+		 safewayCheckBox = (CheckBox) findViewById(R.id.buttonSafeway);
+		 row5 = (LinearLayout) findViewById(R.id.row_safeway);
+		 row5.setTag("safeway");
+		 s5 = new LinearLayout(this);
+		 safewayFruit = new CheckBox(this);
+		 safewayVegetable = new CheckBox(this);
+		 searchSafeway = new SearchView(this);
+		 listSafeway = new ListView(this);
+		 initializeCheckBoxes(s5, safewayFruit, safewayVegetable, row5, safewayCheckBox, searchSafeway, listSafeway);
+		 initializeSearch(searchSafeway);
 	 }
 	 
 	 public void initializeCheckBoxes(LinearLayout layout, CheckBox fruitCheckBox, CheckBox vegetableCheckBox, LinearLayout row, CheckBox button, SearchView search, ListView list){
@@ -246,23 +355,16 @@ public class NotificationActivity extends Activity{
 		 vegetableCheckBox.setGravity(Gravity.BOTTOM);
 		 vegetableCheckBox.setTextColor(getResources().getColor(R.color.TextGrey));
 		 
-		 
-		 // added for handling saved check box settings.
-		 String pastSaved_checkBox[] = pastSaved_allNew.split(":");
-		 if (pastSaved_checkBox.length == 2) {
-			 fruitCheckBox.setChecked(pastSaved_checkBox[0].equals("true")?true:false);
-			 vegetableCheckBox.setChecked(pastSaved_checkBox[1].equals("true")?true:false);
-		}
+		 // for saved notification data.
+		 handleSavedCheckBox(row, fruitCheckBox, vegetableCheckBox);
 		 
 		 
 		 layout.addView(fruitCheckBox);
 		 layout.addView(vegetableCheckBox);
 		 
-		// added for handling previously added by search.
-				 String pastSaved_search[] = pastSaved_searchAdded.split(":");
-				 for (int i = 0; i < pastSaved_search.length; i++) {
-					 if (!pastSaved_search[i].equals("")) addStore(pastSaved_search[i]);
-				 }
+		 // for saved notification data.
+		 handleSavedSearch(row);
+				 
 		 search.setPadding(0,  20, 20, 20);
 		 layout.addView(search);
 		 layout.addView(list);
@@ -276,6 +378,48 @@ public class NotificationActivity extends Activity{
 		 expanded.put(button, false);
 	 }
 	 
+	 public void handleSavedCheckBox(LinearLayout row, CheckBox fruitCheckBox, CheckBox vegetableCheckBox) {
+		 
+		 String savedString = null;
+		 
+		 String rowTag = (String)row.getTag();
+		 
+		 if (rowTag.equals("all")) savedString = pastSaved_allNew;
+		 else if (rowTag.equals("berkeleyBowl")) savedString = pastSaved_berkeleyBowlNew;
+		 else if (rowTag.equals("yasai")) savedString =pastSaved_yasaiNew;
+		 else if (rowTag.equals("traderJoes")) savedString = pastSaved_traderJoesNew;
+		 else if (rowTag.equals("safeway")) savedString = pastSaved_safewayNew;
+		 
+		 if (savedString == null) return;
+		 
+		 // added for handling saved check box settings.
+		 String pastSaved_checkBox[] = savedString.split(":");
+		 if (pastSaved_checkBox.length == 2) {
+			 fruitCheckBox.setChecked(pastSaved_checkBox[0].equals("true")?true:false);
+			 vegetableCheckBox.setChecked(pastSaved_checkBox[1].equals("true")?true:false);
+		}
+	 }
+	 
+	 public void handleSavedSearch(LinearLayout row) {
+		 String savedString = null;
+		 
+		 String rowTag = (String)row.getTag();
+		 
+		 if (rowTag.equals("all")) savedString = pastSaved_searchAddedAll;
+		 else if (rowTag.equals("berkeleyBowl")) savedString = pastSaved_searchAddedBerkeleyBowl;
+		 else if (rowTag.equals("yasai")) savedString =pastSaved_searchAddedYasai;
+		 else if (rowTag.equals("traderJoes")) savedString = pastSaved_searchAddedTraderJoes;
+		 else if (rowTag.equals("safeway")) savedString = pastSaved_searchAddedSafeway;
+		 
+		 if (savedString == null) return;
+		 
+		 // added for handling previously added by search.
+		 String pastSaved_search[] = pastSaved_searchAddedAll.split(":");
+		 for (int i = 0; i < pastSaved_search.length; i++) {
+			 if (!pastSaved_search[i].equals("")) addStore(pastSaved_search[i]);
+		 }
+		 
+	 }
 	 
 	 
 	 
@@ -341,7 +485,7 @@ public class NotificationActivity extends Activity{
 		 t.setTextSize(getResources().getDimension(R.dimen.check_box_text_size));
 		 t.setTextColor(getResources().getColor(R.color.TextGrey));
 		 t.setGravity(Gravity.LEFT);
-		 t.setText("new" + newStore);
+		 t.setText("new " + newStore);
 
 		 
 		 LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(

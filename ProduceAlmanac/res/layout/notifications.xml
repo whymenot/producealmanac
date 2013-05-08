@@ -44,5 +44,56 @@
         android:text="Berkeley Bowl" />    
     </LinearLayout>
 
+        <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/row_yasai"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dip"
+        android:background="@android:color/white"
+        android:gravity="left|center" >
+
+    <CheckBox
+        android:id="@+id/buttonYasai"
+        android:layout_width="wrap_content"
+        android:layout_height="100dip"
+        android:textSize="@dimen/button_font"
+        android:text="Yasai" />    
+    </LinearLayout>
+
+        <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/row_trader_joes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dip"
+        android:background="@android:color/white"
+        android:gravity="left|center" >
+
+    <CheckBox
+        android:id="@+id/buttonTraderJoes"
+        android:layout_width="wrap_content"
+        android:layout_height="100dip"
+        android:textSize="@dimen/button_font"
+        android:text="Trader Joes" />    
+    </LinearLayout>
+
+        <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/row_safeway"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dip"
+        android:background="@android:color/white"
+        android:gravity="left|center" >
+
+    <CheckBox
+        android:id="@+id/buttonSafeway"
+        android:layout_width="wrap_content"
+        android:layout_height="100dip"
+        android:textSize="@dimen/button_font"
+        android:text="Safeway" />    
+    </LinearLayout>
+
 
 </LinearLayout>
