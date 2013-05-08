@@ -37,7 +37,7 @@ public class NotificationService extends Service {
 		Intent intent1 = new Intent(this.getApplicationContext(), CoverFlowTestingActivity.class);
 
 		Notification notification = new Notification(com.example.coverflow.R.drawable.ic_launcher,
-				"Melon is in Season!", System.currentTimeMillis());
+				"Peaches have arrived at Berkeley Bowl.", System.currentTimeMillis());
 
 		intent1.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP
 				| Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -49,7 +49,7 @@ public class NotificationService extends Service {
 		notification.flags |= Notification.FLAG_AUTO_CANCEL;
 
 		notification.setLatestEventInfo(this.getApplicationContext(),
-				"ProduceAlmanac", "See this delicious melon that is in season...",
+				"ProduceAlmanac", "Peaches have arrived at Berkeley Bowl.",
 				pendingNotificationIntent);
 		mManager.notify(0, notification);
 	}
