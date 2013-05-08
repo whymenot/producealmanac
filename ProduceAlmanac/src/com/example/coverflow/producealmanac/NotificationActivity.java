@@ -330,7 +330,7 @@ public class NotificationActivity extends Activity{
 			     //LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
 		 //layoutParams.setMargins(getResources().getDimensionPixelSize(R.dimen.width_of_button), 0, 0, 0);
-	 
+		 button.setButtonDrawable(getResources().getDrawable(R.drawable.expand));
 		 LinearLayout.LayoutParams subLayoutParams = new LinearLayout.LayoutParams(
 			     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
