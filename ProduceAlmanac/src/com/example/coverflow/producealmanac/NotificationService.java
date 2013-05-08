@@ -36,8 +36,8 @@ public class NotificationService extends Service {
 		 */
 		Intent intent1 = new Intent(this.getApplicationContext(), DetailActivity.class);
 
-		// temporarily directing to peach page
-		intent1.putExtra("name", "peaches");
+		// temporarily directing to apricots page
+		intent1.putExtra("name", "apricots");
 
 		Notification notification = new Notification(com.example.coverflow.R.drawable.ic_launcher,
 				"Peaches have arrived at Berkeley Bowl.", System.currentTimeMillis());
