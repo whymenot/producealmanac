@@ -14,6 +14,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
@@ -23,6 +24,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -54,27 +56,27 @@ public class NotificationActivity extends Activity{
 	Button buttonBerkeleyBowl;
 	CheckBox berkeleyBowlFruit;
 	CheckBox berkeleyBowlVegetable;
-	ArrayList<String> personalBerkeleyBowl;
+	ArrayList<String> personalBerkeleyBowl = new ArrayList<String>();
 	
 	Button buttonSafeway;
 	CheckBox safewayFruit;
 	CheckBox safewayVegetable;	
-	ArrayList<String> personalSafeway;
+	ArrayList<String> personalSafeway = new ArrayList<String>();;
 	
 	Button buttonTraderJoes;
 	CheckBox traderJoesFruit;
 	CheckBox traderJoesVegetable;
-	ArrayList<String> personalTraderJoes;
+	ArrayList<String> personalTraderJoes = new ArrayList<String>();;
 	
 	Button buttonWholeFoods;
 	CheckBox wholeFoodsFruit;
 	CheckBox wholeFoodsVegetable;
-	ArrayList<String> personalWholeFoods;
+	ArrayList<String> personalWholeFoods = new ArrayList<String>();;
 	
 	Button buttonYasai;
 	CheckBox yasaiFruit;
 	CheckBox yasaiVegetable;
-	ArrayList<String> personalYasai;
+	ArrayList<String> personalYasai = new ArrayList<String>();;
 	
 	
 	SharedPreferences settings;
@@ -264,13 +266,14 @@ public class NotificationActivity extends Activity{
 		 allStoresFruit = new CheckBox(this);
 		 allStoresVegetable = new CheckBox(this);
 		 searchAllStores = new SearchView(this);
+		 searchAllStores.setTag(searchAllStores);
 		 searchAllStores.setId(SEARCH);
 		 setSearchViewIcon();
 		 listAllStores = new ListView(this);
 		 initializeCheckBoxes(s1, allStoresFruit, allStoresVegetable, row1, allStoresCheckBox, searchAllStores, listAllStores);
 		
 		 lists.put(searchAllStores, listAllStores);
-		 initializeSearch(searchAllStores);
+		 initializeSearch(searchAllStores, row1);
 
 		 //BERKELEY BOWL
 		 berkeleyBowlCheckBox = (CheckBox) findViewById(R.id.buttonBerkeleyBowl);
@@ -280,11 +283,12 @@ public class NotificationActivity extends Activity{
 		 berkeleyBowlFruit = new CheckBox(this);
 		 berkeleyBowlVegetable = new CheckBox(this);
 		 searchBerkeleyBowl = new SearchView(this);
+		 searchBerkeleyBowl.setTag(searchBerkeleyBowl);
 		 listBerkeleyBowl = new ListView(this);
 		 initializeCheckBoxes(s2, berkeleyBowlFruit, berkeleyBowlVegetable, row2, berkeleyBowlCheckBox, searchBerkeleyBowl, listBerkeleyBowl);
 		
 		 lists.put(searchBerkeleyBowl, listBerkeleyBowl);
-		 initializeSearch(searchBerkeleyBowl);
+		 initializeSearch(searchBerkeleyBowl, row2);
 		 //YASAI
 		 yasaiCheckBox = (CheckBox) findViewById(R.id.buttonYasai);
 		 row3 = (LinearLayout) findViewById(R.id.row_yasai);
@@ -297,7 +301,7 @@ public class NotificationActivity extends Activity{
 		 initializeCheckBoxes(s3, yasaiFruit, yasaiVegetable, row3, yasaiCheckBox, searchYasai, listYasai);
 		
 		 lists.put(searchYasai, listYasai);
-		 initializeSearch(searchYasai);
+		 initializeSearch(searchYasai, row3);
 		 //TRADER JOES
 		 traderJoesCheckBox = (CheckBox) findViewById(R.id.buttonTraderJoes);
 		 row4 = (LinearLayout) findViewById(R.id.row_trader_joes);
@@ -310,7 +314,7 @@ public class NotificationActivity extends Activity{
 		 initializeCheckBoxes(s4, traderJoesFruit, traderJoesVegetable, row4, traderJoesCheckBox, searchTraderJoes, listTraderJoes);
 		 
 		 lists.put(searchTraderJoes, listTraderJoes);
-		 initializeSearch(searchTraderJoes);
+		 initializeSearch(searchTraderJoes, row4);
 		 //Safeway
 		 safewayCheckBox = (CheckBox) findViewById(R.id.buttonSafeway);
 		 row5 = (LinearLayout) findViewById(R.id.row_safeway);
@@ -322,7 +326,7 @@ public class NotificationActivity extends Activity{
 		 listSafeway = new ListView(this);
 		 initializeCheckBoxes(s5, safewayFruit, safewayVegetable, row5, safewayCheckBox, searchSafeway, listSafeway);
 		 lists.put(searchSafeway, listSafeway);
-		 initializeSearch(searchSafeway);
+		 initializeSearch(searchSafeway, row5);
 	 }
 	 
 	 public void initializeCheckBoxes(LinearLayout layout, CheckBox fruitCheckBox, CheckBox vegetableCheckBox, LinearLayout row, CheckBox button, SearchView search, ListView list){
@@ -418,9 +422,9 @@ public class NotificationActivity extends Activity{
 		 if (savedString == null) return;
 		 
 		 // added for handling previously added by search.
-		 String pastSaved_search[] = pastSaved_searchAddedAll.split(":");
+		 String pastSaved_search[] = savedString.split(":");
 		 for (int i = 0; i < pastSaved_search.length; i++) {
-			 if (!pastSaved_search[i].equals("")) addStore(pastSaved_search[i]);
+			 if (!pastSaved_search[i].equals("")) addStore(pastSaved_search[i], rowTag);
 		 }
 		 
 	 }
@@ -429,7 +433,7 @@ public class NotificationActivity extends Activity{
 	 
 	 
 HashMap<SearchView, ListView> lists = new HashMap<SearchView, ListView>();	 
-	 public void initializeSearch(final SearchView search){
+	 public void initializeSearch(final SearchView search, LinearLayout row){
 	        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
 	    
 	        currentSearchView=search;
@@ -439,12 +443,15 @@ HashMap<SearchView, ListView> lists = new HashMap<SearchView, ListView>();
 	        search.setIconifiedByDefault(true); // Do not iconify the widget; expand it by default
 	        
 	        //final SearchView.OnQueryTextListener queryTextListener = ; 
+	        
+	        final String tagString = (String)row.getTag();
+	        
 	        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() { 
 	            @Override 
 	            public boolean onQueryTextChange(String newText) { 
 	                // Do something 
 	            	Log.i("debugging", "on query text changed");
-	            	showResults(newText, lists.get(search));
+	            	showResults(newText, lists.get(search), tagString);
 	                return true; 
 	            } 
 
@@ -456,14 +463,56 @@ HashMap<SearchView, ListView> lists = new HashMap<SearchView, ListView>();
 	            } 
 	        });
 	 }
-
+	 
+	 public ArrayList<String> getStoreFromTagString(Object tag) {
+		 
+		 String tagString = (String)tag;
+		 ArrayList<String> store = null;
+		 
+		 if (tagString.equals("all")) store = personalAllStores;
+		 else if (tagString.equals("berkeleyBowl")) store = personalBerkeleyBowl;
+		 else if (tagString.equals("yasai")) store = personalYasai;
+		 else if (tagString.equals("traderJoes")) store = personalTraderJoes;
+		 else if (tagString.equals("safeway")) store = personalSafeway;
+		 
+		 return store;
+	 }
+	 
+	 public LinearLayout getLayoutFromTagString(Object tag) {
+		 String tagString = (String)tag;
+		 LinearLayout layout = null;
+		 
+		 if (tagString.equals("all")) layout = s1;
+		 else if (tagString.equals("berkeleyBowl")) layout = s2;
+		 else if (tagString.equals("yasai")) layout = s3;
+		 else if (tagString.equals("traderJoes")) layout = s4;
+		 else if (tagString.equals("safeway")) layout = s5;
+		 
+		 return layout;
+	 }
+	 
 	 public void removeStore(Button storeButton){
 		 Log.i("debugging", "in removeStore");
-		 personalAllStores.remove(buttons.get(storeButton));
-		 s1.removeView(textRows.get(storeButton));
+		 
+		 ArrayList<String> myStores = getStoreFromTagString(storeButton.getTag());
+		 LinearLayout myLayout = getLayoutFromTagString(storeButton.getTag());
+		 
+		 if(myStores == null || myLayout == null) return;
+		 
+		 myStores.remove(buttons.get(storeButton));
+		 myLayout.removeView(textRows.get(storeButton));
 	 }
-	 public void addStore(String newStore){
-		 for (String s : personalAllStores){
+	 public void addStore(String newStore, String tagString){
+		 Log.i("debugging", "tagString : " + tagString);
+		 
+		 ArrayList<String> myStores = getStoreFromTagString(tagString);
+		 LinearLayout myLayout = getLayoutFromTagString(tagString);
+		 
+		 if (myStores == null || myLayout == null) return;
+		 
+		 Log.i("debugging", "passed if statement..");
+		 
+		 for (String s : myStores){
 			 if (s.equals(newStore)){
 				 //TODO: Toast that this item has already been added 
 				 //TODO: take things out of list
@@ -471,7 +520,7 @@ HashMap<SearchView, ListView> lists = new HashMap<SearchView, ListView>();
 			 }
 			 
 		 }
-		 personalAllStores.add(newStore);
+		 myStores.add(newStore);
 		 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 
 		 LinearLayout textRow = new LinearLayout(this);
@@ -502,6 +551,7 @@ HashMap<SearchView, ListView> lists = new HashMap<SearchView, ListView>();
 		 
 		 textRow.setPadding(0, 20, 0, 0);
 		 b.setOnClickListener(deleteFromPersonalListener);
+		 b.setTag(tagString);
 		 buttons.put(b, newStore);
 		
 		 //TODO: add button listener
@@ -509,7 +559,7 @@ HashMap<SearchView, ListView> lists = new HashMap<SearchView, ListView>();
 		 textRow.addView(b, buttonParams);
 		 
 		 textRows.put(b, textRow);
-		 s1.addView(textRow, 1+personalAllStores.size());
+		 myLayout.addView(textRow, 1+myStores.size());
 		 
 	
 		 
@@ -521,11 +571,10 @@ HashMap<SearchView, ListView> lists = new HashMap<SearchView, ListView>();
 		    public void onClick(View v) {
 		    	removeStore((Button)v);
 		    	Log.i("debugging", "current button is" + buttons.get(v));
-		    	
 		    }
 	 };
 		    
-	 private void showResults(String newText, ListView list) {
+	 private void showResults(String newText, ListView list, String tagString) {
 		 Log.i("debugging", "showresults called");
 	/*
 	        // add some dummy stuff for localNow to test
@@ -551,6 +600,13 @@ HashMap<SearchView, ListView> lists = new HashMap<SearchView, ListView>();
 		    		}
 		    	}
 	    	}
+	    	
+	    	final String tagString_final = tagString;
+	    	
+	    	for(int i = 0; i < result.size(); i++) {
+	    		Log.i("debugging", "result item : " + result.get(i));
+	    	}
+	    	
 	       	ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, result);
 	    	list.setAdapter(myAdapter);
 	    	list.setOnItemClickListener(new OnItemClickListener() {
@@ -560,9 +616,11 @@ HashMap<SearchView, ListView> lists = new HashMap<SearchView, ListView>();
 						long arg3) {
 					String currentItem =(String) ((TextView)arg1).getText();
 			
-					addStore(currentItem);						
+					addStore(currentItem, tagString_final);						
 	        }
 	    	});
+	    	
+	    	Utility.setListViewHeightBasedOnChildren(list);
 	 }
 
 	 
