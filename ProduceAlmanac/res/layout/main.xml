@@ -8,7 +8,6 @@
         android:layout_height="match_parent"
         android:typeface="sans" 
         android:orientation="vertical" 
-        android:layout_marginTop="44dip"
 		android:paddingLeft="20.6dip"
 		android:background="@android:color/white"
 	    android:paddingRight="20.6dip"
