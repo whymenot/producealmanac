@@ -268,8 +268,9 @@ public class NotificationActivity extends Activity{
 		 setSearchViewIcon();
 		 listAllStores = new ListView(this);
 		 initializeCheckBoxes(s1, allStoresFruit, allStoresVegetable, row1, allStoresCheckBox, searchAllStores, listAllStores);
+		
+		 lists.put(searchAllStores, listAllStores);
 		 initializeSearch(searchAllStores);
-		 
 
 		 //BERKELEY BOWL
 		 berkeleyBowlCheckBox = (CheckBox) findViewById(R.id.buttonBerkeleyBowl);
@@ -281,9 +282,9 @@ public class NotificationActivity extends Activity{
 		 searchBerkeleyBowl = new SearchView(this);
 		 listBerkeleyBowl = new ListView(this);
 		 initializeCheckBoxes(s2, berkeleyBowlFruit, berkeleyBowlVegetable, row2, berkeleyBowlCheckBox, searchBerkeleyBowl, listBerkeleyBowl);
+		
+		 lists.put(searchBerkeleyBowl, listBerkeleyBowl);
 		 initializeSearch(searchBerkeleyBowl);
-		 
-		 
 		 //YASAI
 		 yasaiCheckBox = (CheckBox) findViewById(R.id.buttonYasai);
 		 row3 = (LinearLayout) findViewById(R.id.row_yasai);
@@ -294,8 +295,9 @@ public class NotificationActivity extends Activity{
 		 searchYasai = new SearchView(this);
 		 listYasai = new ListView(this);
 		 initializeCheckBoxes(s3, yasaiFruit, yasaiVegetable, row3, yasaiCheckBox, searchYasai, listYasai);
+		
+		 lists.put(searchYasai, listYasai);
 		 initializeSearch(searchYasai);
-		 
 		 //TRADER JOES
 		 traderJoesCheckBox = (CheckBox) findViewById(R.id.buttonTraderJoes);
 		 row4 = (LinearLayout) findViewById(R.id.row_trader_joes);
@@ -306,8 +308,9 @@ public class NotificationActivity extends Activity{
 		 searchTraderJoes = new SearchView(this);
 		 listTraderJoes = new ListView(this);
 		 initializeCheckBoxes(s4, traderJoesFruit, traderJoesVegetable, row4, traderJoesCheckBox, searchTraderJoes, listTraderJoes);
-		 initializeSearch(searchTraderJoes);
 		 
+		 lists.put(searchTraderJoes, listTraderJoes);
+		 initializeSearch(searchTraderJoes);
 		 //Safeway
 		 safewayCheckBox = (CheckBox) findViewById(R.id.buttonSafeway);
 		 row5 = (LinearLayout) findViewById(R.id.row_safeway);
@@ -318,6 +321,7 @@ public class NotificationActivity extends Activity{
 		 searchSafeway = new SearchView(this);
 		 listSafeway = new ListView(this);
 		 initializeCheckBoxes(s5, safewayFruit, safewayVegetable, row5, safewayCheckBox, searchSafeway, listSafeway);
+		 lists.put(searchSafeway, listSafeway);
 		 initializeSearch(searchSafeway);
 	 }
 	 
@@ -424,8 +428,8 @@ public class NotificationActivity extends Activity{
 	 
 	 
 	 
-	 
-	 public void initializeSearch(SearchView search){
+HashMap<SearchView, ListView> lists = new HashMap<SearchView, ListView>();	 
+	 public void initializeSearch(final SearchView search){
 	        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
 	    
 	        currentSearchView=search;
@@ -440,7 +444,7 @@ public class NotificationActivity extends Activity{
 	            public boolean onQueryTextChange(String newText) { 
 	                // Do something 
 	            	Log.i("debugging", "on query text changed");
-	            	showResults(newText);
+	            	showResults(newText, lists.get(search));
 	                return true; 
 	            } 
 
@@ -521,7 +525,7 @@ public class NotificationActivity extends Activity{
 		    }
 	 };
 		    
-	 private void showResults(String newText) {
+	 private void showResults(String newText, ListView list) {
 		 Log.i("debugging", "showresults called");
 	/*
 	        // add some dummy stuff for localNow to test
@@ -548,10 +552,8 @@ public class NotificationActivity extends Activity{
 		    	}
 	    	}
 	       	ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, result);
-	    	listAllStores.setAdapter(myAdapter);
-
-
-	    	listAllStores.setOnItemClickListener(new OnItemClickListener() {
+	    	list.setAdapter(myAdapter);
+	    	list.setOnItemClickListener(new OnItemClickListener() {
 
 				@Override
 				public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
