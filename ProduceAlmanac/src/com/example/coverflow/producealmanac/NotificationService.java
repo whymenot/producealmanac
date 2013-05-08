@@ -34,7 +34,10 @@ public class NotificationService extends Service {
 		 * of our App, this job can be done with the help of the following
 		 * Intent.
 		 */
-		Intent intent1 = new Intent(this.getApplicationContext(), CoverFlowTestingActivity.class);
+		Intent intent1 = new Intent(this.getApplicationContext(), DetailActivity.class);
+
+		// temporarily directing to peach page
+		intent1.putExtra("name", "peaches");
 
 		Notification notification = new Notification(com.example.coverflow.R.drawable.ic_launcher,
 				"Peaches have arrived at Berkeley Bowl.", System.currentTimeMillis());
