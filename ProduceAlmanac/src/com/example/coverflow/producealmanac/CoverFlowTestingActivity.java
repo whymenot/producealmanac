@@ -868,8 +868,8 @@ public class CoverFlowTestingActivity extends Activity {
 		Calendar_Object.set(Calendar.MINUTE, 22);
 		Calendar_Object.set(Calendar.SECOND, 0);
 		*/
-		// notify after 15 sec...
-		Calendar_Object.add(Calendar.SECOND, 15);
+		// notify after 30 sec...
+		Calendar_Object.add(Calendar.SECOND, 30);
 		
 		// MyView is my current Activity, and AlarmReceiver is the
 		// BoradCastReceiver
