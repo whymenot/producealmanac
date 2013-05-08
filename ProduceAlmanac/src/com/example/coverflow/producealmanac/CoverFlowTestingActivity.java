@@ -574,15 +574,15 @@ public class CoverFlowTestingActivity extends Activity {
 		Log.i("debugging", "before summer squash");
 		new Item("summer squash");
 		Log.i("debugging", "before cucumber");
-		new Item("cucumber");
+		//new Item("cucumber");
 		
 		Log.i("debugging", "bp");
-		new Item("bell peppers");
+		//new Item("bell peppers");
 		Log.i("debugging", "asp");
 
-		new Item("asparagus");
+		//new Item("asparagus");
 		Log.i("debugging", "cel");
-		new Item("celery");
+		//new Item("celery");
 		
 		new Item("kiwifruit");
 		Log.i("debugging", "kiw");
