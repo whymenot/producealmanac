@@ -220,7 +220,7 @@ public class Store {
 		
 		current = Store.storeMap.get(CoverFlowTestingActivity.YASAIMARKET);
 		
-		String[] yasaiActive ={"garlic", "cauliflower", "asian greens", "lettuce", "spinach", "eggplant",  "asparagus", "celery", "kiwifruit", "strawberries", "blueberries", "cherries", "nectarines", "peaches", "plums", "pluots", "apricots", "onion", "parsnip"}
+		String[] yasaiActive ={"garlic", "cauliflower", "asian greens", "lettuce", "spinach", "kiwifruit", "strawberries", "blueberries", "cherries", "nectarines", "peaches", "plums", "pluots", "apricots", "onion", "parsnip"}
 ;
 		//String[] yasaiActive = {"garlic", "carrots", "broccoli", "cauliflower", "asian greens"};
 		String[] yasaiInactive = { "carrots", "broccoli","summer squash", };
