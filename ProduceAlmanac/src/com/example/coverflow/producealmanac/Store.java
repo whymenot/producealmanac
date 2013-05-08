@@ -203,8 +203,8 @@ public class Store {
 		ArrayList<Item> activeItems = new ArrayList<Item>();
 		ArrayList<Item> inactiveItems = new ArrayList<Item>();
 		//String[] berkeleyBowlActive = {"garlic", "carrots", "onion", "parsnip", "broccoli", "cauliflower", "asian greens","lettuce", "spinach", "eggplant", "summer squash", "cucumber", "bell peppers", "asparagus", "celery", "kiwifruit"};//, "strawberries", "blueberries"};
-		String[] berkeleyBowlActive = {"eggplant", "summer squash", "kiwifruit", "strawberries", "blueberries", "cherries", "nectarines", "plums", "pluots", "apricots", "onion", "parsnip"};
-		String[] berkeleyBowlInactive = {"garlic","peaches", "carrots", "broccoli", "cauliflower", "asian greens", "lettuce", "spinach"};
+		String[] berkeleyBowlActive = {"eggplant", "summer squash", "kiwifruit", "strawberries", "blueberries", "cherries", "nectarines","peaches", "plums", "pluots", "onion", "parsnip"};
+		String[] berkeleyBowlInactive = {"garlic","apricots", "carrots", "broccoli", "cauliflower", "asian greens", "lettuce", "spinach"};
 		for (String name : berkeleyBowlActive){
 			activeItems.add(Item.itemMap.get(name));			
 		}
