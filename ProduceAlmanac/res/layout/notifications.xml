@@ -25,7 +25,7 @@
 
     <CheckBox
         android:id="@+id/buttonAllStores"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="100dip"
         
         android:textSize="@dimen/button_font"
@@ -60,7 +60,7 @@
 
     <CheckBox
         android:id="@+id/buttonYasai"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="100dip"
         android:textSize="@dimen/button_font"
         android:text="Yasai" />    
@@ -77,7 +77,7 @@
 
     <CheckBox
         android:id="@+id/buttonTraderJoes"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="100dip"
         android:textSize="@dimen/button_font"
         android:text="Trader Joes" />    
@@ -94,7 +94,7 @@
 
     <CheckBox
         android:id="@+id/buttonSafeway"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="100dip"
         android:textSize="@dimen/button_font"
         android:text="Safeway" />    
