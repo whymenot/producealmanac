@@ -21,6 +21,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -154,33 +155,64 @@ public class NotificationActivity extends Activity{
 	 }
 	 
 	 LinearLayout s1;	 
-	 LinearLayout checkBoxRow1;
-	 LinearLayout allStoresContainer;
+	 LinearLayout s2;
+	 LinearLayout s3;
+	 LinearLayout s4;
+	 LinearLayout s5;
+	 LinearLayout s6;
+	 
+
+	 CheckBox allStoresCheckBox;
+	 CheckBox berkeleyBowlCheckBox;
+	 CheckBox yasaiCheckBox;
+	 CheckBox traderJoesCheckBox;
+	 CheckBox safewayCheckBox;
+	 
+	 SearchView searchBerkeleyBowl;
+	 SearchView searchYasai;
+	 SearchView searchTraderJoes;
+	 SearchView searchSafeway;
+	 
+	 ListView listBerkeleyBowl;
+	 ListView listYasai;
+	 ListView listTraderJoes;
+	 ListView listSafeway;
+	 
 	 public void initializeButtons(){
 		//android:icon="@android:drawable/presence_offline"
 		 //ALLSTORES
-		 Button b = (Button) findViewById(R.id.buttonAllStores);
+		 allStoresCheckBox = (CheckBox) findViewById(R.id.buttonAllStores);
 		 row1 = (LinearLayout) findViewById(R.id.row_all_stores);
 		 s1 = new LinearLayout(this);
 		 allStoresFruit = new CheckBox(this);
 		 allStoresVegetable = new CheckBox(this);
 		 searchAllStores = new SearchView(this);
-		 
 		 searchAllStores.setId(SEARCH);
 		 setSearchViewIcon();
-		 
 		 listAllStores = new ListView(this);
-		 initializeCheckBoxes(s1, allStoresFruit, allStoresVegetable, row1, b, searchAllStores);
+		 initializeCheckBoxes(s1, allStoresFruit, allStoresVegetable, row1, allStoresCheckBox, searchAllStores, listAllStores);
 		 initializeSearch(searchAllStores);
 		 
-		 
-		 
-		 
-		 
+
 		 //BERKELEY BOWL
+		 berkeleyBowlCheckBox = (CheckBox) findViewById(R.id.buttonBerkeleyBowl);
+		 row2 = (LinearLayout) findViewById(R.id.row_berkeley_bowl);
+		 s2 = new LinearLayout(this);
+		 berkeleyBowlFruit = new CheckBox(this);
+		 berkeleyBowlVegetable = new CheckBox(this);
+		 searchBerkeleyBowl = new SearchView(this);
+		 listBerkeleyBowl = new ListView(this);
+		 initializeCheckBoxes(s2, berkeleyBowlFruit, berkeleyBowlVegetable, row2, berkeleyBowlCheckBox, searchBerkeleyBowl, listBerkeleyBowl);
+		 initializeSearch(searchBerkeleyBowl);
+		 
+		 
+		 //YASAI
+		 
+		 //TRADER JOES
+		 
 	 }
 	 
-	 public void initializeCheckBoxes(LinearLayout layout, CheckBox fruitCheckBox, CheckBox vegetableCheckBox, LinearLayout row, Button button, SearchView search){
+	 public void initializeCheckBoxes(LinearLayout layout, CheckBox fruitCheckBox, CheckBox vegetableCheckBox, LinearLayout row, CheckBox button, SearchView search, ListView list){
 		 //LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
 			     //LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
@@ -233,13 +265,14 @@ public class NotificationActivity extends Activity{
 				 }
 		 search.setPadding(0,  20, 20, 20);
 		 layout.addView(search);
-		 layout.addView(listAllStores);
+		 layout.addView(list);
 		 
 		 subLayouts.put(button, layout);
 		 allViews.add(row);
 		 layoutParams.put(row, titleLayoutParams);
 		 layoutParams.put(layout, subLayoutParams);
-		 button.setOnClickListener(buttonListener);
+		 
+		 button.setOnCheckedChangeListener(buttonListener);
 		 expanded.put(button, false);
 	 }
 	 
@@ -389,20 +422,12 @@ public class NotificationActivity extends Activity{
 	 
 	 
 	 SearchView currentSearchView;
-		View.OnClickListener buttonListener = new View.OnClickListener(){
+	 	CompoundButton.OnCheckedChangeListener buttonListener = new CompoundButton.OnCheckedChangeListener(){
 			
 			
-			public void onClick(View v){
-				boolean expanding;
-				if (expanded.get(v)){
-					expanding = false;
-					expanded.put(v, false);
-				}
-				else {
-					expanded.put(v, true);
-					expanding=true;
-				}
-				
+	 		public void onCheckedChanged(CompoundButton v,
+					boolean expanding) {
+	 			Log.i("claire", "calling on check changed");
 				
 				View subLayout = subLayouts.get(v);
 				
@@ -429,9 +454,6 @@ public class NotificationActivity extends Activity{
 				Log.i("debugging", "gets past j/i loop and position was: "+ position);
 				if (expanding){
 					Button nextButton = (Button) v;
-					nextButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.navigation_collapse));
-					//nextButton.setBackgroundColor(getResources().getColor(R.color.ButtonRed));
-					//REMOVE OLD BUTTON
 					nextRow.removeViewAt(0);
 					nextRow.addView(nextButton, 0);
 					//TODO edge case end of list 
@@ -444,8 +466,6 @@ public class NotificationActivity extends Activity{
 				else {
 					//CONTRACTING
 					Button nextButton = (Button) v;
-					nextButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.navigation_expand));
-					//nextButton.setBackgroundColor(getResources().getColor(R.color.ButtonGreen));
 					nextRow.removeViewAt(0);
 					nextRow.addView(nextButton, 0);
 					if (position!=0){
@@ -458,6 +478,8 @@ public class NotificationActivity extends Activity{
 				resetMasterLayout();
 			
 			}
+
+		
 		};
 		
 		public void resetMasterLayout(){

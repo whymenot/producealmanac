@@ -18,34 +18,31 @@
         android:background="@android:color/white"
         android:gravity="left|center" >
 
-    <Button
+    <CheckBox
         android:id="@+id/buttonAllStores"
-        android:layout_width="@dimen/width_of_button"
-        android:layout_height="100dip"
-        android:background="@drawable/navigation_expand"
-        android:textSize="@dimen/button_font" />
-
-    <TextView
-        android:id="@+id/textView1"
         android:layout_width="wrap_content"
+        android:layout_height="100dip"
+        
+        android:textSize="@dimen/button_font"
+        android:text="All Stores" />    
+    </LinearLayout>
+
+        <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/row_berkeley_bowl"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="bottom"
-        android:text="All Stores"
-        android:textColor="@color/TextGrey"
-        android:textColorHint="@color/TextGrey"
-        android:textSize="@dimen/store_title_size" />
-    
+        android:layout_margin="20dip"
+        android:background="@android:color/white"
+        android:gravity="left|center" >
 
-    
+    <CheckBox
+        android:id="@+id/buttonBerkeleyBowl"
+        android:layout_width="wrap_content"
+        android:layout_height="100dip"
+        android:textSize="@dimen/button_font"
+        android:text="Berkeley Bowl" />    
     </LinearLayout>
 
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/row_berkeley_bowl"
-    android:orientation="horizontal" >
-    
-    </LinearLayout>
 
 </LinearLayout>
