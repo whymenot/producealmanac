@@ -43,7 +43,7 @@
 
     <CheckBox
         android:id="@+id/buttonBerkeleyBowl"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="100dip"
         android:textSize="@dimen/button_font"
         android:text="Berkeley Bowl" />    

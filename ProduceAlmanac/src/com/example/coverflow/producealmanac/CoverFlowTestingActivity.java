@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -32,6 +31,7 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -43,7 +43,6 @@ import android.widget.Toast;
 
 import com.example.coverflow.R;
 import com.example.coverflow.ResourceImageAdapter;
-import com.example.coverflow.producealmanac.MultiSpinner.MultiSpinnerListener;
 
 /**
  * The Class CoverFlowTestingActivity.
@@ -237,9 +236,13 @@ public class CoverFlowTestingActivity extends Activity {
 */
 		
         final Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
-        storeAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,STORES);
-        storeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        storeAdapter = new ArrayAdapter<String>(this, R.layout.spinner,STORES);
+        storeAdapter.setDropDownViewResource(R.layout.spinner);
         spinner2.setAdapter(storeAdapter);
+        
+        
+        
+        
         
         spinner2.setOnItemSelectedListener(new OnItemSelectedListener() {
 
@@ -468,19 +471,18 @@ public class CoverFlowTestingActivity extends Activity {
 				}
 			**/
 			
-			final Button button = new Button(this);
-			button.setText("-");
-			
+			LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+				     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-			expanded.put(button, false);
+			final CheckBox button = new CheckBox(this);
+			button.setChecked(true);
+			button.setButtonDrawable(getResources().getDrawable(R.drawable.expand));
+			button.setText(FILTERS[i]);
+			button.setTextColor(getResources().getColor(R.color.Brown));
+			button.setTextSize(40);
+	
 			
-			TextView txtView = new TextView(this);
-			//should be different per each one
-			txtView.setText(FILTERS[i]);
-			txtView.setTextColor(getResources().getColor(R.color.Brown));
-			txtView.setTextSize(40);
-			s1.addView(button);
-			s1.addView(txtView);
+			s1.addView(button, layoutParams);
 			gridLinearLayout.addView(s1);
 
 			final GridView gridview = new GridView(this);
@@ -490,17 +492,22 @@ public class CoverFlowTestingActivity extends Activity {
 			gridview.setNumColumns(GridView.AUTO_FIT);
 			gridview.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
 			
-			
-			button.setOnClickListener(new View.OnClickListener(){
-				public void onClick(View v) {
-					if (button.getText().equals("-")) {
+			button.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+				
+				
+		 		public void onCheckedChanged(CompoundButton v,
+						boolean expanding) {
+					if (!expanding) {
 						gridview.setVisibility(GridView.GONE);
-						button.setText("+");
 					} else {
 						gridview.setVisibility(GridView.VISIBLE);
-						button.setText("-");
+						
 					}
-				}});
+				}
+			});
+			
+			
+			
 
 	        myImageAdapter = new ImageAdapter(this);
 	        gridview.setOnItemClickListener(new OnItemClickListener() {
@@ -574,15 +581,15 @@ public class CoverFlowTestingActivity extends Activity {
 		Log.i("debugging", "before summer squash");
 		new Item("summer squash");
 		Log.i("debugging", "before cucumber");
-		new Item("cucumber");
+		//new Item("cucumber");
 		
 		Log.i("debugging", "bp");
-		new Item("bell peppers");
+		//new Item("bell peppers");
 		Log.i("debugging", "asp");
 
-		new Item("asparagus");
+		//new Item("asparagus");
 		Log.i("debugging", "cel");
-		new Item("celery");
+		//new Item("celery");
 		
 		new Item("kiwifruit");
 		Log.i("debugging", "kiw");
@@ -618,7 +625,7 @@ public class CoverFlowTestingActivity extends Activity {
 		String group = "group";
 		
 		//@TODO include filter Strings as last argument to putEntry()
-		putEntry("artichokes are pretty", "anywhere", "red", "artichoke", VEGGIES);
+		//putEntry("artichokes are pretty", "anywhere", "red", "artichoke", VEGGIES);
 		putEntry("Garlic is a bulbous plant with a pungent and slightly spicy taste and odor that mellows with cooking. It can be sauteed, roasted, or added raw to a dish to enhance its flavor.", "Garlic is typically stored at room temperature, but peeled cloves can be preserved in wine or vinegar", "firm with no soft spots", "garlic", VEGGIES);
 		putEntry("Onions are common bulbous vegetables used in many cuisines around the world. They have a strong odor and taste that mellows with cooking.", "Onions are typically stored at room temperature.", "firm with no brown spots", "onion", VEGGIES);
 		putEntry("Carrots are known for their high vitamin-A content, which can improve vision. They have a sweet and crisp taste and are used in dishes ranging from soups and stews to deserts.", "Carrots can last for several months when stored in the refrigerator", "firm and crisp texture", "carrots", VEGGIES);
@@ -627,28 +634,28 @@ public class CoverFlowTestingActivity extends Activity {
 		putEntry("Cauliflower is closely related to brocolli, rich with antioxidants and provides numerous health benefits. It can be boiled, steamed, sauteed or eaten raw.", "Store in a plastic bag inside the refrigerator for up to a week", "compact, creamy white buds without separated clusters", "cauliflower", VEGGIES);
 		putEntry("None require long cooking; on the contrary, most Asian greens should be cooked quickly, sealing in their sweetness by stir-frying or steaming. Try swapping Asian greens for mustard, Swiss chard, or spinach when preparing a favorite recipe.", "Larger, more mature greens can remain in the refrigerator for up to five days, while smaller, tender greens should be used within three days of purchase.", "dry and firm", "asian greens", VEGGIES);
 		
-		putEntry("c", "t", "green", "lettuce", VEGGIES);
-		putEntry("c", "t", "green", "spinach", VEGGIES);
-		putEntry("c", "t", "green", "eggplant", VEGGIES);
+		putEntry("With many varieties such as Romaine, Red Leaf, King Crown, and Butter Lettuce, this leafy vegetable goes great in salads or as a topping for other savory dishes.", "Keep lettuce in the refrigerator for up to 10 days in a loose plastic bag.", "Ripe lettuce is typically firm at the base with varying shades of green.", "lettuce", VEGGIES);
+		putEntry("Spinach is highly nutritious, versatile, leafy vegetable that can be added to dishes raw or cooked.", "Place in an air-tight bag or container for up to 5 days in the refrigerator", "Leaves should be dark green with no signs of yellowing", "spinach", VEGGIES);
+		putEntry("The eggplant is a bulky vegetable with a spongy texture and a pleasant slightly bitter taste. It can be grilled, baked, roasted or steamed.", "Eggplants are sensitive to both heat and cold, and should be stored at around 50 degrees Fahrenheit.","Ripe eggplants should be firm and heavy for their size, with smooth, shiny skin and vivid color.", "eggplant", VEGGIES);
 
 		putEntry("Summer squash can be grilled, steamed, boiled, sauteed, fried or used in stir fry recipes. They mix well with onions, tomatoes and okra in vegetable medleys.", "Place, unwashed in plastic bags, in the crisper drawer of the refrigerator. The storage life of summer squash is brief, so use within two to three days.", "Summer squash is best when immature, young and tender.", "summer squash", VEGGIES);
-		putEntry("c", "t", "green", "cucumber", VEGGIES);
+		//putEntry("c", "t", "green", "cucumber", VEGGIES);
 		
-		putEntry("c", "t", "green", "bell peppers", VEGGIES);
-		putEntry("c", "t", "green", "asparagus", VEGGIES);
-		putEntry("c", "t", "green", "celery", VEGGIES);
+		//putEntry("c", "t", "green", "bell peppers", VEGGIES);
+		//putEntry("c", "t", "green", "asparagus", VEGGIES);
+		//putEntry("c", "t", "green", "celery", VEGGIES);
 		
 		
-		putEntry("c", "t", "green", "kiwifruit", FRUITS);
-		putEntry("c", "t", "green", "strawberries", FRUITS);
-		putEntry("c", "t", "green", "blueberries", FRUITS);
+		putEntry("Kiwifruits are a unique fruit common in Califormia, with a sweet and sour taste. They can be peeled and sliced, or the flesh can be scraped out with a sppon.", "Kiwifruits can be stored for several days at room temperature, or up to 4 weeks in the refrigerator.", "Kiwifruits should give slightly to pressure when ripe, be plump and smooth, and have no wrinkles, punctures, or bruises.", "kiwifruit", FRUITS);
+		putEntry("The common strawberry is actually a hybrid of fruits, and not a member of the botanical berry family. Nevertheless, this sweet and succulent fruit is enjoyed by many on it's own, mixed into a fruit salad, or even used in ice creams or milkshakes.", "Strawberries spoil quickly so they should be consumed as soon as possible. They may last in the refrigerator for a few days, but freezing them will preserve them for up to a year.", "Ripe strawberries should be a beautiful bright red; spots of light green indicate under-ripeness and a dark red indicates over-ripeness.", "strawberries", FRUITS);
+		putEntry("Blueberries are high in antioxidants and very nutritious; ranging in flavor from tart and sour to sweet. While they can be baked into pies or other deserts, eating them raw provides the greatest nutritional benefits.", "t", "green", "blueberries", FRUITS);
 		
-		putEntry("c", "t", "green", "cherries", FRUITS);
-		putEntry("c", "t", "green", "nectarines", FRUITS);
-		putEntry("c", "t", "green", "peaches", FRUITS);
-		putEntry("c", "t", "green", "plums", FRUITS);
-		putEntry("c", "t", "green", "pluots", FRUITS);
-		putEntry("c", "t", "green", "apricots", FRUITS);
+		putEntry("Cherries are small tree fruits with a central pit seed surrounded by edible fleshy fruit. Externally the fruits have bright red or purple color with very thin peel.", "Place your cherries in the refrigerator as soon as possible in a plastic bag. Do not wash prior to storage, as moisture can be absorbed where the stem meets the fruit and lead to splits or spoilage.", "Cherries are best with a red glow and no brown specks", "cherries", FRUITS);
+		putEntry("Nectarines is virtually identical to the fruit we call peaches, except for one noticeable feature. The skin of most peaches contains fuzz, while the skin of nectarines is smooth. Nectarines can be tracked back to ancient China", "Store nectarines at room temperature until ripe � this usually takes 2 to 3 days.", "Nectarines are best when you slightly apply a little bit of pressure to show a little bit of squishiness. Any squishier, the fruit is most likely rotten", "nectarines", FRUITS);
+		putEntry("Peaches are a round juicy fruit with yellowish-red skin and a rough pit in the middle. ", "Refrigerate in a plastic bag and use within two days", "A good indicator of maturity is a well-defined cleft in the shape of the peach. Avoid those with any hint of green as they will never fully ripen", "peaches", FRUITS);
+		putEntry("Plums are part of the Drupe family, which are fruits that  have a hard stone pit surrounding their seeds. When plums are dried, they are known as prunes.", "Store at room temperature until ripe, then refrigerate in a plastic bag", "Plums smell sweet and fruity when they are ripe. An underripe plum will have little to no scent at all and avoid mushy plums", "plums", FRUITS);
+		putEntry("The pluot is a hybrid between plums and apricots that come in vast array of colors", "Store ripe stone fruit in the refrigerator and use promptly", "Ripe pluots taste like plums but are less acidic, thanks to their apricot parent. They also have a noticeable fragrance when ripened", "pluots", FRUITS);
+		putEntry("Apricot is a yellow/orange fruit that has a hue of red when exposed to sunlight for an extended period of time", "Once ripe, refrigerate in a plastic bag", "Place Apricots on a flat surface with space between the fruit to ripen them at room temperature. It is best to turn them occasionally so that they will ripen evenly", "apricots", FRUITS);
 	}
 
 	public void putEntry(String general, String storage, String ripe, String name, String group) {
@@ -805,6 +812,9 @@ public class CoverFlowTestingActivity extends Activity {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				
+
+				
+				
 				System.out.println("clicked item : " + arg2);
 				Intent intent = new Intent(CoverFlowTestingActivity.this, DetailActivity.class);
 				intent.putExtra("name", ((TextView) arg1).getText());
@@ -824,6 +834,10 @@ public class CoverFlowTestingActivity extends Activity {
 
     public boolean onOptionsItemSelected(MenuItem item) {
 		
+    	
+    	
+    	
+    	
       switch (item.getItemId()) { //basic structure borrowed from Kate's drawing app in section
       case R.id.notification:
             Toast.makeText(this, "Button pressed: " + getResources().getString(R.string.notification) + " .",
@@ -881,7 +895,6 @@ public class CoverFlowTestingActivity extends Activity {
     
 	 public void initializeButtons(){
 			
-		 //button1 = (Button)findViewById(R.id.button1);
 		 button1.setText("+");
 		 //row1 = (LinearLayout) findViewById(R.id.bowlRow);
 		 LinearLayout s1 = new LinearLayout(this);
@@ -939,8 +952,10 @@ public class CoverFlowTestingActivity extends Activity {
 				
 				Log.i("debugging", "gets past j/i loop and position was: "+ position);
 				if (expanding){
+					
 					Button nextButton = (Button) v;
-					nextButton.setText("-");
+					nextButton.setBackground(getResources().getDrawable(R.drawable.navigation_collapse));
+				
 					
 					//REMOVE OLD BUTTON
 					nextRow.removeViewAt(0);
@@ -955,7 +970,7 @@ public class CoverFlowTestingActivity extends Activity {
 				else {
 					//CONTRACTING
 					Button nextButton = (Button) v;
-					nextButton.setText("+");
+					nextButton.setBackground(getResources().getDrawable(R.drawable.navigation_expand));
 					nextRow.removeViewAt(0);
 					nextRow.addView(nextButton, 0);
 					if (position!=0){

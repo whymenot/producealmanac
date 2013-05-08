@@ -203,7 +203,7 @@ public class Store {
 		ArrayList<Item> activeItems = new ArrayList<Item>();
 		ArrayList<Item> inactiveItems = new ArrayList<Item>();
 		//String[] berkeleyBowlActive = {"garlic", "carrots", "onion", "parsnip", "broccoli", "cauliflower", "asian greens","lettuce", "spinach", "eggplant", "summer squash", "cucumber", "bell peppers", "asparagus", "celery", "kiwifruit"};//, "strawberries", "blueberries"};
-		String[] berkeleyBowlActive = {"eggplant", "summer squash", "cucumber", "bell peppers", "asparagus", "celery", "kiwifruit", "strawberries", "blueberries", "cherries", "nectarines", "peaches", "plums", "pluots", "apricots", "onion", "parsnip"};
+		String[] berkeleyBowlActive = {"eggplant", "summer squash", "kiwifruit", "strawberries", "blueberries", "cherries", "nectarines", "peaches", "plums", "pluots", "apricots", "onion", "parsnip"};
 		String[] berkeleyBowlInactive = {"garlic", "carrots", "broccoli", "cauliflower", "asian greens", "lettuce", "spinach"};
 		for (String name : berkeleyBowlActive){
 			activeItems.add(Item.itemMap.get(name));			
@@ -220,10 +220,10 @@ public class Store {
 		
 		current = Store.storeMap.get(CoverFlowTestingActivity.YASAIMARKET);
 		
-		String[] yasaiActive ={"garlic", "cauliflower", "asian greens", "lettuce", "spinach", "eggplant",  "asparagus", "celery", "kiwifruit", "strawberries", "blueberries", "cherries", "nectarines", "peaches", "plums", "pluots", "apricots", "onion", "parsnip"}
+		String[] yasaiActive ={"garlic", "cauliflower", "asian greens", "lettuce", "spinach", "kiwifruit", "strawberries", "blueberries", "cherries", "nectarines", "peaches", "plums", "pluots", "apricots", "onion", "parsnip"}
 ;
 		//String[] yasaiActive = {"garlic", "carrots", "broccoli", "cauliflower", "asian greens"};
-		String[] yasaiInactive = { "carrots", "broccoli","summer squash", "cucumber", "bell peppers",};
+		String[] yasaiInactive = { "carrots", "broccoli","summer squash", };
 		
 		for (String name : yasaiActive){
 			activeItems.add(Item.itemMap.get(name));			
@@ -242,7 +242,7 @@ public class Store {
 		
 		String[] safewayActive= {"garlic", "carrots", "onion","plums"};
 		//String[] safewayActive = {"garlic", "carrots", "broccoli", "cauliflower", "asian greens"};
-		String[] safewayInactive = {"summer squash", "cucumber", "bell peppers",};
+		String[] safewayInactive = {"summer squash"};
 		
 		for (String name : safewayActive){
 			activeItems.add(Item.itemMap.get(name));			
@@ -260,7 +260,7 @@ public class Store {
 		current = Store.storeMap.get(CoverFlowTestingActivity.TRADERJOES);
 		
 		//String[] traderJoesActive 	= {"garlic", "carrots", "onion"};
-		String[] traderJoesActive = { "broccoli", "cauliflower", "asian greens","lettuce", "spinach", "eggplant",  "asparagus", "celery", "peaches", "plums","nectarines"};
+		String[] traderJoesActive = { "broccoli", "cauliflower", "asian greens","lettuce", "spinach", "eggplant",  "peaches", "plums","nectarines"};
 		String[] traderJoesInactive = {"garlic", "carrots",};
 		
 		for (String name : traderJoesActive){
@@ -283,7 +283,7 @@ public class Store {
 		
 		String[] wholeFoodsActive = {"carrots", "onion", "strawberries", "blueberries", "cherries", "nectarines"};
 		//String[] wholeFoodsActive = {"garlic", "carrots", "broccoli", "cauliflower", "asian greens"};
-		String[] wholeFoodsInactive = {"lettuce", "spinach", "eggplant",  "asparagus", "celery"};
+		String[] wholeFoodsInactive = {"lettuce", "spinach", "eggplant"};
 		
 		for (String name : wholeFoodsActive){
 			activeItems.add(Item.itemMap.get(name));			
