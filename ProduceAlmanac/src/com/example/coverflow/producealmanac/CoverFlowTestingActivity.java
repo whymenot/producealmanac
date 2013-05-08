@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -32,6 +31,7 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -43,7 +43,6 @@ import android.widget.Toast;
 
 import com.example.coverflow.R;
 import com.example.coverflow.ResourceImageAdapter;
-import com.example.coverflow.producealmanac.MultiSpinner.MultiSpinnerListener;
 
 /**
  * The Class CoverFlowTestingActivity.
@@ -468,19 +467,18 @@ public class CoverFlowTestingActivity extends Activity {
 				}
 			**/
 			
-			final Button button = new Button(this);
-			button.setText("-");
-			
+			LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+				     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-			expanded.put(button, false);
+			final CheckBox button = new CheckBox(this);
+			button.setChecked(true);
+			button.setButtonDrawable(getResources().getDrawable(R.drawable.expand));
+			button.setText(FILTERS[i]);
+			button.setTextColor(getResources().getColor(R.color.Brown));
+			button.setTextSize(40);
+	
 			
-			TextView txtView = new TextView(this);
-			//should be different per each one
-			txtView.setText(FILTERS[i]);
-			txtView.setTextColor(getResources().getColor(R.color.Brown));
-			txtView.setTextSize(40);
-			s1.addView(button);
-			s1.addView(txtView);
+			s1.addView(button, layoutParams);
 			gridLinearLayout.addView(s1);
 
 			final GridView gridview = new GridView(this);
@@ -490,17 +488,22 @@ public class CoverFlowTestingActivity extends Activity {
 			gridview.setNumColumns(GridView.AUTO_FIT);
 			gridview.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
 			
-			
-			button.setOnClickListener(new View.OnClickListener(){
-				public void onClick(View v) {
-					if (button.getText().equals("-")) {
+			button.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+				
+				
+		 		public void onCheckedChanged(CompoundButton v,
+						boolean expanding) {
+					if (!expanding) {
 						gridview.setVisibility(GridView.GONE);
-						button.setText("+");
 					} else {
 						gridview.setVisibility(GridView.VISIBLE);
-						button.setText("-");
+						
 					}
-				}});
+				}
+			});
+			
+			
+			
 
 	        myImageAdapter = new ImageAdapter(this);
 	        gridview.setOnItemClickListener(new OnItemClickListener() {
@@ -881,7 +884,6 @@ public class CoverFlowTestingActivity extends Activity {
     
 	 public void initializeButtons(){
 			
-		 //button1 = (Button)findViewById(R.id.button1);
 		 button1.setText("+");
 		 //row1 = (LinearLayout) findViewById(R.id.bowlRow);
 		 LinearLayout s1 = new LinearLayout(this);
@@ -939,8 +941,10 @@ public class CoverFlowTestingActivity extends Activity {
 				
 				Log.i("debugging", "gets past j/i loop and position was: "+ position);
 				if (expanding){
+					
 					Button nextButton = (Button) v;
-					nextButton.setText("-");
+					nextButton.setBackground(getResources().getDrawable(R.drawable.navigation_collapse));
+				
 					
 					//REMOVE OLD BUTTON
 					nextRow.removeViewAt(0);
@@ -955,7 +959,7 @@ public class CoverFlowTestingActivity extends Activity {
 				else {
 					//CONTRACTING
 					Button nextButton = (Button) v;
-					nextButton.setText("+");
+					nextButton.setBackground(getResources().getDrawable(R.drawable.navigation_expand));
 					nextRow.removeViewAt(0);
 					nextRow.addView(nextButton, 0);
 					if (position!=0){
