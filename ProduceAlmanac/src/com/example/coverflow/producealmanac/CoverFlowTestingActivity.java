@@ -840,8 +840,6 @@ public class CoverFlowTestingActivity extends Activity {
     	
       switch (item.getItemId()) { //basic structure borrowed from Kate's drawing app in section
       case R.id.notification:
-            Toast.makeText(this, "Button pressed: " + getResources().getString(R.string.notification) + " .",
-                        Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(CoverFlowTestingActivity.this, NotificationActivity.class);
             startActivity(intent);
             return true;

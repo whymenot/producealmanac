@@ -587,7 +587,7 @@ HashMap<SearchView, ListView> lists = new HashMap<SearchView, ListView>();
 	*/    	
 	    	ArrayList<String> result = new ArrayList<String>();
 	    	ArrayList<String> allFood = new ArrayList<String>();
-	    	String[] allFoodArray={"apples", "oranges", "pears"};
+	    	String[] allFoodArray= {"summer squash", "eggplant", "spinach", "lettuce", "asian greens", "cauliflower", "broccoli","strawberries","kiwifruit","summer squash","garlic","onion","carrots","parsnip","apricots","pluots","plums","peaches","nectarines","cherries","blueberries"};
 	    	for (String s: allFoodArray){
 	    		allFood.add(s);
 	    	}
