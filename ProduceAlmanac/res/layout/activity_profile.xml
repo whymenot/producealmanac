@@ -36,7 +36,7 @@
             <TextView
             android:id="@+id/item_name"
 	   		android:layout_width="wrap_content"
-	    	android:layout_height="120dip"
+	    	android:layout_height="135dip"
 	    	android:text="LEMON"
 	    	android:textColor="@color/Brown"
 	    	android:textStyle="bold"

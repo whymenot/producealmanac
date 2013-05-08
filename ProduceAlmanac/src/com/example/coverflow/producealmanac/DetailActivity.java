@@ -45,7 +45,7 @@ public class DetailActivity extends Activity {
 		itemName.setText(currentItem.name);
 		//BIGGER NAMES
 		String currentName = currentItem.name;
-		if (currentName.equals("summer squash")|| currentItem.equals("bell peppers")||currentName.equals("asian greens")){
+		if (currentName.equals("summer squash")|| currentItem.equals("bell peppers")||currentName.equals("asian greens")||currentName.equals("strawberries")){
 		itemName.setTextSize(50);
 		}
 		itemGeneral.setText(currentItem.description);
