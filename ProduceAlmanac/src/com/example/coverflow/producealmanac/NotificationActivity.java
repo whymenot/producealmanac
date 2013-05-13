@@ -440,7 +440,8 @@ HashMap<SearchView, ListView> lists = new HashMap<SearchView, ListView>();
 	        
 	        // Assumes current activity is the searchable activity
 	        search.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-	        search.setIconifiedByDefault(true); // Do not iconify the widget; expand it by default
+	        search.setQueryHint("search");
+	        search.setIconifiedByDefault(false); // Do not iconify the widget; expand it by default
 	        
 	        //final SearchView.OnQueryTextListener queryTextListener = ; 
 	        
