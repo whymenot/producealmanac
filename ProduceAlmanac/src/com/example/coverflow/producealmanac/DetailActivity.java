@@ -1,9 +1,10 @@
 package com.example.coverflow.producealmanac;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.widget.LinearLayout;
@@ -33,7 +34,7 @@ public class DetailActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.detail, menu);
+		//getMenuInflater().inflate(R.menu.detail, menu);
 		return true;
 	}
 
@@ -42,6 +43,7 @@ public class DetailActivity extends Activity {
 		TextView itemGeneral = (TextView)findViewById(R.id.item_general);
 		TextView itemRipe = (TextView)findViewById(R.id.item_ripe);
 		TextView itemStorage = (TextView)findViewById(R.id.item_storage);
+		TextView located = (TextView) findViewById(R.id.stores);
 		itemName.setText(currentItem.name);
 		//BIGGER NAMES
 		String currentName = currentItem.name;
@@ -54,6 +56,16 @@ public class DetailActivity extends Activity {
 		LinearLayout picture = (LinearLayout) findViewById(R.id.item_photo);
 		picture.setBackgroundResource(getResources().getIdentifier(currentItem.name.replace(' ', '_') + "_detail", "drawable", getPackageName()));
 		//picture.setBackgroundResource(getResources().getIdentifier("celeriac_detail", "drawable", getPackageName()));
-		
+		String availableStores = "";
+		ArrayList<Store> stores = new ArrayList<Store>(Store.storeMap.values());
+		for (Store s : stores){
+			if (s.hasActive(Item.itemMap.get(currentName))){
+				availableStores = availableStores.concat(s.getName()).concat("\n");				
+			}
+		}
+		if (availableStores.equals("")){
+			availableStores = "No Stores Found";
+		}
+		located.setText(availableStores);
 	}
 }
