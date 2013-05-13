@@ -40,7 +40,7 @@ public class NotificationService extends Service {
 		intent1.putExtra("name", "apricots");
 
 		Notification notification = new Notification(com.example.coverflow.R.drawable.ic_launcher,
-				"Peaches have arrived at Berkeley Bowl.", System.currentTimeMillis());
+				"Apricots have arrived at Berkeley Bowl.", System.currentTimeMillis());
 
 		intent1.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP
 				| Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -52,7 +52,7 @@ public class NotificationService extends Service {
 		notification.flags |= Notification.FLAG_AUTO_CANCEL;
 
 		notification.setLatestEventInfo(this.getApplicationContext(),
-				"ProduceAlmanac", "Peaches have arrived at Berkeley Bowl.",
+				"ProduceAlmanac", "Apricots have arrived at Berkeley Bowl.",
 				pendingNotificationIntent);
 		mManager.notify(0, notification);
 	}

@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -617,11 +618,31 @@ HashMap<SearchView, ListView> lists = new HashMap<SearchView, ListView>();
 						long arg3) {
 					String currentItem =(String) ((TextView)arg1).getText();
 			
-					addStore(currentItem, tagString_final);						
+					addStore(currentItem, tagString_final);
+					
+					closeSoftKeyboard();
 	        }
 	    	});
 	    	
 	    	Utility.setListViewHeightBasedOnChildren(list);
+	 }
+	 
+	 public void closeSoftKeyboard() {
+		 /*
+		 SearchView searchAllStores;
+		 SearchView searchBerkeleyBowl;
+		 SearchView searchYasai;
+		 SearchView searchTraderJoes;
+		 SearchView searchSafeway;
+		 */
+		 
+	    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+	    imm.hideSoftInputFromWindow(searchAllStores.getWindowToken(), 0);
+	    imm.hideSoftInputFromWindow(searchBerkeleyBowl.getWindowToken(), 0);
+	    imm.hideSoftInputFromWindow(searchYasai.getWindowToken(), 0);
+	    imm.hideSoftInputFromWindow(searchTraderJoes.getWindowToken(), 0);
+	    imm.hideSoftInputFromWindow(searchTraderJoes.getWindowToken(), 0);
+	    
 	 }
 
 	 
