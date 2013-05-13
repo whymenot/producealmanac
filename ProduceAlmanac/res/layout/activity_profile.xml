@@ -102,6 +102,26 @@
 	    	android:layout_marginLeft="24dip"
 	    	android:textSize="@dimen/body_font"
 	    	/>
+        	
+        	             <TextView
+            android:layout_marginTop="24dip"
+	   		android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+	    	android:text="currently in store at"
+	    	android:textColor="@color/TextGreen"
+	    	android:layout_marginLeft="24dip"
+	    	android:textStyle="bold"
+	    	android:textSize="@dimen/title_font"
+	    	/>
+        	<TextView
+        	android:id="@+id/stores"
+	   		android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+	    	android:text="this is some text about some things"
+	    	android:textColor="@color/TextBrown"
+	    	android:layout_marginLeft="24dip"
+	    	android:textSize="@dimen/body_font"
+	    	/>
     </LinearLayout>
 
 </LinearLayout>
